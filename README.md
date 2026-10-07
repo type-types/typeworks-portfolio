@@ -19,7 +19,7 @@ git add -A && git commit -m "내용" && git push
 
 ### typeworks.pro DNS 레코드 (Squarespace 도메인 관리 화면)
 
-Squarespace 기본 프리셋(Squarespace Defaults)을 삭제한 뒤 커스텀 레코드로 추가합니다.
+2026-10-08 적용 완료. Squarespace 기본 프리셋(Squarespace Defaults)을 삭제하고 아래를 커스텀 레코드로 넣었습니다.
 
 | 종류 | 호스트 | 값 |
 | --- | --- | --- |
@@ -27,13 +27,13 @@ Squarespace 기본 프리셋(Squarespace Defaults)을 삭제한 뒤 커스텀 �
 | A | @ | 185.199.109.153 |
 | A | @ | 185.199.110.153 |
 | A | @ | 185.199.111.153 |
-| AAAA | @ | 2606:50c0:8000::153 |
-| AAAA | @ | 2606:50c0:8001::153 |
-| AAAA | @ | 2606:50c0:8002::153 |
-| AAAA | @ | 2606:50c0:8003::153 |
 | CNAME | www | type-types.github.io |
 
-레코드가 퍼진 뒤 GitHub 저장소 Settings > Pages 에서 "Enforce HTTPS" 를 켭니다.
+참고
+- ALIAS 레코드는 이 도메인에 DNSSEC가 켜져 있어 Squarespace가 거부합니다. A 레코드 방식을 씁니다.
+- AAAA(IPv6) 레코드는 선택 사항이라 넣지 않았습니다. 필요하면 2606:50c0:8000::153, 8001::153, 8002::153, 8003::153 네 개를 @ 에 추가합니다.
+- Squarespace DNS 편집은 변경마다 패스키 재인증을 요구할 수 있습니다.
+- GitHub 저장소 Settings > Pages 의 "Enforce HTTPS" 는 인증서 발급 후 켭니다.
 
 ## 파일
 

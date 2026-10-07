@@ -1,5 +1,12 @@
 # Typeworks 포트폴리오 작업 기록
 
+## 2026-10-08 07:30 typeworks.pro DNS 연결
+
+- 사용자가 Squarespace 패스키 재인증을 통과한 뒤 Squarespace Defaults 프리셋을 삭제했습니다.
+- ALIAS @ -> type-types.github.io 를 시도했으나 DNSSEC 사용 도메인이라 거부됐습니다. A 레코드 4개와 www CNAME 으로 적용했습니다. AAAA 는 생략했습니다.
+- 1.1.1.1, 8.8.8.8, Squarespace 네임서버 모두에서 새 레코드를 확인했고 http://typeworks.pro 가 포트폴리오를 서빙하는 것을 확인했습니다.
+- GitHub Pages 에 도메인을 다시 저장해 HTTPS 인증서 발급을 걸었습니다.
+
 ## 2026-10-08 01:50 배포 준비와 GitHub Pages 공개
 
 - 공유 미리보기용 OG 이미지(1200x630)와 JSON-LD Organization 정보, 트위터 카드 메타를 추가했습니다.
