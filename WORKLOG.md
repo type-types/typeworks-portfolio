@@ -10,6 +10,7 @@
 - Playwright로 1440, 768, 390, 320픽셀에서 가로 넘침, 콘솔 오류, 이미지와 폰트 로딩, 앵커 이동 후 포커스를 재확인했습니다. 문제 없음.
 - git 저장소를 만들고 GitHub 공개 저장소 type-types/typeworks-portfolio 에 푸시한 뒤 GitHub Pages(main 루트)와 커스텀 도메인 typeworks.pro를 설정했습니다.
 - 호스팅을 GitHub Pages로 고른 이유: Squarespace DNS를 그대로 두고 A/CNAME 레코드만 바꾸면 되기 때문입니다. Cloudflare Pages/Workers는 apex 도메인을 쓰려면 네임서버를 Cloudflare로 옮겨야 합니다.
+- Pages 기본(레거시) 빌드가 즉시 실패해 GitHub Actions 워크플로(.github/workflows/pages.yml) 배포로 바꿨습니다. 걸려 있던 레거시 배포를 취소한 뒤 배포 성공을 확인했습니다.
 - Squarespace DNS 변경은 재인증(패스키) 단계에서 멈췄습니다. 레코드 목록은 README에 정리했습니다.
 
 ## 2026-10-08 완료 내용
