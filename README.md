@@ -1,25 +1,51 @@
-# Typeworks 영문 포트폴리오 검토본
+# Typeworks 영문 포트폴리오
 
-K-NET, Nonol, Melissa를 소개하는 한 페이지 영문 웹사이트입니다.
+K-NET, Nonol, Melissa를 소개하는 한 페이지 영문 웹사이트입니다. 공개 주소는 https://typeworks.pro 입니다.
 
-## 열기
+## 열기와 수정
 
-`index.html`을 브라우저로 열면 확인할 수 있습니다. Claude에 검토를 맡길 때는 이 폴더 전체 또는 `review/typeworks-portfolio.zip`을 전달하면 됩니다.
+`index.html`을 브라우저로 열면 바로 확인할 수 있습니다. 일반 HTML, CSS, JavaScript로 작성했으며 설치나 빌드 과정이 없습니다.
+Google Fonts는 인터넷 연결 시 사용되고, 연결이 없으면 대체 서체로 표시됩니다.
 
-작업 위치는 `/Users/type/minseok_park/typeworks/portfolio`입니다.
+## 배포
+
+- 호스팅: GitHub Pages, 저장소 https://github.com/type-types/typeworks-portfolio (main 브랜치 루트)
+- 도메인: Squarespace에 등록된 typeworks.pro. DNS 레코드를 GitHub Pages로 가리키면 연결됩니다 (아래 참고).
+- 배포 방법: main 브랜치에 푸시하면 1분 안에 자동 반영됩니다.
+
+```bash
+git add -A && git commit -m "내용" && git push
+```
+
+### typeworks.pro DNS 레코드 (Squarespace 도메인 관리 화면)
+
+Squarespace 기본 프리셋(Squarespace Defaults)을 삭제한 뒤 커스텀 레코드로 추가합니다.
+
+| 종류 | 호스트 | 값 |
+| --- | --- | --- |
+| A | @ | 185.199.108.153 |
+| A | @ | 185.199.109.153 |
+| A | @ | 185.199.110.153 |
+| A | @ | 185.199.111.153 |
+| AAAA | @ | 2606:50c0:8000::153 |
+| AAAA | @ | 2606:50c0:8001::153 |
+| AAAA | @ | 2606:50c0:8002::153 |
+| AAAA | @ | 2606:50c0:8003::153 |
+| CNAME | www | type-types.github.io |
+
+레코드가 퍼진 뒤 GitHub 저장소 Settings > Pages 에서 "Enforce HTTPS" 를 켭니다.
 
 ## 파일
 
-- `index.html`: 회사 소개, 제품 설명, 링크 및 검색 메타 정보
+- `index.html`: 회사 소개, 제품 설명, 링크, 검색 및 공유용 메타 정보(OG 이미지, JSON-LD)
+- `404.html`: 없는 주소로 들어왔을 때 보여 주는 페이지
 - `style.css`: 데스크톱과 모바일 화면 스타일
 - `app.js`: 페이지 내 링크 이동 시 키보드 포커스 처리
-- `assets/`: 실제 제품 화면, Melissa 공식 스토어 이미지 및 파비콘
-- `robots.txt`, `sitemap.xml`: 향후 typeworks.pro 배포용 검색 설정
-- `review/typeworks-portfolio.zip`: Claude에 전달할 검토용 소스 묶음
-- `review/screenshots/`: 데스크톱, 태블릿 및 모바일 검토 화면
+- `assets/`: 제품 화면(PNG 원본과 WebP), Melissa 공식 스토어 이미지, 파비콘, 터치 아이콘, OG 이미지
+- `site.webmanifest`: 홈 화면 추가용 아이콘 정보
+- `robots.txt`, `sitemap.xml`, `CNAME`, `.nojekyll`: 검색 설정과 GitHub Pages 배포 설정
+- `review/`: 검토용 스크린샷과 ZIP (git에는 넣지 않음)
 - `WORKLOG.md`: 완료 사항과 결정 이유
-
-일반 HTML, CSS, JavaScript로 작성했으며 설치나 빌드 과정이 필요하지 않습니다. Google Fonts는 인터넷 연결 시 사용되고, 연결이 없으면 대체 서체로 표시됩니다.
 
 ## 내용 근거
 
@@ -28,10 +54,4 @@ K-NET, Nonol, Melissa를 소개하는 한 페이지 영문 웹사이트입니다
 - Melissa: 개발 연혁 및 https://apps.apple.com/kr/app/melissa/id6741430491
 - Typeworks 소개: 사용자가 제공한 관심 분야와 개발 방식
 
-Nonol은 프로토타입이며, 연결된 체험 데모와 NFC 구현 범위를 구분했습니다. Melissa는 iOS 출시 상태로 소개했습니다. 각 제품을 동일한 Claude API 기반 제품으로 설명하지 않았습니다.
-
-## 확인 사항
-
-1440, 768, 390, 320픽셀 화면에서 가로 넘침, 이미지 로딩, 페이지 내 이동, 키보드 포커스, 외부 링크 및 JavaScript 오류를 확인했습니다. 동작 축소 설정도 반영했습니다.
-
-이 폴더에는 웹사이트 검토용 정적 파일만 담았습니다. 호스팅 설정, 배포 스크립트 및 Git 메타 데이터는 포함하지 않았습니다.
+Nonol은 프로토타입이며, 연결된 체험 데모와 NFC 구현 범위를 구분했습니다. Melissa는 iOS 출시 상태로 소개했습니다.

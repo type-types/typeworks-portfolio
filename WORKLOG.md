@@ -1,5 +1,17 @@
 # Typeworks 포트폴리오 작업 기록
 
+## 2026-10-08 01:50 배포 준비와 GitHub Pages 공개
+
+- 공유 미리보기용 OG 이미지(1200x630)와 JSON-LD Organization 정보, 트위터 카드 메타를 추가했습니다.
+- 파비콘 PNG, 애플 터치 아이콘, 192/512 아이콘과 site.webmanifest를 추가했습니다.
+- 제품 화면 이미지를 WebP로 변환하고 picture 요소로 분기했습니다 (Nonol 화면 534KB에서 80KB).
+- 브라우저 프레임 주소 표시 글자가 hover 시 기준 요소가 바뀌어 미세하게 움직이던 CSS 버그를 고쳤습니다.
+- 404 페이지, CNAME, .nojekyll, sitemap lastmod를 추가했습니다.
+- Playwright로 1440, 768, 390, 320픽셀에서 가로 넘침, 콘솔 오류, 이미지와 폰트 로딩, 앵커 이동 후 포커스를 재확인했습니다. 문제 없음.
+- git 저장소를 만들고 GitHub 공개 저장소 type-types/typeworks-portfolio 에 푸시한 뒤 GitHub Pages(main 루트)와 커스텀 도메인 typeworks.pro를 설정했습니다.
+- 호스팅을 GitHub Pages로 고른 이유: Squarespace DNS를 그대로 두고 A/CNAME 레코드만 바꾸면 되기 때문입니다. Cloudflare Pages/Workers는 apex 도메인을 쓰려면 네임서버를 Cloudflare로 옮겨야 합니다.
+- Squarespace DNS 변경은 재인증(패스키) 단계에서 멈췄습니다. 레코드 목록은 README에 정리했습니다.
+
 ## 2026-10-08 완료 내용
 
 - K-NET, Nonol, Melissa의 기존 자료와 공개 화면을 확인하고 영문 포트폴리오를 제작했습니다.
