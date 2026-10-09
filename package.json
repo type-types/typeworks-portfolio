@@ -1,0 +1,8 @@
+{
+  "name": "typeworks-company-site",
+  "private": true,
+  "scripts": {
+    "build": "node scripts/build-site.mjs",
+    "check": "node --check app.js && node --check scripts/build-site.mjs && node --check content/cases.mjs && node --check content/contact.mjs"
+  }
+}

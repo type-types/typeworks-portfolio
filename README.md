@@ -1,25 +1,81 @@
-# Typeworks 영문 포트폴리오
+# Typeworks 회사 소개 사이트
 
-K-NET, Nonol, Melissa를 소개하는 한 페이지 영문 웹사이트입니다. 공개 주소는 https://typeworks.pro 입니다.
+제품 제작을 중심으로 철학, 작업 방식, 대표의 프로젝트 경험과 제작 상담을 소개하는 정적 웹사이트입니다. 공개 주소는 https://typeworks.pro 입니다.
+
+한국어 회사 사이트를 기본으로 구성하고, 기존 영문 포트폴리오는 `/en/`에 보존했습니다.
 
 ## 열기와 수정
 
-`index.html`을 브라우저로 열면 바로 확인할 수 있습니다. 일반 HTML, CSS, JavaScript로 작성했으며 설치나 빌드 과정이 없습니다.
-Google Fonts는 인터넷 연결 시 사용되고, 연결이 없으면 대체 서체로 표시됩니다.
+설치할 패키지는 없습니다. Node.js에서 다음 명령으로 페이지를 생성합니다.
+
+```bash
+npm run build
+npm run check
+```
+
+로컬 미리보기는 프로젝트 폴더에서 다음 명령으로 엽니다.
+
+```bash
+python3 -m http.server 4317 --bind 127.0.0.1
+```
+
+브라우저에서 http://127.0.0.1:4317 을 엽니다. 사이트는 루트 기준 주소를 사용하므로 HTTP 서버로 확인합니다.
+
+- 사례 수정: `content/cases.mjs`에서 프로젝트 설명, 역할과 링크를 바꾸고 `npm run build`를 실행합니다.
+- 회사 소개와 서비스 수정: `scripts/build-site.mjs`의 해당 페이지 내용을 바꾸고 페이지를 다시 생성합니다.
+- 문의 이메일 설정: `content/contact.mjs`의 `recipient`에 이메일을 넣고 페이지를 다시 생성합니다.
+- 화면 스타일 수정: `style.css`를 수정하고 브라우저를 새로고침합니다.
+
+Google Fonts는 인터넷 연결 시 사용되며, 연결이 없으면 대체 서체로 표시됩니다.
+
+## 페이지와 파일 역할
+
+| 경로 | 역할 |
+| --- | --- |
+| `index.html` | 한국어 홈 |
+| `about/index.html` | 철학, 작업 원칙, 대표 소개와 비전 |
+| `services/index.html` | 제작 범위, 진행 방식, 비용 기준과 인수인계 |
+| `work/index.html` | 제작 사례 목록 |
+| `work/<slug>/index.html` | 사례별 필요, 제작 내용, 결과와 담당 역할 |
+| `contact/index.html` | 상담 내용 작성과 연락 안내 |
+| `en/` | 기존 영문 포트폴리오 |
+| `content/cases.mjs` | 사례 원본 데이터 |
+| `content/contact.mjs` | 문의 수신 이메일 |
+| `scripts/build-site.mjs` | 공통 탐색, 푸터, 페이지와 sitemap 생성 |
+| `style.css`, `app.js` | 한국어 사이트 화면 및 메뉴, 상담 요약 기능 |
+| `assets/` | 브랜드 SVG, 제품 화면, 아이콘과 공유 이미지 |
+| `404.html` | 없는 주소 안내 |
+| `site.webmanifest`, `robots.txt`, `sitemap.xml`, `CNAME`, `.nojekyll` | 검색 및 GitHub Pages 설정 |
+| `review/` | 로컬 검토 화면과 자료, Git에는 포함하지 않음 |
+| `WORKLOG.md` | 주요 완료 사항과 결정 이유 |
+
+생성된 HTML도 Git에 포함합니다. GitHub Pages 배포 시 원본 데이터에서 페이지를 다시 생성합니다.
+
+## 상담 기능
+
+상담 입력값은 브라우저 화면에서 요약하는 데 사용됩니다. 서버 접수와 개인정보 저장 기능은 없습니다.
+
+- 수신 이메일을 설정하면 이메일 앱에 상담 내용을 담아 열 수 있습니다. 방문자가 내용을 확인하고 전송합니다.
+- 이메일이 미정인 현재 설정에서는 상담 요약을 복사해 기존 LinkedIn 연락 경로로 전달합니다.
+- 자동 복사가 차단되면 요약을 선택해 직접 복사할 수 있습니다.
+
+## 내용 기준
+
+- 제품 제작이 현재 중심 사업입니다. 교육과 AI 학원 설립은 경험을 넓혀갈 방향과 구상 단계로 표시했습니다.
+- 대표의 기존 프로젝트 참여 경험을 포함하며 팀 성과와 담당 역할을 구분했습니다.
+- 500만~1,000만원은 상담하고자 하는 프로젝트 규모입니다. 실제 견적, 기간, 수정 횟수와 교육 범위는 개별 합의합니다.
+- K-NET과 멜리사는 기존 실제 화면을 사용했습니다. CSI와 공연 사례의 도식은 기능 흐름 설명입니다.
+- 기존 영문 페이지의 Nonol은 프로토타입으로 유지했습니다.
 
 ## 배포
 
-- 호스팅: GitHub Pages, 저장소 https://github.com/type-types/typeworks-portfolio (main 브랜치 루트)
-- 도메인: Squarespace에 등록된 typeworks.pro. DNS 레코드를 GitHub Pages로 가리키면 연결됩니다 (아래 참고).
-- 배포 방법: main 브랜치에 푸시하면 1분 안에 자동 반영됩니다.
+- 호스팅: GitHub Pages, 저장소 https://github.com/type-types/typeworks-portfolio
+- 배포: main 브랜치 푸시 후 `.github/workflows/pages.yml`에서 문법 점검과 페이지 생성, 배포를 진행합니다.
+- 도메인: Squarespace에 등록한 typeworks.pro, GitHub Pages를 가리키는 DNS 레코드 유지
 
-```bash
-git add -A && git commit -m "내용" && git push
-```
+### DNS 기록
 
-### typeworks.pro DNS 레코드 (Squarespace 도메인 관리 화면)
-
-2026-10-08 적용 완료. Squarespace 기본 프리셋(Squarespace Defaults)을 삭제하고 아래를 커스텀 레코드로 넣었습니다.
+2026-10-08 적용한 레코드입니다.
 
 | 종류 | 호스트 | 값 |
 | --- | --- | --- |
@@ -29,29 +85,16 @@ git add -A && git commit -m "내용" && git push
 | A | @ | 185.199.111.153 |
 | CNAME | www | type-types.github.io |
 
-참고
-- ALIAS 레코드는 이 도메인에 DNSSEC가 켜져 있어 Squarespace가 거부합니다. A 레코드 방식을 씁니다.
-- AAAA(IPv6) 레코드는 선택 사항이라 넣지 않았습니다. 필요하면 2606:50c0:8000::153, 8001::153, 8002::153, 8003::153 네 개를 @ 에 추가합니다.
-- Squarespace DNS 편집은 변경마다 패스키 재인증을 요구할 수 있습니다.
-- GitHub 저장소 Settings > Pages 의 "Enforce HTTPS" 는 인증서 발급 후 켭니다.
-
-## 파일
-
-- `index.html`: 회사 소개, 제품 설명, 링크, 검색 및 공유용 메타 정보(OG 이미지, JSON-LD)
-- `404.html`: 없는 주소로 들어왔을 때 보여 주는 페이지
-- `style.css`: 데스크톱과 모바일 화면 스타일
-- `app.js`: 페이지 내 링크 이동 시 키보드 포커스 처리
-- `assets/`: 제품 화면(PNG 원본과 WebP), Melissa 공식 스토어 이미지, 파비콘, 터치 아이콘, OG 이미지
-- `site.webmanifest`: 홈 화면 추가용 아이콘 정보
-- `robots.txt`, `sitemap.xml`, `CNAME`, `.nojekyll`: 검색 설정과 GitHub Pages 배포 설정
-- `review/`: 검토용 스크린샷과 ZIP (git에는 넣지 않음)
-- `WORKLOG.md`: 완료 사항과 결정 이유
+DNSSEC가 켜진 도메인에서 ALIAS 대신 A 레코드 방식을 사용했습니다. IPv6 레코드는 당시 설정에 포함하지 않았습니다.
 
 ## 내용 근거
 
-- K-NET: https://k-net.kr/ 및 기존 프로젝트 자료
-- Nonol: 제품 문서 및 https://nonol-original-concept.1991knet.workers.dev/
-- Melissa: 개발 연혁 및 https://apps.apple.com/kr/app/melissa/id6741430491
-- Typeworks 소개: 사용자가 제공한 관심 분야와 개발 방식
-
-Nonol은 프로토타입이며, 연결된 체험 데모와 NFC 구현 범위를 구분했습니다. Melissa는 iOS 출시 상태로 소개했습니다.
+- 사용자와 합의한 회사 철학, 강점, 사업 방향과 제작 범위
+- 대표 역할 기록: https://app.notion.com/p/3d74d4feddec808cbdedd54c33d1c765
+- 프로젝트 기록: https://app.notion.com/p/2f84d4feddec80bcb336e975f3b7dd2a
+- K-NET: https://k-net.kr/
+- CSI 도구: https://github.com/type-types/csi-data-collect-anno-tool
+- 공연 모듈: https://github.com/type-types/IGNITION
+- 멜리사: https://apps.apple.com/kr/app/melissa/id6741430491
+- 영상의학: https://github.com/kw-idea/rad-mentor-buddy
+- 병리 도구: https://github.com/kw-idea/DP_annotation_front
