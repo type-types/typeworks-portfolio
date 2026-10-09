@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://typeworks.pro/</loc>
-    <lastmod>2026-10-08</lastmod>
-  </url>
+  <url><loc>https://typeworks.pro/</loc></url>
+  <url><loc>https://typeworks.pro/about/</loc></url>
+  <url><loc>https://typeworks.pro/services/</loc></url>
+  <url><loc>https://typeworks.pro/work/</loc></url>
+  <url><loc>https://typeworks.pro/contact/</loc></url>
+  <url><loc>https://typeworks.pro/work/knet/</loc></url>
+  <url><loc>https://typeworks.pro/work/csi/</loc></url>
+  <url><loc>https://typeworks.pro/work/ignition/</loc></url>
+  <url><loc>https://typeworks.pro/work/melissa/</loc></url>
+  <url><loc>https://typeworks.pro/work/ondam/</loc></url>
+  <url><loc>https://typeworks.pro/work/radio-gemma/</loc></url>
+  <url><loc>https://typeworks.pro/work/pathology/</loc></url>
+  <url><loc>https://typeworks.pro/en/</loc></url>
 </urlset>

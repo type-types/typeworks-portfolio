@@ -1,1 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48"><rect width="48" height="48" rx="11" fill="#246cd9"/><text x="24" y="34" font-family="sans-serif" font-size="36" font-weight="700" text-anchor="middle" fill="white">t</text></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" role="img" aria-labelledby="favicon-title">
+  <title id="favicon-title">Typeworks</title>
+  <rect width="48" height="48" rx="11" fill="#246cd9"/>
+  <g transform="translate(4.32 2.32) scale(.82)" fill="#ffffff"><path d="M19 6h8v10h15v8H27v9c0 3.3 1.7 5 5 5h6v8h-7c-7.7 0-12-4.4-12-12V6Z"/><path d="M6 16h10v8H6z"/></g>
+</svg>
