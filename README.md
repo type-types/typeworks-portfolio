@@ -66,6 +66,8 @@ Google Fonts는 인터넷 연결 시 사용되며, 연결이 없으면 대체 �
 - 500만~1,000만원은 상담하고자 하는 프로젝트 규모입니다. 실제 견적, 기간, 수정 횟수와 교육 범위는 개별 합의합니다.
 - K-NET과 멜리사는 기존 실제 화면을 사용했습니다. CSI와 공연 사례의 도식은 기능 흐름 설명입니다.
 - 기존 영문 페이지의 Nonol은 프로토타입으로 유지했습니다.
+- 홈과 제품 제작 페이지에서 NFC 현장 방문 확인 모듈과 SIP 연결을 통한 AI 발신 전화 기술을 소개합니다. 보유 기술과 구현 경험은 대표가 제공한 내용을 근거로 작성했습니다.
+- NFC는 현장 태그를 통한 방문 확인으로 설명하고, 방문자 본인 인증과 구분합니다.
 
 ## 배포
 
@@ -110,3 +112,5 @@ DNSSEC가 켜진 도메인에서 ALIAS 대신 A 레코드 방식을 사용했습
 - 멜리사: https://apps.apple.com/kr/app/melissa/id6741430491
 - 영상의학: https://github.com/kw-idea/rad-mentor-buddy
 - 병리 도구: https://github.com/kw-idea/DP_annotation_front
+- NTAG 424 DNA 기술 설명: https://www.nxp.com/docs/en/data-sheet/NT4H2421Gx.pdf
+- SIP 전화 연결 표준: https://www.rfc-editor.org/rfc/rfc3261.html
