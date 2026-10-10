@@ -72,6 +72,18 @@ Google Fonts는 인터넷 연결 시 사용되며, 연결이 없으면 대체 �
 - 호스팅: GitHub Pages, 저장소 https://github.com/type-types/typeworks-portfolio
 - 배포: main 브랜치 푸시 후 `.github/workflows/pages.yml`에서 문법 점검과 페이지 생성, 배포를 진행합니다.
 - 도메인: Squarespace에 등록한 typeworks.pro, GitHub Pages를 가리키는 DNS 레코드 유지
+- HTTPS: 인증서를 확인하고 자동 전환을 적용했습니다. HTTP 주소는 HTTPS로 이동합니다.
+
+### v1 원본 백업
+
+회사 소개 사이트 배포 직전 공개되었던 영문 포트폴리오를 `v1` 태그로 보관했습니다.
+
+- 원본: `dc3649f98e3dd95a4f3f8c43d29ee56823289199`
+- GitHub: https://github.com/type-types/typeworks-portfolio/tree/v1
+- 로컬 ZIP: `../backups/v1/typeworks-v1.zip`
+- 검증 기록: `../backups/v1/manifest.json`
+
+ZIP에 포함된 29개 파일이 원본 커밋의 내용과 일치하는지 확인했습니다. 현재 `/en/` 페이지는 새 사이트에 맞게 경로와 일부 공통 자산을 조정한 버전이며, 배포 전 원본은 위 백업에 있습니다.
 
 ### DNS 기록
 
