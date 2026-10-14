@@ -21,9 +21,9 @@ python3 -m http.server 4317 --bind 127.0.0.1
 
 브라우저에서 http://127.0.0.1:4317 을 엽니다. 사이트는 루트 기준 주소를 사용하므로 HTTP 서버로 확인합니다.
 
-- 사례 수정: `content/cases.mjs`에서 프로젝트 설명, 역할과 링크를 바꾸고 `npm run build`를 실행합니다.
+- 사례 수정: 기존 프로젝트 설명과 역할은 `content/cases.mjs`, 표시 이름과 이미지, 노놀 및 AWS SBG 사례와 노출 순서는 `content/portfolio-cases.mjs`에서 관리합니다. 수정 후 `npm run build`를 실행합니다.
 - 회사 소개와 서비스 수정: `scripts/build-site.mjs`의 해당 페이지 내용을 바꾸고 페이지를 다시 생성합니다.
-- 문의 이메일 설정: `content/contact.mjs`의 `recipient`에 이메일을 넣고 페이지를 다시 생성합니다.
+- 연락 경로 수정: `scripts/build-site.mjs`의 상담 안내와 LinkedIn 링크를 수정합니다.
 - 화면 스타일 수정: `style.css`를 수정하고 브라우저를 새로고침합니다.
 
 Google Fonts는 인터넷 연결 시 사용되며, 연결이 없으면 대체 서체로 표시됩니다.
@@ -40,31 +40,32 @@ Google Fonts는 인터넷 연결 시 사용되며, 연결이 없으면 대체 �
 | `contact/index.html` | 상담 내용 작성과 연락 안내 |
 | `en/` | 기존 영문 포트폴리오 |
 | `content/cases.mjs` | 사례 원본 데이터 |
-| `content/contact.mjs` | 문의 수신 이메일 |
+| `content/portfolio-cases.mjs` | 사례 표시 정보, 신규 사례와 노출 순서 |
 | `scripts/build-site.mjs` | 공통 탐색, 푸터, 페이지와 sitemap 생성 |
 | `style.css`, `app.js` | 한국어 사이트 화면 및 메뉴, 상담 요약 기능 |
 | `assets/` | 브랜드 SVG, 제품 화면, 아이콘과 공유 이미지 |
 | `404.html` | 없는 주소 안내 |
 | `site.webmanifest`, `robots.txt`, `sitemap.xml`, `CNAME`, `.nojekyll` | 검색 및 GitHub Pages 설정 |
 | `review/` | 로컬 검토 화면과 자료, Git에는 포함하지 않음 |
+| `dist/` | 공개 배포 파일, 빌드 때 생성하며 Git에는 포함하지 않음 |
 | `WORKLOG.md` | 주요 완료 사항과 결정 이유 |
 
-생성된 HTML도 Git에 포함합니다. GitHub Pages 배포 시 원본 데이터에서 페이지를 다시 생성합니다.
+생성된 HTML도 Git에 포함합니다. GitHub Pages 배포 시 원본 데이터에서 페이지를 다시 생성하고 `dist/`의 공개 파일만 업로드합니다. 기존 영문 포트폴리오와 관련 자산도 배포 파일에 포함합니다.
 
 ## 상담 기능
 
 상담 입력값은 브라우저 화면에서 요약하는 데 사용됩니다. 서버 접수와 개인정보 저장 기능은 없습니다.
 
-- 수신 이메일을 설정하면 이메일 앱에 상담 내용을 담아 열 수 있습니다. 방문자가 내용을 확인하고 전송합니다.
-- 이메일이 미정인 현재 설정에서는 상담 요약을 복사해 기존 LinkedIn 연락 경로로 전달합니다.
+- 상담 요약을 복사해 기존 LinkedIn 연락 경로로 전달합니다.
 - 자동 복사가 차단되면 요약을 선택해 직접 복사할 수 있습니다.
 
 ## 내용 기준
 
 - 제품 제작이 현재 중심 사업입니다. 교육과 AI 학원 설립은 경험을 넓혀갈 방향과 구상 단계로 표시했습니다.
 - 대표의 기존 프로젝트 참여 경험을 포함하며 팀 성과와 담당 역할을 구분했습니다.
-- 500만~1,000만원은 상담하고자 하는 프로젝트 규모입니다. 실제 견적, 기간, 수정 횟수와 교육 범위는 개별 합의합니다.
-- K-NET과 멜리사는 기존 실제 화면을 사용했습니다. CSI와 공연 사례의 도식은 기능 흐름 설명입니다.
+- 예산은 선택 입력이며, 기능과 범위에 따라 견적, 기간, 수정 횟수와 운영 안내 범위를 개별 합의합니다.
+- K-NET은 실제 제품에 가상 데이터를 넣은 화면, CSI는 원본 화면 코드와 가상 데이터로 구성한 데모, IGNITION은 공개 시연 화면을 사용합니다. Melissa는 공식 App Store 소개 이미지를 사용합니다.
+- 노놀은 알파 신청 및 Test Lab 공개 단계로 소개합니다. AWS SBG 사례는 세션 진행, 강의 자료와 인스타그램 홍보 시안 제작 경험입니다.
 - 기존 영문 페이지의 Nonol은 프로토타입으로 유지했습니다.
 - 홈과 제품 제작 페이지에서 NFC 현장 방문 확인 모듈과 SIP 연결을 통한 AI 발신 전화 기술을 소개합니다. 보유 기술과 구현 경험은 대표가 제공한 내용을 근거로 작성했습니다.
 - NFC는 현장 태그를 통한 방문 확인으로 설명하고, 방문자 본인 인증과 구분합니다.
@@ -72,7 +73,7 @@ Google Fonts는 인터넷 연결 시 사용되며, 연결이 없으면 대체 �
 ## 배포
 
 - 호스팅: GitHub Pages, 저장소 https://github.com/type-types/typeworks-portfolio
-- 배포: main 브랜치 푸시 후 `.github/workflows/pages.yml`에서 문법 점검과 페이지 생성, 배포를 진행합니다.
+- 배포: main 브랜치 푸시 후 `.github/workflows/pages.yml`에서 문법 점검과 페이지 생성, `dist/` 업로드 및 배포를 진행합니다.
 - 도메인: Squarespace에 등록한 typeworks.pro, GitHub Pages를 가리키는 DNS 레코드 유지
 - HTTPS: 인증서를 확인하고 자동 전환을 적용했습니다. HTTP 주소는 HTTPS로 이동합니다.
 
@@ -86,6 +87,17 @@ Google Fonts는 인터넷 연결 시 사용되며, 연결이 없으면 대체 �
 - 검증 기록: `../backups/v1/manifest.json`
 
 ZIP에 포함된 29개 파일이 원본 커밋의 내용과 일치하는지 확인했습니다. 현재 `/en/` 페이지는 새 사이트에 맞게 경로와 일부 공통 자산을 조정한 버전이며, 배포 전 원본은 위 백업에 있습니다.
+
+### v4 배포 전 백업
+
+2026-10-14 현재 공개본을 v4 배포 전에 보관했습니다. 공개 홈, CSS와 JavaScript가 아래 원본 커밋의 파일과 일치함을 확인했습니다.
+
+- 원본: `dd7e83e1a2eeebb7e54291664b3f0adbf0580a78`
+- GitHub: https://github.com/type-types/typeworks-portfolio/tree/pre-v4-20261014-125111
+- 로컬 ZIP: `../backups/pre-v4-20261014-125111/typeworks-pre-v4.zip`
+- 검증 기록: `../backups/pre-v4-20261014-125111/manifest.json`
+
+ZIP의 49개 파일이 원본 커밋과 일치함을 확인했습니다. 기존 `v1` 백업도 유지합니다.
 
 ### DNS 기록
 
@@ -109,7 +121,8 @@ DNSSEC가 켜진 도메인에서 ALIAS 대신 A 레코드 방식을 사용했습
 - K-NET: https://k-net.kr/
 - CSI 도구: https://github.com/type-types/csi-data-collect-anno-tool
 - 공연 모듈: https://github.com/type-types/IGNITION
-- 멜리사: https://apps.apple.com/kr/app/melissa/id6741430491
+- Melissa: https://apps.apple.com/kr/app/melissa/id6741430491
+- 노놀: https://nonol.net/test-lab/
 - 영상의학: https://github.com/kw-idea/rad-mentor-buddy
 - 병리 도구: https://github.com/kw-idea/DP_annotation_front
 - NTAG 424 DNA 기술 설명: https://www.nxp.com/docs/en/data-sheet/NT4H2421Gx.pdf
