@@ -1,10 +1,10 @@
 # Typeworks 회사 소개 사이트
 
-## v5 로컬 시안
+## v5-1 로컬 시안
 
-v4 공개본을 기준으로 홈, 회사소개, 서비스와 비용 및 작업 방식에 이해를 돕는 시각 자료를 추가한 버전입니다. v5는 로컬 검토 단계입니다. 디자인 기준은 `DESIGN_SYSTEM.md`, 시각 자료 구성은 `content/visuals.mjs`에서 관리합니다.
+v4 공개본을 기준으로 홈, 회사소개, 서비스와 비용 및 작업 방식에 이해를 돕는 시각 자료를 추가했습니다. v5-1은 회사소개 첫 화면을 글 왼쪽과 사진 오른쪽으로 정리하고, 견적의 두 박스를 하나로 합친 로컬 검토 버전입니다. 디자인 기준은 `DESIGN_SYSTEM.md`, 시각 자료 구성은 `content/visuals.mjs`에서 관리합니다.
 
-검토 주소는 http://127.0.0.1:4318/ 이며, 보관본은 typeworks 작업 폴더의 `previews/typeworks-v5-20261016/`에 있습니다. 보관본 폴더에서 `npm run build`를 실행하고 `python3 -m http.server 4318 --bind 127.0.0.1 --directory dist`로 다시 열 수 있습니다.
+검토 주소는 http://127.0.0.1:4319/ 이며, 보관본은 typeworks 작업 폴더의 `previews/typeworks-v5-1-20261016/`에 있습니다. 보관본 폴더에서 `npm run build`를 실행하고 `python3 -m http.server 4319 --bind 127.0.0.1 --directory dist`로 다시 열 수 있습니다. 기존 v5 보관본과 http://127.0.0.1:4318/ 도 비교용으로 유지합니다.
 
 제품 제작을 중심으로 철학, 작업 방식, 대표의 프로젝트 경험과 제작 상담을 소개하는 정적 웹사이트입니다. 공개 주소는 https://typeworks.pro 입니다.
 

@@ -55,4 +55,8 @@ export const nfcVisual = () => `<figure class="technology-visual"><img src="/ass
 
 export const callVisual = () => `<figure class="technology-visual call-visual"><div class="call-visual-scene"><div class="call-device">${icon('phone')}<span>먼저 거는 전화</span></div><div class="voice-wave" aria-hidden="true">${[16,30,22,42,32,54,28,40,20,32,16].map(height => `<i style="--wave-height:${height}px"></i>`).join('')}</div><div class="call-record">${icon('notes')}<span>남겨지는 대화</span></div></div><figcaption><span>전화 연결 → AI와 대화 → 대화 기록</span><small>온담 프로토타입에서 실제 통화로 검증한 흐름입니다.</small></figcaption></figure>`;
 
-export const estimateVisual = () => `<figure class="estimate-visual"><div class="estimate-inputs"><span>${icon('screen')}필요한 기능</span><span class="estimate-plus" aria-hidden="true">+</span><span>${icon('data')}연동 범위</span><span class="estimate-plus" aria-hidden="true">+</span><span>${icon('book')}전달과 운영 안내</span></div><div class="estimate-output">${arrow}<span>함께 정하는 견적과 일정</span></div><figcaption>만들 범위와 전달할 내용을 먼저 정하고 견적을 안내합니다.</figcaption></figure>`;
+export const estimateVisual = (contactLink) => `<div class="estimate-guide reveal"><ul class="estimate-factors">${[
+  ['screen','필요한 기능','사용할 화면과 꼭 필요한 기능을 정합니다.'],
+  ['data','연동 범위','연결할 데이터와 외부 서비스를 확인합니다.'],
+  ['book','전달과 운영 안내','받으실 결과물과 사용 안내의 범위를 정합니다.'],
+].map(([symbol,title,description]) => `<li>${icon(symbol)}<h3>${title}</h3><p>${description}</p></li>`).join('')}</ul><div class="estimate-summary"><div><h3>범위에 맞는 견적과 일정을 안내합니다.</h3><p>제작 기간, 수정 횟수와 운영 지원 범위도 함께 정합니다.</p></div>${contactLink}</div></div>`;
