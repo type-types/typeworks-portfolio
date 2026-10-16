@@ -424,3 +424,43 @@ html:not(.js) .menu-toggle,html:not(.js) .gallery-open{display:none}
 @media(max-width:900px){.about-hero{grid-template-columns:1.1fr 1fr;gap:30px;padding-block:46px 42px;align-items:start}.about-copy h1{font-size:34px}.about-copy>p.about-lead{font-size:19px}.about-hero>.planning-photo{align-self:start;margin-top:48px}.about-hero .planning-photo img{aspect-ratio:3/4}.about-detail>.section-heading h2{font-size:30px}}
 @media(max-width:700px){.about-hero{grid-template-columns:1fr;gap:30px}.about-copy h1{font-size:36px}.about-copy>p:not(.eyebrow){max-width:34em}.about-hero>.planning-photo{margin:0;max-width:560px;width:100%}.about-hero .planning-photo img{aspect-ratio:3/2}}
 @media(max-width:600px){.about-hero{padding-block:38px 36px}.about-copy>.eyebrow{font-size:16px;margin-bottom:20px}.about-copy h1{font-size:clamp(30px,8vw,36px)}.about-copy>p:not(.eyebrow){font-size:18px;margin-top:18px}.about-copy>p.about-lead{font-size:19px;margin-top:24px}.about-detail>.section-heading h2{font-size:28px}}
+
+/* v5-4: distinct mobile case groups and a separate navigation surface. */
+.technology-section{background:var(--soft)}
+.technology-section .technology-item{border-top:0;padding-top:0}
+.technology-section .section-heading{margin-bottom:36px}
+@media(max-width:900px){
+  :root{--mobile-header-height:88px;--mobile-nav-gutter:38px}
+  .menu-toggle{width:44px;height:44px;min-height:44px;flex:0 0 44px;justify-content:center;gap:0;padding:10px;border-radius:50%}
+  .menu-icon{flex-shrink:0}
+  .menu-toggle.is-open .menu-icon{border-color:transparent}
+  .menu-toggle.is-open .menu-icon:before,.menu-toggle.is-open .menu-icon:after{content:'';position:absolute;inset:5px 0 auto;height:1.5px;background:currentColor;transform:rotate(45deg)}
+  .menu-toggle.is-open .menu-icon:after{transform:rotate(-45deg)}
+  html.menu-open{overflow:hidden}
+  html.menu-open .page-shell{padding-top:var(--mobile-header-height)}
+  .site-header.is-open{position:fixed;inset:0;z-index:100;width:auto;height:100vh;height:100dvh;min-height:0;margin:0;padding-inline:var(--mobile-nav-gutter);display:grid;grid-template-columns:minmax(0,1fr) 44px;grid-template-rows:var(--mobile-header-height) minmax(0,1fr);align-items:center;gap:0;background:var(--paper);overflow:hidden}
+  .site-header.is-open>.brand{grid-column:1;grid-row:1;justify-self:start}
+  .site-header.is-open>.menu-toggle{grid-column:2;grid-row:1}
+  .site-header.is-open #site-nav{grid-column:1/-1;grid-row:2;justify-self:center;align-self:stretch;min-height:0;max-width:520px;border:0;padding:12px 0 calc(28px + env(safe-area-inset-bottom));gap:6px;overflow-y:auto;overscroll-behavior:contain;font-size:22px}
+  .site-header.is-open #site-nav>a{padding:14px 0;min-height:52px}
+  .site-header.is-open #site-nav>.nav-contact{margin-top:auto;padding:16px 22px;font-size:18px}
+}
+@media(max-width:600px){
+  :root{--mobile-header-height:80px;--mobile-nav-gutter:24px}
+  .featured-work{gap:28px}
+  .featured-case{background:var(--soft);border-radius:18px;padding:20px 18px;gap:18px}
+  .featured-case+.featured-case{border-top:0;padding-top:20px}
+  .featured-copy h3{margin-top:8px;font-size:27px}
+  .featured-copy .eyebrow{font-size:15px}
+  .featured-description{font-size:18px;line-height:1.8;margin-top:12px}
+  .featured-facts{border:0;padding-top:0;margin-top:16px}
+  .featured-facts>span{display:inline-block;background:var(--blue-soft);padding:3px 8px;border-radius:5px;font-size:15px}
+  .featured-facts>p{font-size:16px;margin-top:10px}
+  .featured-copy>.text-link{margin-top:18px;min-height:44px}
+  .featured-visual>.visual-label{font-size:14px;line-height:1.7}
+  .technology-section{margin-block:12px}
+  .technology-section .technology-grid{gap:44px}
+  .technology-section .section-heading{margin-bottom:30px}
+  .technology-section .technology-item h3{font-size:25px;line-height:1.5}
+  .technology-section .technology-item p{font-size:18px}
+}

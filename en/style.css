@@ -100,3 +100,16 @@ h3{font-size:45px;letter-spacing:-2px;font-weight:500;margin:0 0 22px;line-heigh
 
 .brand-symbol{width:30px;height:30px;margin-right:11px}
 @media(max-width:700px){nav{gap:14px}nav .legacy-contact{display:none}nav .language-switch{display:inline}.brand-symbol{width:26px;height:26px;margin-right:8px}}
+
+/* Improve the preserved English portfolio on small screens. */
+@media(max-width:700px){
+  .site-header{height:auto;min-height:82px;flex-wrap:wrap;gap:18px;padding-block:20px}
+  .site-header nav{flex-wrap:wrap;gap:18px;font-size:14px}
+  .site-header nav .language-switch{display:inline}
+  .nav-count,.browser-bar>span{font-size:14px}
+  .eyebrow,.location,.hero-index,.section-heading .muted,.category,.status,.project-number,.project-footer,.project-footer>span,.project-footer a,.visual-caption,.demo-caption,.contact-link,.site-footer,.site-footer>a:last-child{font-size:14px}
+  .hero-bottom p,.description,.about-copy p{font-size:16px;line-height:1.8}
+  .text-link{font-size:15px}
+  .project-footer{align-items:flex-start;flex-wrap:wrap}
+  .site-footer{flex-wrap:wrap}
+}

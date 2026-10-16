@@ -52,6 +52,7 @@
     if (!toggle || !navigation) return;
 
     const mobile = window.matchMedia("(max-width: 900px)");
+    const background = [...document.querySelectorAll("main, .site-footer, .skip-link")];
     let isOpen = false;
     let navigationHadFocus = navigation.contains(document.activeElement);
     let toggleHadFocus = toggle.contains(document.activeElement);
@@ -74,6 +75,17 @@
       toggle.classList.toggle("is-open", isOpen);
       navigation.classList.toggle("is-open", isOpen);
       header?.classList.toggle("is-open", isOpen);
+      document.documentElement.classList.toggle("menu-open", isOpen);
+      background.forEach((element) => { element.inert = isOpen; });
+      if (isOpen) {
+        header?.setAttribute("role", "dialog");
+        header?.setAttribute("aria-modal", "true");
+        header?.setAttribute("aria-label", "사이트 메뉴");
+      } else {
+        header?.removeAttribute("role");
+        header?.removeAttribute("aria-modal");
+        header?.removeAttribute("aria-label");
+      }
 
       const isHidden = mobile.matches && !isOpen;
       navigation.inert = isHidden;
@@ -83,14 +95,29 @@
         navigation.removeAttribute("aria-hidden");
       }
       if (restoreFocus) toggle.focus({ preventScroll: true });
+      else if (isOpen) navigation.querySelector("a[href]")?.focus({ preventScroll: true });
     };
 
     toggle.type = "button";
-    toggle.addEventListener("click", () => updateMenu(!isOpen));
+    toggle.addEventListener("click", () => updateMenu(!isOpen, isOpen));
     document.addEventListener("keydown", (event) => {
-      if (event.key !== "Escape" || !isOpen) return;
-      event.preventDefault();
-      updateMenu(false, true);
+      if (!isOpen) return;
+      if (event.key === "Escape") {
+        event.preventDefault();
+        updateMenu(false, true);
+        return;
+      }
+      if (event.key !== "Tab" || !header) return;
+      const links = [...header.querySelectorAll("a[href], button:not([disabled])")];
+      const first = links[0];
+      const last = links[links.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last?.focus({ preventScroll: true });
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first?.focus({ preventScroll: true });
+      }
     });
     navigation.addEventListener("click", (event) => {
       const link = event.target.closest("a");
@@ -124,6 +151,8 @@
     } else {
       mobile.addListener(handleViewportChange);
     }
+    window.addEventListener("pagehide", () => updateMenu(false));
+    window.addEventListener("pageshow", () => updateMenu(false));
     updateMenu(false);
   };
 
