@@ -1,5 +1,11 @@
 # Typeworks 회사 소개 사이트
 
+## v5-3 통합본
+
+v4 공개본을 기준으로 홈, 회사소개, 서비스와 비용 및 작업 방식에 이해를 돕는 시각 자료를 추가했습니다. v5-3은 앞선 수정 사항을 유지하고, 작업 방식의 각 단계를 제목과 설명, 그림과 확인 항목 순서로 묶은 버전입니다. 디자인 기준은 `DESIGN_SYSTEM.md`, 시각 자료 구성은 `content/visuals.mjs`에서 관리합니다.
+
+검토 주소는 http://127.0.0.1:4321/ 이며, 보관본은 typeworks 작업 폴더의 `previews/typeworks-v5-3-20261016/`에 있습니다. 보관본 폴더에서 `npm run build`를 실행하고 `python3 -m http.server 4321 --bind 127.0.0.1 --directory dist`로 다시 열 수 있습니다. 기존 v5, v5-1과 v5-2 보관본도 비교용으로 유지합니다.
+
 제품 제작을 중심으로 철학, 작업 방식, 대표의 프로젝트 경험과 제작 상담을 소개하는 정적 웹사이트입니다. 공개 주소는 https://typeworks.pro 입니다.
 
 한국어 회사 사이트를 기본으로 구성하고, 기존 영문 포트폴리오는 `/en/`에 보존했습니다.
@@ -41,9 +47,13 @@ Google Fonts는 인터넷 연결 시 사용되며, 연결이 없으면 대체 �
 | `en/` | 기존 영문 포트폴리오 |
 | `content/cases.mjs` | 사례 원본 데이터 |
 | `content/portfolio-cases.mjs` | 사례 표시 정보, 신규 사례와 노출 순서 |
+| `content/visuals.mjs` | 홈과 주요 페이지의 설명 도식과 사진 구성 |
+| `content/visual-sources-v5.json` | 생성 사진의 도구, 목적과 프롬프트 기록 |
+| `DESIGN_SYSTEM.md` | v5의 브랜드 톤과 시각 자료 기준 |
 | `scripts/build-site.mjs` | 공통 탐색, 푸터, 페이지와 sitemap 생성 |
 | `style.css`, `app.js` | 한국어 사이트 화면 및 메뉴, 상담 요약 기능 |
 | `assets/` | 브랜드 SVG, 제품 화면, 아이콘과 공유 이미지 |
+| `assets/visuals/` | 협업과 NFC 방문 확인을 설명하는 연출 사진 |
 | `404.html` | 없는 주소 안내 |
 | `site.webmanifest`, `robots.txt`, `sitemap.xml`, `CNAME`, `.nojekyll` | 검색 및 GitHub Pages 설정 |
 | `review/` | 로컬 검토 화면과 자료, Git에는 포함하지 않음 |
@@ -98,6 +108,17 @@ ZIP에 포함된 29개 파일이 원본 커밋의 내용과 일치하는지 확�
 - 검증 기록: `../backups/pre-v4-20261014-125111/manifest.json`
 
 ZIP의 49개 파일이 원본 커밋과 일치함을 확인했습니다. 기존 `v1` 백업도 유지합니다.
+
+### v5-3 배포 전 백업
+
+사용자가 확인한 v5-3 통합본의 배포 전에 기존 공개본을 보관했습니다.
+
+- 원본: `d1e86b258f1edcdba071f372bdc59811e30ad36e`
+- Git 태그: `pre-v5-20261016-113230`
+- 로컬 ZIP: `../backups/pre-v5-20261016-113230/typeworks-pre-v5.zip`
+- 검증 기록: `../backups/pre-v5-20261016-113230/manifest.json`
+
+ZIP의 73개 파일이 원본 커밋과 일치함을 확인했습니다. 각 로컬 검토본도 별도 폴더에 유지합니다.
 
 ### DNS 기록
 
