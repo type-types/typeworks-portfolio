@@ -17,6 +17,7 @@ ul,ol{margin:0;padding:0}
 [hidden]{display:none!important}
 ::selection{background:#dbe8fd}
 a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid var(--blue);outline-offset:5px}
+html[data-focus-input=pointer] :is(a,button,summary):focus-visible{outline:none}
 :target{scroll-margin-top:36px}
 .page-shell{margin:var(--frame-inset) var(--frame-inset) 0;background:var(--paper);border-radius:var(--frame-radius) var(--frame-radius) 0 0;overflow:clip;min-height:100vh}
 .wrap{width:min(1248px,calc(100% - var(--content-gutter) * 2));margin-inline:auto}
@@ -450,6 +451,7 @@ html:not(.js) .menu-toggle,html:not(.js) .gallery-open{display:none}
   .site-header.is-open>.menu-toggle{grid-column:2;grid-row:1}
   .site-header.is-open #site-nav{grid-column:1/-1;grid-row:2;justify-self:center;align-self:stretch;min-height:0;max-width:520px;border:0;padding:12px 0 calc(28px + env(safe-area-inset-bottom));gap:6px;overflow-y:auto;overscroll-behavior:contain;font-size:22px}
   .site-header.is-open #site-nav>a{padding:14px 0;min-height:52px}
+  .site-header.is-open #site-nav>a:focus-visible{outline-offset:-4px}
   .site-header.is-open #site-nav>.nav-contact{margin-top:auto;padding:16px 22px;font-size:18px}
 }
 @media(max-width:600px){
