@@ -44,11 +44,11 @@ const featuredCase = (slug, index) => {
   return `<article class="featured-case reveal"><a class="featured-visual case-link" href="/work/${slug}/">${caseMedia(item)}<span class="visual-label">${item.visualLabel}</span></a><div class="featured-copy"><p class="eyebrow">0${index + 1} / ${item.category}</p><h3><a href="/work/${slug}/">${item.title}</a></h3><p class="featured-description">${item.shortDescription}</p><div class="featured-facts"><span>${item.status}</span><p>${item.role}</p></div>${textLink('사례 자세히 보기', `/work/${slug}/`)}</div></article>`;
 };
 const services = [
-  ['01','맞춤 소프트웨어','고객이 사용할 서비스와<br>운영자가 관리할 도구를 함께 만듭니다.','신청과 예약 / 회원 관리 / 신규 서비스'],
-  ['02','업무 도구와 AI','흩어진 정보와 반복 작업을 연결하고,<br>필요한 단계에 AI를 적용합니다.','지식 관리 / 데이터 수집 / 업무 자동화'],
-  ['03','공연과 현장 운영','참여자가 쓰는 화면과<br>현장을 진행하는 도구를 연결합니다.','관객 참여 / 행사 운영 / 현장 방문 확인'],
+  ['맞춤 소프트웨어','고객이 사용할 서비스와<br>운영자가 관리할 도구를 함께 만듭니다.','신청과 예약 / 회원 관리 / 신규 서비스'],
+  ['업무 도구와 AI','흩어진 정보와 반복 작업을 연결하고,<br>필요한 단계에 AI를 적용합니다.','지식 관리 / 데이터 수집 / 업무 자동화'],
+  ['공연과 현장 운영','참여자가 쓰는 화면과<br>현장을 진행하는 도구를 연결합니다.','관객 참여 / 행사 운영 / 현장 방문 확인'],
 ];
-const serviceGrid = () => `<div class="service-grid">${services.map(([number,title,description,examples],index) => `<article class="service-item reveal">${serviceVisual(index)}<span class="number">${number}</span><h3>${title}</h3><p>${description}</p><p class="service-examples">${examples}</p></article>`).join('')}</div>`;
+const serviceGrid = () => `<div class="service-grid">${services.map(([title,description,examples],index) => `<article class="service-item reveal"><h3>${title}</h3>${serviceVisual(index)}<p>${description}</p><p class="service-examples">${examples}</p></article>`).join('')}</div>`;
 const processSteps = [
   ['01','필요를 이해합니다','지금 하는 일, 불편한 점과 원하는 결과를 함께 살펴봅니다.'],
   ['02','범위를 합의합니다','만들 기능, 완료 기준, 비용, 일정과 수정 범위를 정합니다.'],
