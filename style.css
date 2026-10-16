@@ -110,7 +110,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 .site-footer>div>p{font-size:17px;line-height:1.8;color:var(--muted);margin-top:22px}
 .site-footer>nav{display:flex;justify-content:flex-end;align-items:flex-start;flex-wrap:wrap;gap:16px 28px;font-size:16px}
 .site-footer>nav>a:hover{color:var(--blue)}
-.footer-bottom{grid-column:1/-1;display:flex;justify-content:space-between;gap:20px;padding-top:40px;font-size:16px;color:var(--muted)}
+.footer-bottom{grid-column:1/-1;display:flex;flex-wrap:wrap;justify-content:space-between;gap:20px;padding-top:40px;font-size:16px;color:var(--muted)}
 .page-hero{padding-block:78px 40px}
 .page-hero>.eyebrow{color:var(--blue);margin-bottom:28px}
 .page-hero h1{font-size:clamp(40px,4.7vw,68px)}

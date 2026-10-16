@@ -17,7 +17,7 @@ const textLink = (label, url) => `<a class="text-link" href="${url}">${label}${a
 const navItems = [['about','회사소개'],['services','서비스와 비용'],['work','제작 사례'],['process','작업 방식']];
 const navigation = (current) => navItems.map(([slug,label]) => `<a href="/${slug}/"${current === slug ? ' aria-current="page"' : ''}>${label}</a>`).join('');
 const cta = () => `<section class="cta wrap reveal"><div><p class="eyebrow">프로젝트 상담</p><h2>만들고 싶은 것이 있나요?</h2><p>지금의 상황과 원하는 결과부터 말씀해 주세요.</p></div>${button('프로젝트 이야기하기','/contact/',true)}</section>`;
-const footer = () => `<footer class="site-footer wrap"><div><a class="brand" href="/" aria-label="타입웍스 홈"><img src="/assets/brand-mark.svg" width="32" height="32" alt=""><span>typeworks.</span></a><p>필요를 이해하고, 제품을 만들고,<br>쓰는 방법을 공유합니다.</p></div><nav aria-label="하단 메뉴">${navigation('')}${textLink('제작 상담','/contact/')}</nav><div class="footer-bottom"><span>© 2026 Typeworks</span><a href="/en/" lang="en">기존 영문 포트폴리오</a></div></footer>`;
+const footer = () => `<footer class="site-footer wrap"><div><a class="brand" href="/" aria-label="타입웍스 홈"><img src="/assets/brand-mark.svg" width="32" height="32" alt=""><span>typeworks.</span></a><p>필요를 이해하고, 제품을 만들고,<br>쓰는 방법을 공유합니다.</p></div><nav aria-label="하단 메뉴">${navigation('')}${textLink('제작 상담','/contact/')}</nav><div class="footer-bottom"><span>© 2026 Typeworks</span><a href="mailto:minseok@typeworks.pro">문의 minseok@typeworks.pro</a></div></footer>`;
 const shell = (title, current, body, description, relative) => {
   const path = relative === '404.html' ? '/404.html' : '/' + relative.replace(/index\.html$/, '');
   const publicUrl = 'https://typeworks.pro' + path;
