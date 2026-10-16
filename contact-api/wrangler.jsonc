@@ -1,0 +1,12 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "typeworks-contact",
+  "account_id": "b4a0537c21dad38e3834247b02f4649b",
+  "main": "worker.mjs",
+  "compatibility_date": "2026-10-16",
+  "workers_dev": true,
+  "preview_urls": false,
+  "send_email": [{ "name": "EMAIL", "destination_address": "minseok@typeworks.pro" }],
+  "ratelimits": [{ "name": "CONTACT_RATE_LIMITER", "namespace_id": "26101656", "simple": { "limit": 3, "period": 60 } }],
+  "observability": { "enabled": true, "traces": { "enabled": true } }
+}
