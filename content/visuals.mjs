@@ -16,7 +16,7 @@ const flow = (items) => `<div class="visual-flow">${items.map(([symbol, title, d
 
 export const journeyVisual = () => `<figure class="journey-visual"><div class="journey-heading"><span class="visual-dot" aria-hidden="true"></span><span>필요에서 시작해, 쓰는 순간까지.</span></div><div class="journey-scenes"><div class="journey-scene"><div class="paper-stack" aria-hidden="true"><i></i><i></i><i></i></div><span>흩어진 필요</span><small>메모, 자료, 반복 업무</small></div>${arrow}<div class="journey-scene"><div class="mini-browser" aria-hidden="true"><div class="mini-browser-bar"><i></i><i></i><i></i></div><div class="mini-browser-body"><span></span><b></b><b></b><em></em></div></div><span>작동하는 제품</span><small>사용 화면과 관리 도구</small></div>${arrow}<div class="journey-scene"><div class="guide-sheet" aria-hidden="true">${icon('check')}<i></i><i></i></div><span>이어지는 운영</span><small>직접 쓰는 방법까지</small></div></div><figcaption>필요를 정리하고, 제품을 만들고, 운영 방법을 전달합니다.</figcaption></figure>`;
 
-export const planningPhoto = () => `<figure class="planning-photo"><img src="/assets/visuals/planning-v5.jpg" width="1536" height="1024" alt="함께 메모를 정리하며 필요한 일을 구체화하는 과정을 표현한 연출 사진" loading="lazy" decoding="async"><figcaption>함께 정리하고 구체화하는 과정을 표현한 연출 이미지입니다.</figcaption></figure>`;
+export const planningPhoto = () => `<figure class="planning-photo"><img src="/assets/visuals/planning-v5.jpg" width="1536" height="1024" alt="함께 메모를 정리하며 필요한 일을 구체화하는 과정을 표현한 연출 사진" loading="lazy" decoding="async"></figure>`;
 
 export const serviceVisual = (index) => {
   if (index === 0) return `<figure class="service-visual service-screen"><a class="service-screen-window" href="/work/knet/" aria-label="K-NET 실제 제작 사례 보기"><img src="/assets/portfolio/knet-study-editor.png" width="1265" height="712" alt="K-NET의 소개 편집과 실시간 미리보기 운영 화면, 데모 데이터" loading="lazy" decoding="async"></a><figcaption>작성하는 화면과 확인하는 화면을 함께 만듭니다.<small>K-NET 운영 화면, 데모 데이터</small></figcaption></figure>`;
@@ -51,9 +51,9 @@ export const stageVisual = (index) => {
   return `<figure class="stage-visual stage-visual-${index + 1}">${visuals[index]}<figcaption>${captions[index]}</figcaption></figure>`;
 };
 
-export const nfcVisual = () => `<figure class="technology-visual"><img src="/assets/visuals/nfc-visit-v5.jpg" width="1536" height="1024" alt="휴대전화를 책상 위 태그에 가까이 대는 방문 확인 개념 연출 사진" loading="lazy" decoding="async"><figcaption><span>태그 가까이 → 현장 방문 확인 → 기록 연결</span><small>사용 개념을 표현한 연출 이미지입니다.</small></figcaption></figure>`;
+export const nfcVisual = () => `<figure class="technology-visual"><img src="/assets/visuals/nfc-visit-v5.jpg" width="1536" height="1024" alt="휴대전화를 책상 위 태그에 가까이 대는 방문 확인 개념 연출 사진" loading="lazy" decoding="async"><figcaption><span>태그 가까이 → 현장 방문 확인 → 기록 연결</span></figcaption></figure>`;
 
-export const callVisual = () => `<figure class="technology-visual call-visual"><div class="call-visual-scene"><div class="call-device">${icon('phone')}<span>먼저 거는 전화</span></div><div class="voice-wave" aria-hidden="true">${[16,30,22,42,32,54,28,40,20,32,16].map(height => `<i style="--wave-height:${height}px"></i>`).join('')}</div><div class="call-record">${icon('notes')}<span>남겨지는 대화</span></div></div><figcaption><span>전화 연결 → AI와 대화 → 대화 기록</span><small>온담 프로토타입에서 실제 통화로 검증한 흐름입니다.</small></figcaption></figure>`;
+export const callVisual = () => `<figure class="technology-visual call-visual"><div class="call-visual-scene"><div class="call-device">${icon('phone')}<span>먼저 거는 전화</span></div><div class="voice-wave" aria-hidden="true">${[16,30,22,42,32,54,28,40,20,32,16].map(height => `<i style="--wave-height:${height}px"></i>`).join('')}</div><div class="call-record">${icon('notes')}<span>남겨지는 대화</span></div></div><figcaption><span>전화 연결 → AI와 대화 → 대화 기록</span></figcaption></figure>`;
 
 export const estimateVisual = (contactLink) => `<div class="estimate-guide reveal"><ul class="estimate-factors">${[
   ['screen','필요한 기능','사용할 화면과 꼭 필요한 기능을 정합니다.'],
