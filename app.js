@@ -53,7 +53,11 @@
 
     const mobile = window.matchMedia("(max-width: 900px)");
     const background = [...document.querySelectorAll("main, .site-footer, .skip-link")];
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     let isOpen = false;
+    let targetOpen = false;
+    let animationId = 0;
+    let menuAnimations = [];
     let navigationHadFocus = navigation.contains(document.activeElement);
     let toggleHadFocus = toggle.contains(document.activeElement);
 
@@ -67,8 +71,16 @@
       if (!toggle.contains(event.target)) toggleHadFocus = false;
     }, { capture: true });
 
+    const stopMenuAnimation = () => {
+      animationId += 1;
+      menuAnimations.forEach((animation) => animation.cancel());
+      menuAnimations = [];
+    };
+
     const updateMenu = (open, restoreFocus = false) => {
+      stopMenuAnimation();
       isOpen = open && mobile.matches;
+      targetOpen = isOpen;
       toggle.setAttribute("aria-expanded", String(isOpen));
       toggle.setAttribute("aria-controls", "site-nav");
       toggle.setAttribute("aria-label", isOpen ? "메뉴 닫기" : "메뉴 열기");
@@ -98,13 +110,57 @@
       else if (isOpen) navigation.querySelector("a[href]")?.focus({ preventScroll: true });
     };
 
+    const animateMenu = (open, restoreFocus = false) => {
+      const nextOpen = open && mobile.matches;
+      if (nextOpen === targetOpen) return;
+      if (!header || !header.animate || reducedMotion.matches || (!nextOpen && !isOpen)) {
+        updateMenu(nextOpen, restoreFocus);
+        return;
+      }
+
+      const links = [...navigation.querySelectorAll("a[href]")];
+      const mounted = isOpen;
+      const backgroundStart = mounted ? getComputedStyle(header).backgroundColor : "rgba(255, 255, 255, 0)";
+      const linkStarts = links.map((link) => {
+        const style = mounted ? getComputedStyle(link) : null;
+        return { opacity: style?.opacity ?? "0", transform: style?.transform ?? "translateY(10px)" };
+      });
+      const paper = getComputedStyle(document.documentElement).getPropertyValue("--paper").trim() || "#fff";
+
+      if (nextOpen) updateMenu(true);
+      else stopMenuAnimation();
+      targetOpen = nextOpen;
+      const currentId = animationId;
+      const easing = "cubic-bezier(.22, 1, .36, 1)";
+      menuAnimations = [header.animate([
+        { backgroundColor: backgroundStart },
+        { backgroundColor: nextOpen ? paper : "rgba(255, 255, 255, 0)" },
+      ], { duration: nextOpen ? 240 : 180, easing, fill: "both" })];
+      links.forEach((link, index) => {
+        menuAnimations.push(link.animate([
+          linkStarts[index],
+          { opacity: nextOpen ? "1" : "0", transform: nextOpen ? "translateY(0)" : "translateY(-6px)" },
+        ], {
+          duration: nextOpen ? 220 : 150,
+          delay: nextOpen && !mounted ? 40 + index * 20 : 0,
+          easing,
+          fill: "both",
+        }));
+      });
+      Promise.all(menuAnimations.map((animation) => animation.finished)).then(() => {
+        if (currentId !== animationId) return;
+        if (targetOpen) stopMenuAnimation();
+        else updateMenu(false, restoreFocus);
+      }, () => {});
+    };
+
     toggle.type = "button";
-    toggle.addEventListener("click", () => updateMenu(!isOpen, isOpen));
+    toggle.addEventListener("click", () => animateMenu(!targetOpen, targetOpen));
     document.addEventListener("keydown", (event) => {
       if (!isOpen) return;
       if (event.key === "Escape") {
         event.preventDefault();
-        updateMenu(false, true);
+        animateMenu(false, true);
         return;
       }
       if (event.key !== "Tab" || !header) return;
@@ -150,6 +206,16 @@
       mobile.addEventListener("change", handleViewportChange);
     } else {
       mobile.addListener(handleViewportChange);
+    }
+    const handleMotionChange = () => {
+      if (!reducedMotion.matches || !isOpen) return;
+      if (targetOpen) stopMenuAnimation();
+      else updateMenu(false, true);
+    };
+    if (reducedMotion.addEventListener) {
+      reducedMotion.addEventListener("change", handleMotionChange);
+    } else {
+      reducedMotion.addListener(handleMotionChange);
     }
     window.addEventListener("pagehide", () => updateMenu(false));
     window.addEventListener("pageshow", () => updateMenu(false));
