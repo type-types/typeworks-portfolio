@@ -130,6 +130,7 @@
       if (nextOpen) updateMenu(true);
       else stopMenuAnimation();
       targetOpen = nextOpen;
+      toggle.classList.toggle("is-open", nextOpen);
       const currentId = animationId;
       const easing = "cubic-bezier(.22, 1, .36, 1)";
       menuAnimations = [header.animate([
@@ -224,101 +225,91 @@
 
   const initializeContactForm = () => {
     const form = document.getElementById("contact-form");
-    const summary = document.getElementById("contact-summary");
-    const panel = document.getElementById("summary-panel");
+    const fields = document.getElementById("contact-fields");
     const status = document.getElementById("form-status");
-    const copyButton = document.getElementById("copy-summary");
-    if (!form || !summary || !panel || !status || !copyButton) return;
+    const button = document.getElementById("contact-submit");
+    const label = document.getElementById("contact-submit-label");
+    const result = document.getElementById("contact-result");
+    if (!form || !fields || !status || !button || !label || !result) return;
 
-    copyButton.type = "button";
-    copyButton.disabled = true;
-    summary.readOnly = true;
-    status.setAttribute("role", "status");
-
-    const fieldValue = (name) => {
-      const field = form.elements.namedItem(name);
-      if (!field) return "";
-      const value = String(field.value || "").trim();
-      if (!value) return "";
-      if (field instanceof HTMLSelectElement) {
-        return field.selectedOptions[0]?.textContent.trim() || value;
-      }
-      return value;
-    };
-
-    const clearSummary = (message = "") => {
-      summary.value = "";
-      panel.hidden = true;
-      copyButton.disabled = true;
-      status.textContent = message;
-    };
-
+    let submitting = false;
+    let sent = false;
+    let controller;
+    const value = (name) => String(form.elements.namedItem(name)?.value || "").trim();
     const requiredTextFields = ["company", "name", "message"];
-    const clearTextValidation = () => {
-      requiredTextFields.forEach((name) => {
-        const field = form.elements.namedItem(name);
-        field?.setCustomValidity("");
-      });
+    const resetResult = () => {
+      if (submitting) return;
+      sent = false;
+      result.hidden = true;
+      button.disabled = false;
+      label.textContent = "상담 내용 보내기";
+      status.textContent = "";
+      status.classList.remove("is-error");
     };
-
     const handleInput = (event) => {
-      const field = event.target;
-      if (requiredTextFields.includes(field.name)) field.setCustomValidity("");
-      if (!summary.value) return;
-      clearSummary("입력한 내용이 바뀌었습니다. 상담 내용을 다시 만들어 주세요.");
+      if (requiredTextFields.includes(event.target.name)) event.target.setCustomValidity("");
+      resetResult();
     };
     form.addEventListener("input", handleInput);
     form.addEventListener("change", handleInput);
     form.addEventListener("reset", () => {
-      clearTextValidation();
-      clearSummary();
+      requiredTextFields.forEach((name) => form.elements.namedItem(name)?.setCustomValidity(""));
+      resetResult();
     });
-
-    form.addEventListener("submit", (event) => {
+    form.addEventListener("submit", async (event) => {
       event.preventDefault();
+      if (submitting || sent) return;
       requiredTextFields.forEach((name) => {
-        const field = form.elements.namedItem(name);
-        field?.setCustomValidity(fieldValue(name) ? "" : "공백이 아닌 내용을 입력해 주세요.");
+        form.elements.namedItem(name)?.setCustomValidity(value(name) ? "" : "공백이 아닌 내용을 입력해 주세요.");
       });
       if (!form.reportValidity()) return;
-
-      summary.value = [
-        "타입웍스 프로젝트 상담",
-        "",
-        `회사 또는 팀: ${fieldValue("company")}`,
-        `담당자: ${fieldValue("name")}`,
-        `이메일: ${fieldValue("email")}`,
-        `프로젝트 유형: ${fieldValue("projectType") || "상담 후 결정"}`,
-        `예산: ${fieldValue("budget") || "상담 후 결정"}`,
-        `희망 일정: ${fieldValue("timeline") || "상담 후 결정"}`,
-        "",
-        "필요한 제품과 현재 상황",
-        fieldValue("message"),
-      ].join("\n");
-      panel.hidden = false;
-      copyButton.disabled = false;
-      status.textContent = "상담 내용을 정리했습니다. 내용을 확인한 뒤 복사해 전달해 주세요.";
-    });
-
-    copyButton.addEventListener("click", async () => {
-      const text = summary.value;
-      if (!text || panel.hidden) return;
+      const payload = Object.fromEntries(["company", "name", "email", "projectType", "budget", "timeline", "message", "website"].map((name) => [name, value(name)]));
+      submitting = true;
+      fields.disabled = true;
+      form.setAttribute("aria-busy", "true");
+      label.textContent = "보내는 중…";
+      status.classList.remove("is-error");
+      status.textContent = "상담 내용을 보내고 있습니다. 잠시 기다려 주세요.";
+      controller = new AbortController();
+      const timeout = window.setTimeout(() => controller.abort(), 25000);
       try {
-        if (!navigator.clipboard?.writeText) throw new Error("Clipboard unavailable");
-        await navigator.clipboard.writeText(text);
-        if (summary.value === text && !panel.hidden) {
-          status.textContent = "상담 내용을 복사했습니다. 전달할 곳에 붙여 넣어 주세요.";
+        const response = await fetch(form.action, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+          credentials: "omit",
+          referrerPolicy: "origin",
+          signal: controller.signal,
+        });
+        const data = await response.json();
+        if (!response.ok || data.ok !== true) {
+          throw new Error(response.status === 429 ? "rate_limit" : "send_failed");
         }
-      } catch {
-        if (summary.value !== text || panel.hidden) return;
-        summary.focus({ preventScroll: true });
-        summary.select();
-        status.textContent = "자동 복사를 사용할 수 없습니다. 선택된 상담 내용을 직접 복사해 주세요.";
+        sent = true;
+        label.textContent = "전송 완료";
+        status.textContent = "이메일 전송이 완료되었습니다.";
+        result.hidden = false;
+        document.getElementById("contact-result-title")?.focus();
+      } catch (error) {
+        status.classList.add("is-error");
+        status.textContent = error.message === "rate_limit"
+          ? "잠시 요청이 많습니다. 1분 뒤 다시 보내주시거나 이메일로 직접 문의해 주세요. 입력한 내용은 그대로 남아 있습니다."
+          : "전송 완료를 확인하지 못했습니다. 잠시 후 다시 시도하거나 이메일로 직접 문의해 주세요. 입력한 내용은 그대로 남아 있습니다.";
+      } finally {
+        window.clearTimeout(timeout);
+        submitting = false;
+        controller = null;
+        fields.disabled = false;
+        button.disabled = sent;
+        form.removeAttribute("aria-busy");
+        if (!sent) {
+          label.textContent = "상담 내용 보내기";
+          button.focus({ preventScroll: true });
+        }
       }
     });
-
-    const fields = form.querySelector("#contact-fields");
-    if (fields) fields.disabled = false;
+    window.addEventListener("pagehide", () => controller?.abort());
+    fields.disabled = false;
   };
 
   const initializeGallery = () => {

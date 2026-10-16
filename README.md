@@ -1,5 +1,11 @@
 # Typeworks 회사 소개 사이트
 
+## v5-6 상담 이메일과 메뉴 개선
+
+상담 내용을 이메일로 전송하는 Cloudflare Worker와 메뉴 아이콘 전환을 통합했습니다. 페이지와 메뉴가 바깥 여백, 둥근 모서리와 본문 여백을 공유하며 열기와 닫기 중 로고 및 버튼 위치를 유지합니다.
+
+로컬 상담 검토 주소는 http://127.0.0.1:4324/contact/ 입니다. 이 검토 서버의 전송은 모의 처리입니다. 메뉴 전용 검토본은 `.worktrees/fix/menu-frame`과 http://127.0.0.1:4325/ 에 보존했습니다. v5-6의 배포 원본은 `previews/typeworks-v5-6-20261016/`에 보존합니다.
+
 ## v5-5 통합본
 
 v4 공개본을 기준으로 홈, 회사소개, 서비스와 비용 및 작업 방식에 이해를 돕는 시각 자료를 추가했습니다. v5-4의 모바일 사례 구분과 전체 화면 메뉴, 서비스 및 견적 정리를 유지하고, v5-5에서는 메뉴의 열기와 닫기를 부드럽게 연결했습니다. 디자인 기준은 `DESIGN_SYSTEM.md`, 시각 자료 구성은 `content/visuals.mjs`에서 관리합니다.
@@ -12,11 +18,12 @@ v4 공개본을 기준으로 홈, 회사소개, 서비스와 비용 및 작업 �
 
 ## 열기와 수정
 
-설치할 패키지는 없습니다. Node.js에서 다음 명령으로 페이지를 생성합니다.
+정적 사이트는 추가 패키지 설치 없이 Node.js에서 생성합니다.
 
 ```bash
 npm run build
 npm run check
+npm test
 ```
 
 로컬 미리보기는 프로젝트 폴더에서 다음 명령으로 엽니다.
@@ -29,7 +36,7 @@ python3 -m http.server 4317 --bind 127.0.0.1
 
 - 사례 수정: 기존 프로젝트 설명과 역할은 `content/cases.mjs`, 표시 이름과 이미지, 노놀 및 AWS SBG 사례와 노출 순서는 `content/portfolio-cases.mjs`에서 관리합니다. 수정 후 `npm run build`를 실행합니다.
 - 회사 소개와 서비스 수정: `scripts/build-site.mjs`의 해당 페이지 내용을 바꾸고 페이지를 다시 생성합니다.
-- 연락 경로 수정: `scripts/build-site.mjs`의 상담 안내와 LinkedIn 링크를 수정합니다.
+- 연락 경로 수정: `content/contact.mjs`의 수신 주소 및 서버 주소와 `scripts/build-site.mjs`의 상담 안내를 수정합니다.
 - 화면 스타일 수정: `style.css`를 수정하고 브라우저를 새로고침합니다.
 
 Google Fonts는 인터넷 연결 시 사용되며, 연결이 없으면 대체 서체로 표시됩니다.
@@ -47,11 +54,13 @@ Google Fonts는 인터넷 연결 시 사용되며, 연결이 없으면 대체 �
 | `en/` | 기존 영문 포트폴리오 |
 | `content/cases.mjs` | 사례 원본 데이터 |
 | `content/portfolio-cases.mjs` | 사례 표시 정보, 신규 사례와 노출 순서 |
+| `content/contact.mjs` | 상담 이메일과 전송 서버 주소 |
+| `contact-api/` | Cloudflare 상담 전송 서버와 검증 코드 |
 | `content/visuals.mjs` | 홈과 주요 페이지의 설명 도식과 사진 구성 |
 | `content/visual-sources-v5.json` | 생성 사진의 도구, 목적과 프롬프트 기록 |
 | `DESIGN_SYSTEM.md` | v5의 브랜드 톤과 시각 자료 기준 |
 | `scripts/build-site.mjs` | 공통 탐색, 푸터, 페이지와 sitemap 생성 |
-| `style.css`, `app.js` | 한국어 사이트 화면 및 메뉴, 상담 요약 기능 |
+| `style.css`, `app.js` | 한국어 사이트 화면 및 메뉴, 상담 전송 기능 |
 | `assets/` | 브랜드 SVG, 제품 화면, 아이콘과 공유 이미지 |
 | `assets/visuals/` | 협업과 NFC 방문 확인을 설명하는 연출 사진 |
 | `404.html` | 없는 주소 안내 |
@@ -64,10 +73,14 @@ Google Fonts는 인터넷 연결 시 사용되며, 연결이 없으면 대체 �
 
 ## 상담 기능
 
-상담 입력값은 브라우저 화면에서 요약하는 데 사용됩니다. 서버 접수와 개인정보 저장 기능은 없습니다.
+상담 폼은 Cloudflare Worker의 `/api/contact`에 JSON을 전송합니다. 서버가 메일 전송을 수락한 뒤 완료 화면을 표시합니다. 회신 주소에는 작성자가 입력한 이메일을 설정합니다.
 
-- 상담 요약을 복사해 기존 LinkedIn 연락 경로로 전달합니다.
-- 자동 복사가 차단되면 요약을 선택해 직접 복사할 수 있습니다.
+- 서버는 입력 형식과 길이, 허용 출처를 검증하고 IP별 분당 3회로 전송을 제한합니다.
+- 전송 실패나 시간 초과 시 입력값을 유지하고 재시도 및 직접 이메일 문의를 안내합니다.
+- 별도 상담 데이터베이스를 사용하지 않으며 메일은 수신함에 보관됩니다. 앱 로그에는 전송 결과 코드만 기록합니다.
+- 자바스크립트 사용이 어려우면 직접 이메일 링크를 이용할 수 있습니다.
+
+서버 패키지는 `contact-api`에서 `npm ci`로 설치하고 `npm run dev`로 실행합니다. 배포에는 회사 Cloudflare 계정의 Workers Scripts Write 권한이 필요합니다. 프로젝트 전용 토큰을 환경 변수 `CLOUDFLARE_API_TOKEN`으로 전달하고 `contact-api`에서 `npm run deploy`를 실행합니다. 토큰은 저장소에 포함하지 않습니다. 수신 대상은 인증된 `minseok@typeworks.pro`로 제한합니다. 실제 전송 수락, Gmail 수신 및 회신 주소를 확인했습니다. 정적 사이트 배포와 서버 배포는 별도 명령으로 진행합니다.
 
 ## 내용 기준
 
@@ -166,3 +179,10 @@ DNSSEC가 켜진 도메인에서 ALIAS 대신 A 레코드 방식을 사용했습
 - 병리 도구: https://github.com/kw-idea/DP_annotation_front
 - NTAG 424 DNA 기술 설명: https://www.nxp.com/docs/en/data-sheet/NT4H2421Gx.pdf
 - SIP 전화 연결 표준: https://www.rfc-editor.org/rfc/rfc3261.html
+
+### v5-6 배포 전 백업
+
+- 원본: `c10b0641d589a0b10bdf8e6dc09a2e935e79b9f8`
+- Git 태그: `pre-v5-6-20261016-1710`
+- 로컬 ZIP: `../backups/pre-v5-6-20261016-1710/typeworks-pre-v5-6.zip`
+- 검증 기록: `../backups/pre-v5-6-20261016-1710/manifest.json`, 원본 78개 파일

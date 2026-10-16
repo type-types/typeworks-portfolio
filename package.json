@@ -3,6 +3,7 @@
   "private": true,
   "scripts": {
     "build": "node scripts/build-site.mjs",
-    "check": "node --check app.js && node --check scripts/build-site.mjs && node --check content/cases.mjs && node --check content/portfolio-cases.mjs && node --check content/contact.mjs && node --check content/visuals.mjs"
+    "check": "node --check app.js && node --check scripts/build-site.mjs && node --check content/cases.mjs && node --check content/portfolio-cases.mjs && node --check content/contact.mjs && node --check content/visuals.mjs && node --check contact-api/worker.mjs",
+    "test": "node --test contact-api/worker.test.mjs"
   }
 }

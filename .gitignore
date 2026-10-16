@@ -3,3 +3,9 @@ review/
 project.md
 insight.md
 dist/
+.wrangler/
+node_modules/
+.dev.vars*
+.env*
+contact-api/worker-configuration.d.ts
+.worktrees
