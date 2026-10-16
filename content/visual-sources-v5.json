@@ -1,0 +1,17 @@
+{
+  "version": "v5",
+  "created": "2026-10-16",
+  "tool": "Built-in image_gen",
+  "assets": [
+    {
+      "file": "assets/visuals/planning-v5.jpg",
+      "purpose": "협업과 요구 정리를 설명하는 보조 연출 사진",
+      "prompt": "Use case: photorealistic-natural. Asset type: supporting editorial photograph for the Korean software studio Typeworks, used beside an explanation of collaborative requirements planning and product handover. Create one landscape 3:2 photograph. An approachable, quiet worktable in soft natural window light: two people's hands arranging a few blank white index cards with subtle blue tabs around an open notebook; a slim silver laptop partly visible with its screen out of frame. The process of making sense of scattered notes should be visually obvious. Pale warm wood, off-white paper, restrained true blue accents matching #246cd9, light gray and charcoal. Candid documentary composition, realistic skin and paper texture, generous breathing space, modest everyday workspace, no faces. No readable text, no labels, no logos, no watermark, no neon, no staged corporate handshake, no stock-photo smiles, no sci-fi or glossy 3D. Supporting conceptual image, not a claim to depict the actual studio or client."
+    },
+    {
+      "file": "assets/visuals/nfc-visit-v5.jpg",
+      "purpose": "휴대전화를 태그 가까이 대는 방문 확인 개념 연출 사진",
+      "prompt": "Use case: photorealistic-natural. Asset type: supporting explanatory photograph for a calm white Korean software studio website. One landscape 3:2 editorial photograph, close-up of a single adult hand holding a modern dark smartphone just above a small unbranded white square NFC tag on a pale oak reception desk. Show the simple physical action of bringing the phone close to the tag. The tag has only a small restrained blue circle in #246cd9, no letters. Phone screen softly lit with a minimal abstract check mark, no readable words or personal data. Soft natural daylight, realistic materials, neutral warm white and light gray palette with one blue accent, gentle shadows, clear uncomplicated composition and generous space. No faces, no logos, no watermark, no padlock or fingerprint imagery, no security/authentication claims, no glowing wireless effects, no sci-fi. Conceptual explanation of recording a physical visit, not a product catalog photo or actual customer scene."
+    }
+  ]
+}

@@ -2,6 +2,7 @@ import { mkdir, writeFile, readFile, cp, rm } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import { portfolioCases as cases, featuredSlugs, supportingSlugs, workSlugs } from '../content/portfolio-cases.mjs';
+import { journeyVisual, planningPhoto, serviceVisual, stepSymbol, connectionVisual, processOverview, stageVisual, nfcVisual, callVisual, estimateVisual } from '../content/visuals.mjs';
 
 const rootUrl = new URL('../', import.meta.url);
 const root = fileURLToPath(rootUrl);
@@ -47,17 +48,17 @@ const services = [
   ['02','업무 도구와 AI','흩어진 정보와 반복 작업을 연결하고,<br>필요한 단계에 AI를 적용합니다.','지식 관리 / 데이터 수집 / 업무 자동화'],
   ['03','공연과 현장 운영','참여자가 쓰는 화면과<br>현장을 진행하는 도구를 연결합니다.','관객 참여 / 행사 운영 / 현장 방문 확인'],
 ];
-const serviceGrid = () => `<div class="service-grid">${services.map(([number,title,description,examples]) => `<article class="service-item reveal"><span class="number">${number}</span><h3>${title}</h3><p>${description}</p><p class="service-examples">${examples}</p></article>`).join('')}</div>`;
+const serviceGrid = () => `<div class="service-grid">${services.map(([number,title,description,examples],index) => `<article class="service-item reveal">${serviceVisual(index)}<span class="number">${number}</span><h3>${title}</h3><p>${description}</p><p class="service-examples">${examples}</p></article>`).join('')}</div>`;
 const processSteps = [
   ['01','필요를 이해합니다','지금 하는 일, 불편한 점과 원하는 결과를 함께 살펴봅니다.'],
   ['02','범위를 합의합니다','만들 기능, 완료 기준, 비용, 일정과 수정 범위를 정합니다.'],
   ['03','만들며 확인합니다','작동하는 화면을 공유하고 합의한 기준으로 함께 확인합니다.'],
   ['04','운영 방법을 전합니다','결과물을 전달하고 내용 수정과 운영 방법을 쉽게 알려드립니다.'],
 ];
-const processGrid = () => `<ol class="process-grid">${processSteps.map(([number,title,description]) => `<li class="reveal"><span class="number">${number}</span><h3>${title}</h3><p>${description}</p></li>`).join('')}</ol>`;
+const processGrid = () => `<ol class="process-grid">${processSteps.map(([number,title,description],index) => `<li class="reveal">${stepSymbol(index)}<span class="number">${number}</span><h3>${title}</h3><p>${description}</p></li>`).join('')}</ol>`;
 const priceBand = (isDetail = false) => `<div class="price-band reveal"><div><p class="eyebrow">견적 안내</p><p class="price">필요한 기능과<br>범위를 기준으로.</p></div><div><h3>무엇을 어디까지 만들지,<br>함께 정한 뒤 시작합니다.</h3><p>기능, 일정과 인수인계 범위에 따라 견적을 안내합니다.</p>${textLink(isDetail ? '제작 상담하기' : '비용과 작업 범위 알아보기',isDetail ? '/contact/' : '/services/#pricing')}</div></div>`;
 
-const home = `<section class="hero wrap portfolio-hero"><p class="eyebrow hero-label">소프트웨어 제작 스튜디오</p><h1>필요한 소프트웨어를,<br> 실제로 쓰는 제품으로.</h1><p class="lead">요구를 정리하고, 제품을 만들고, 쓰는 방법까지 전달합니다.</p><div class="hero-actions">${button('프로젝트 상담하기','/contact/')}${textLink('제작 사례 보기','#selected-work')}</div></section>
+const home = `<section class="hero wrap portfolio-hero hero-v5"><div class="hero-copy"><p class="eyebrow hero-label">소프트웨어 제작 스튜디오</p><h1>필요한 소프트웨어를,<br> 실제로 쓰는 제품으로.</h1><p class="lead">요구를 정리하고, 제품을 만들고, 쓰는 방법까지 전달합니다.</p><div class="hero-actions">${button('프로젝트 상담하기','/contact/')}${textLink('제작 사례 보기','#selected-work')}</div></div>${journeyVisual()}</section>
 <section class="section selected-work wrap" id="selected-work"><div class="section-heading reveal"><div><p class="eyebrow">대표 제작 사례</p><h2>업무에서 연구와 현장까지.</h2></div>${textLink('전체 포트폴리오','/work/')}</div><div class="featured-work">${featuredSlugs.map(featuredCase).join('')}</div><p class="case-context">대표 박민석의 프로젝트 경험입니다. 상세 페이지에서 담당 역할과 화면을 확인하실 수 있습니다.</p></section>
 <section class="section wrap portfolio-more"><div class="section-heading reveal"><div><p class="eyebrow">제품과 전달 경험</p><h2>함께 쓰고, 이해할 수 있도록.</h2></div></div><div class="case-grid">${supportingSlugs.map(caseCard).join('')}</div></section>
 <section class="section wrap" id="services"><div class="section-heading reveal"><div><p class="eyebrow">제공하는 서비스</p><h2>필요한 기능을, 함께 구체화합니다.</h2></div>${textLink('서비스와 보유 기술','/services/')}</div>${serviceGrid()}</section>
@@ -66,10 +67,10 @@ const home = `<section class="hero wrap portfolio-hero"><p class="eyebrow hero-l
 const work = `${pageHero('포트폴리오','필요에서 출발한,<br>제품과 경험들.','소프트웨어 제작, 팀 운영과 기술을 전달한 경험입니다.')}<section class="section wrap work-list"><div class="case-grid portfolio-grid">${workSlugs.map(caseCard).join('')}</div><p class="case-context">대표의 기존 프로젝트 참여 경험을 포함합니다. 실제 화면, 데모 화면, 기능 소개 이미지와 콘텐츠 제작 시안을 사례별로 표시했습니다.</p></section>${cta()}`;
 
 const servicePage = `${pageHero('서비스와 비용','필요한 기능을 정리하고,<br>사용할 제품을 만듭니다.','새로운 서비스, 반복되는 업무와 현장 운영에 필요한 소프트웨어를 제작합니다.')}<section class="section wrap">${serviceGrid()}<div class="scope-note reveal"><h2>화면만 만드는 데서 끝나지 않습니다.</h2><p>제품을 사용하는 사람과 관리하는 사람의 일을 함께 살펴봅니다. 필요한 정보, 데이터와 운영 규칙을 화면과 기능에 연결합니다.</p></div></section>
-<section class="section wrap" id="modules"><div class="section-heading reveal"><div><p class="eyebrow">보유 기술과 구현 경험</p><h2>필요한 곳에 연결할 기술.</h2></div></div><div class="technology-grid"><article class="technology-item reveal"><span class="eyebrow">NFC 현장 방문 확인</span><h3>지문 인식기 설치 부담을 줄이는<br>현장 방문 확인 모듈.</h3><p>휴대전화와 NTAG 424 DNA 태그를 활용해 현장 방문을 확인하고, 방문 기록을 운영 도구에 연결할 수 있습니다.</p><p class="muted">방문자 본인 확인이 필요하면 인증 방식과 범위를 함께 정합니다.</p></article><article class="technology-item reveal"><span class="eyebrow">AI 발신 전화</span><h3>AI가 먼저 전화를 걸고,<br>사용자와 대화합니다.</h3><p>SIP 전화 연결을 통해 발신, 대화와 기록을 이어갑니다. 온담 프로토타입에서 실제 전화로 이 흐름을 검증했습니다.</p>${textLink('온담 제작 사례','/work/ondam/')}</article></div></section>
-<section class="section wrap" id="pricing"><div class="section-heading reveal"><div><p class="eyebrow">견적 기준</p><h2>범위를 정하면,<br>비용도 명확해집니다.</h2></div></div>${priceBand(true)}<div class="agreement-grid"><article class="reveal"><h3>결과물과 완료 기준</h3><p>어떤 기능을 만들고 무엇을 전달할지, 어떤 상태에서 제작이 완료되는지 정합니다.</p></article><article class="reveal"><h3>일정과 수정 범위</h3><p>제작 기간과 확인 시점, 수정 횟수 및 범위를 견적과 계약에 함께 정합니다.</p></article><article class="reveal"><h3>운영 안내와 교육</h3><p>내용 수정, 데이터 확인과 일상적인 운영 방법을 알려드립니다. 안내 범위를 제작 금액에 함께 정합니다.</p></article></div><p class="scope-footnote">작업 규모에 맞춰 금액, 제작 기간, 수정 횟수와 운영 지원 범위를 함께 정합니다.</p></section>${cta()}`;
+<section class="section wrap" id="modules"><div class="section-heading reveal"><div><p class="eyebrow">보유 기술과 구현 경험</p><h2>필요한 곳에 연결할 기술.</h2></div></div><div class="technology-grid"><article class="technology-item reveal">${nfcVisual()}<span class="eyebrow">NFC 현장 방문 확인</span><h3>지문 인식기 설치 부담을 줄이는<br>현장 방문 확인 모듈.</h3><p>휴대전화와 NTAG 424 DNA 태그를 활용해 현장 방문을 확인하고, 방문 기록을 운영 도구에 연결할 수 있습니다.</p><p class="muted">방문자 본인 확인이 필요하면 인증 방식과 범위를 함께 정합니다.</p></article><article class="technology-item reveal">${callVisual()}<span class="eyebrow">AI 발신 전화</span><h3>AI가 먼저 전화를 걸고,<br>사용자와 대화합니다.</h3><p>SIP 전화 연결을 통해 발신, 대화와 기록을 이어갑니다. 온담 프로토타입에서 실제 전화로 이 흐름을 검증했습니다.</p>${textLink('온담 제작 사례','/work/ondam/')}</article></div></section>
+<section class="section wrap" id="pricing"><div class="section-heading reveal"><div><p class="eyebrow">견적 기준</p><h2>범위를 정하면,<br>비용도 명확해집니다.</h2></div></div>${estimateVisual()}${priceBand(true)}<div class="agreement-grid"><article class="reveal"><h3>결과물과 완료 기준</h3><p>어떤 기능을 만들고 무엇을 전달할지, 어떤 상태에서 제작이 완료되는지 정합니다.</p></article><article class="reveal"><h3>일정과 수정 범위</h3><p>제작 기간과 확인 시점, 수정 횟수 및 범위를 견적과 계약에 함께 정합니다.</p></article><article class="reveal"><h3>운영 안내와 교육</h3><p>내용 수정, 데이터 확인과 일상적인 운영 방법을 알려드립니다. 안내 범위를 제작 금액에 함께 정합니다.</p></article></div><p class="scope-footnote">작업 규모에 맞춰 금액, 제작 기간, 수정 횟수와 운영 지원 범위를 함께 정합니다.</p></section>${cta()}`;
 
-const processPage = `${pageHero('작업 방식','같은 결과를 바라보도록,<br>함께 정하고 확인합니다.','좋은 제작은 요구를 이해하는 것과 명확하게 전달하는 것에서 시작합니다.')}<section class="section wrap"><div class="process-detail">${processSteps.map(([number,title,description],index) => `<article class="process-row reveal"><div><span class="number">${number}</span><h2>${title}</h2></div><div><p class="large-copy">${description}</p><ul>${[
+const processPage = `${pageHero('작업 방식','같은 결과를 바라보도록,<br>함께 정하고 확인합니다.','좋은 제작은 요구를 이해하는 것과 명확하게 전달하는 것에서 시작합니다.')}${processOverview()}<section class="section wrap"><div class="process-detail">${processSteps.map(([number,title,description],index) => `<article class="process-row reveal"><div class="process-stage"><div class="stage-title"><span class="number">${number}</span><h2>${title}</h2></div>${stageVisual(index)}</div><div><p class="large-copy">${description}</p><ul>${[
 ['현재 사용하는 도구와 일이 흐르는 방식 확인','사용자와 운영자에게 필요한 기능 정리'],
 ['납품할 기능과 산출물, 완료 기준 확정','견적, 일정, 수정과 운영 안내 범위 합의'],
 ['진행한 작업, 결정할 내용과 다음 작업 공유','실제 화면으로 기능 확인 및 피드백 반영'],
@@ -80,7 +81,7 @@ const processPage = `${pageHero('작업 방식','같은 결과를 바라보도�
 ['수정 횟수와 제작 기간은 어떻게 정하나요?','기능 수, 화면과 연동 범위를 살펴보고 견적 단계에서 정합니다. 확정한 기준을 바탕으로 중간 확인과 납품을 진행합니다.'],
 ].map(([question,answer]) => `<details><summary>${question}<span aria-hidden="true">+</span></summary><p>${answer}</p></details>`).join('')}</div></section>${cta()}`;
 
-const about = `${pageHero('회사소개','제품, 지식, 데이터, 규칙을 연결해<br>일이 돌아가는 구조를 만듭니다.','기술을 구현하는 데서 한 걸음 더 나아가, 사람이 일을 이어갈 수 있는 구조를 생각합니다.')}<section class="section wrap"><div class="about-intro reveal"><p class="eyebrow">우리가 중요하게 생각하는 것</p><div><h2>필요를 이해하고.<br>구조를 만들고.<br>쓰는 방법을 공유합니다.</h2><p>흩어진 정보와 반복되는 작업, 사람마다 다른 운영 기준을 함께 살펴봅니다. 무엇을 해결할지 정하고, 소프트웨어로 구현하고, 직접 사용할 수 있도록 전달합니다.</p></div></div><div class="principles-grid">${[
+const about = `${pageHero('회사소개','제품, 지식, 데이터, 규칙을 연결해<br>일이 돌아가는 구조를 만듭니다.','기술을 구현하는 데서 한 걸음 더 나아가, 사람이 일을 이어갈 수 있는 구조를 생각합니다.')}<section class="section wrap"><div class="about-intro reveal"><div><p class="eyebrow">우리가 중요하게 생각하는 것</p>${planningPhoto()}</div><div><h2>필요를 이해하고.<br>구조를 만들고.<br>쓰는 방법을 공유합니다.</h2><p>흩어진 정보와 반복되는 작업, 사람마다 다른 운영 기준을 함께 살펴봅니다. 무엇을 해결할지 정하고, 소프트웨어로 구현하고, 직접 사용할 수 있도록 전달합니다.</p></div></div>${connectionVisual()}<div class="principles-grid">${[
 ['이해하고 구체화합니다','고객이 원하는 기능만 듣기보다, 그 기능이 필요한 이유와 사용 환경을 함께 이해합니다.'],
 ['함께 확인합니다','현재 무엇을 만들고 있고, 어떤 결정이 필요한지 작동하는 화면과 구체적인 작업으로 전달합니다.'],
 ['쉽게 전합니다','복잡한 설명을 줄이고, 고객이 실제로 할 일을 기준으로 제품과 운영 방법을 알려드립니다.'],
