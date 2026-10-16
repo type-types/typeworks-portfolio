@@ -3,10 +3,22 @@
 
   const initialize = () => {
     document.documentElement.classList.add("js");
+    initializeFocusIndicators();
     initializeReveals();
     initializeMenu();
     initializeContactForm();
     initializeGallery();
+  };
+
+  const initializeFocusIndicators = () => {
+    const root = document.documentElement;
+    document.addEventListener("pointerdown", () => {
+      root.dataset.focusInput = "pointer";
+    }, { capture: true });
+    document.addEventListener("keydown", (event) => {
+      if (event.metaKey || event.altKey || event.ctrlKey || ["Shift", "Control", "Alt", "Meta"].includes(event.key)) return;
+      root.dataset.focusInput = "keyboard";
+    }, { capture: true });
   };
 
   const initializeReveals = () => {
