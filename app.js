@@ -231,7 +231,9 @@
       reducedMotion.addListener(handleMotionChange);
     }
     window.addEventListener("pagehide", () => updateMenu(false));
-    window.addEventListener("pageshow", () => updateMenu(false));
+    window.addEventListener("pageshow", (event) => {
+      if (event.persisted) updateMenu(false);
+    });
     updateMenu(false);
   };
 
