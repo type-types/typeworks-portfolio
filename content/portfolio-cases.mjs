@@ -3,6 +3,7 @@ import { cases as sourceCases } from './cases.mjs';
 const presentation = {
   knet: {
     title: 'K-NET 운영 도구',
+    teaser: '소개 편집부터 신청 관리까지',
     shortDescription: '소개 편집과 신청 관리를 운영자가 직접 이어가는 도구입니다.',
     visualType: 'screenshot',
     visual: '/assets/portfolio/knet-study-editor.png',
@@ -18,6 +19,9 @@ const presentation = {
   },
   csi: {
     title: 'CSI 데이터 수집과 라벨링',
+    mobileTitle: 'CSI 데이터 도구',
+    teaser: '센서 데이터를 연구용 라벨로',
+    mobileStatus: '연구용 도구',
     shortDescription: '센서 데이터와 행동 구간을 연결해 연구용 라벨을 만드는 도구입니다.',
     visualType: 'screenshot',
     visual: '/assets/portfolio/csi-labeling.jpg',
@@ -29,6 +33,9 @@ const presentation = {
   },
   ignition: {
     title: 'IGNITION 공연 참여',
+    mobileTitle: 'IGNITION',
+    teaser: '관객의 반응을 무대에 연결',
+    mobileStatus: '현장 사용',
     shortDescription: '관객의 반응과 메시지를 공연 진행에 연결하는 현장 도구입니다.',
     visualType: 'screenshot',
     visual: '/assets/portfolio/ignition-07-screen.png',
@@ -44,6 +51,7 @@ const presentation = {
   },
   melissa: {
     title: 'Melissa',
+    teaser: 'AI 대화를 하루의 일기로',
     shortDescription: 'AI와 나눈 대화를 하루의 일기로 남기는 앱입니다.',
     visualType: 'phones',
     visualLabel: '공식 App Store 소개 이미지',
@@ -51,6 +59,8 @@ const presentation = {
   },
   ondam: {
     title: '온담 AI 안부전화',
+    teaser: 'AI 안부전화와 대화 기록',
+    mobileStatus: '프로토타입',
     shortDescription: 'AI가 전화를 걸어 대화하고 통화 내용을 기록하는 프로토타입입니다.',
     visualType: 'flow',
     visualLabel: '주요 기능 소개',
@@ -60,6 +70,9 @@ const presentation = {
   },
   'radio-gemma': {
     title: 'Radio-gemma 학습 시스템',
+    mobileTitle: 'Radio-gemma',
+    teaser: '판독 사례를 비교하는 학습 도구',
+    mobileStatus: '연구 참여',
     shortDescription: '판독 사례를 비교하고 피드백을 확인하는 전공의 학습 시스템입니다.',
     visualType: 'flow',
     visualLabel: '주요 기능 소개',
@@ -69,6 +82,8 @@ const presentation = {
   },
   pathology: {
     title: '병리 이미지 편집 도구',
+    teaser: '이미지 배치와 관심 영역 편집',
+    mobileStatus: '연구 참여',
     shortDescription: '이미지를 배치하고 관심 영역을 표시해 주석과 함께 저장하는 도구입니다.',
     visualType: 'flow',
     visualLabel: '주요 기능 소개',
@@ -82,6 +97,8 @@ const additionalCases = [
   {
     slug: 'nonol',
     title: '노놀',
+    teaser: '현실에서 함께 푸는 모바일 퀘스트',
+    mobileStatus: '알파 공개',
     subtitle: '현실에서 함께하는 모바일 퀘스트',
     category: '현장 경험과 제품 실험',
     status: '알파 신청 및 Test Lab 공개',
@@ -121,6 +138,9 @@ const additionalCases = [
   {
     slug: 'aws-sbg',
     title: 'AWS SBG 세션과 홍보',
+    mobileTitle: 'AWS SBG',
+    teaser: '기술 강의와 실습 자료 제작',
+    mobileStatus: '세션 진행',
     subtitle: '기술을 이해하고 참여할 수 있도록 전하는 일',
     category: '교육과 콘텐츠',
     status: '세션 진행 / 홍보 자료 제작',

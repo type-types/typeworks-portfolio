@@ -473,3 +473,157 @@ html:not(.js) .menu-toggle,html:not(.js) .gallery-open{display:none}
   .technology-section .technology-item h3{font-size:25px;line-height:1.5}
   .technology-section .technology-item p{font-size:18px}
 }
+
+/* v5-9: compact mobile case rows selected from option B. */
+.case-brief,.case-mobile-action{display:none}
+.case-role-label{display:none}
+.featured-copy>.text-link>.case-link-label{font:inherit;line-height:inherit;transform:none}
+@media(max-width:600px){
+  .featured-work,.case-grid.portfolio-grid,.portfolio-more .case-grid{gap:16px}
+  .featured-case,.case-card{background:var(--soft);border-radius:14px;padding:14px 12px}
+  .featured-case,.case-card>.case-link,.portfolio-grid>.case-card:first-child>.case-link{display:grid;grid-template-columns:104px minmax(0,1fr);align-items:center;gap:14px}
+  .featured-case+.featured-case{border-top:0;padding-top:14px}
+  .featured-case{position:relative}
+  .featured-copy>.text-link:after{content:"";position:absolute;inset:0;border-radius:14px;z-index:1}
+  .featured-visual,.case-card .project-media{grid-column:1;grid-row:1;min-width:0}
+  .featured-copy,.case-card-copy{display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:8px;min-width:0;padding:0}
+  .featured-copy{grid-column:2;grid-row:1}
+  .case-card-copy{grid-column:2;grid-row:1}
+  .case-card .case-meta{display:contents}
+  .featured-copy>.eyebrow,.case-card .case-meta>span:first-child{grid-column:1/-1;grid-row:1;margin:0 0 4px;font-size:14px;line-height:1.6;color:var(--muted);overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+  .featured-copy>h3,.case-card-title{grid-column:1/-1;grid-row:2;margin:0}
+  .featured-copy>h3,.case-card-title h3,.portfolio-grid>.case-card:first-child h3{font-size:19px;line-height:1.5;letter-spacing:-.04em;word-break:keep-all}
+  .case-card-title>span{display:none}
+  .featured-copy>.featured-description,.case-card-copy>p{grid-column:1/-1;grid-row:3;margin:6px 0 8px;font-size:15px;line-height:1.65;color:var(--muted);word-break:keep-all}
+  .featured-facts,.case-card .case-meta>span+span{grid-column:1;grid-row:4;align-self:center;margin:0;padding:0;border:0;min-width:0}
+  .featured-facts>span,.case-card .case-meta>span+span{display:block;background:none;border-radius:0;padding:0;font-size:14px;line-height:1.6;font-weight:500;color:var(--blue)}
+  .case-card .case-meta>span+span:before{content:none}
+  .featured-facts>p,.case-card .role,.featured-visual>.visual-label,.case-card-copy>.visual-label{display:none}
+  .featured-copy>.text-link,.case-card .case-mobile-action{grid-column:2;grid-row:4;display:inline-flex;align-items:center;justify-self:end;align-self:center;gap:6px;margin:0;min-height:32px;font-size:14px;line-height:1.6;white-space:nowrap}
+  .featured-copy>.text-link>span[aria-hidden],.case-mobile-action>span{font-size:18px}
+  .featured-case .project-media,.case-card .project-media{width:104px;height:104px;min-height:0;aspect-ratio:1;border-radius:10px}
+  .featured-case .project-media.screenshot-media,.case-card .project-media.screenshot-media{padding:6px}
+  .featured-case .screenshot-media>img,.case-card .screenshot-media>img{width:100%;height:100%;object-fit:cover;object-position:left top;border-radius:4px}
+  .featured-case .melissa-media,.case-card .melissa-media{padding:10px 5px;background:#f4eee6}
+  .featured-case .phone-gallery,.case-card .phone-gallery{gap:3px;align-items:center}
+  .featured-case .phone-gallery img,.case-card .phone-gallery img{width:calc((100% - 6px)/3);border-radius:4px;box-shadow:none}
+  .case-card .project-media.concept-media{min-height:0;padding:18px}
+  .case-card .concept-title,.case-card .flow-strip{display:none}
+  .case-card .concept-content>svg{width:54px;height:54px;margin:0 auto}
+  .case-full{display:none}
+  .case-brief{display:inline}
+}
+@media(max-width:360px){
+  .featured-case,.case-card>.case-link,.portfolio-grid>.case-card:first-child>.case-link{grid-template-columns:80px minmax(0,1fr);gap:12px}
+  .featured-case .project-media,.case-card .project-media{width:80px;height:80px}
+  .featured-copy>h3,.case-card-title h3,.portfolio-grid>.case-card:first-child h3{font-size:18px}
+  .featured-copy,.case-card-copy{column-gap:5px}
+  .featured-copy>.text-link,.case-card .case-mobile-action{gap:4px}
+  .case-card .concept-content>svg{width:44px;height:44px}
+  .featured-copy>.text-link>span[aria-hidden],.case-mobile-action>span{display:none}
+}
+
+/* v5-10: mobile technology rows and estimates. */
+.service-brief,.service-case-link,.technology-mobile-link,.technology-mobile-status{display:none}
+@media(max-width:600px){
+  .services-hero{padding-block:32px 24px}
+  .services-hero>.eyebrow{font-size:14px;margin-bottom:16px}
+  .services-hero h1{font-size:30px;line-height:1.5}
+  .services-hero .lead{font-size:16px;line-height:1.8;margin-top:16px}
+  .service-offers{padding-top:8px}
+  .service-offers .event-visual .service-screen-window{background:#151516}
+  .service-case-link>span{font-size:18px}
+  .service-offers>.scope-note{display:block;background:var(--warm-soft);padding:20px;border:0;border-radius:14px;margin-top:24px}
+  .service-offers>.scope-note h2{font-size:20px;line-height:1.6}
+  .service-offers>.scope-note>p{font-size:16px;line-height:1.8;margin-top:10px}
+  .technology-section .technology-grid{gap:16px}
+  .technology-section .technology-item{display:grid;grid-template-columns:104px minmax(0,1fr);align-items:start;column-gap:14px;background:var(--paper);border-radius:14px;padding:14px 12px}
+  .technology-section .technology-visual{grid-column:1;grid-row:1/4;align-self:center;margin:0;min-width:0}
+  .technology-section .technology-visual>img,.technology-section .call-visual-scene{width:104px;height:104px;border-radius:10px}
+  .technology-section .technology-visual>figcaption,.technology-section .technology-item>.eyebrow{display:none}
+  .technology-section .technology-item h3{grid-column:2;grid-row:1;font-size:19px;line-height:1.5;margin:0 0 6px}
+  .technology-section .technology-item>p:not(.muted){grid-column:2;grid-row:2;font-size:15px;line-height:1.7;margin:0}
+  .technology-section .technology-item>.muted{grid-column:1/-1;grid-row:4;font-size:14px;line-height:1.8;margin:12px 0 0}
+  .technology-section .technology-mobile-link,.technology-section .technology-item>.text-link{grid-column:2;grid-row:3;display:inline-flex;align-items:center;justify-self:start;gap:7px;font-size:14px;line-height:1.6;font-weight:500;min-height:36px;margin:6px 0 0}
+  .technology-mobile-link>span,.technology-section .technology-item>.text-link>span{font-size:18px}
+  .technology-section .technology-mobile-status{grid-column:1/-1;grid-row:4;display:block;font-size:14px;line-height:1.8;color:var(--muted);margin-top:12px}
+  .technology-section .call-visual-scene{display:flex;align-items:center;justify-content:center;padding:14px}
+  .technology-section .voice-wave,.technology-section .call-record,.technology-section .call-device>span{display:none}
+  .technology-section .call-device>svg{width:48px;height:48px;margin:0}
+  #pricing .estimate-guide{padding:0;background:none;border-radius:0}
+  #pricing .estimate-factors{gap:12px}
+  #pricing .estimate-factors>li{grid-template-columns:30px minmax(0,1fr);column-gap:14px;padding:18px 16px;background:var(--soft);border-radius:14px}
+  #pricing .estimate-factors h3{font-size:18px;line-height:1.6;margin-bottom:5px}
+  #pricing .estimate-factors p{font-size:15px;line-height:1.8}
+  #pricing .estimate-factors svg{width:28px;height:28px}
+  #pricing .estimate-summary{background:var(--warm-soft);border:0;border-radius:14px;padding:20px;margin-top:20px;gap:12px}
+  #pricing .estimate-summary h3{font-size:20px;line-height:1.6}
+  #pricing .estimate-summary p{font-size:16px;line-height:1.8;margin-top:8px}
+  #pricing .estimate-summary>.text-link{font-size:16px;min-height:44px;gap:12px}
+  .service-full{display:none}
+  .service-brief{display:inline}
+}
+@media(max-width:360px){
+  .technology-section .technology-item{grid-template-columns:80px minmax(0,1fr);column-gap:12px}
+  .technology-section .technology-visual>img,.technology-section .call-visual-scene{width:80px;height:80px}
+  .technology-section .technology-item h3{font-size:18px}
+  .technology-section .call-device>svg{width:40px;height:40px}
+}
+
+/* v5-11: large concept cards for service categories on home and services. */
+@media(max-width:600px){
+  .service-grid{gap:24px}
+  .service-offers .service-grid{gap:24px}
+  .service-grid .service-concept-card{display:block;background:var(--soft);border:0;border-radius:18px;padding:20px}
+  .service-grid .service-concept-card>h3{font-size:24px;line-height:1.5;margin:0 0 18px}
+  .service-grid .service-concept-card>.service-visual{margin:0}
+  .service-grid .service-concept-card .service-screen-window{width:100%;height:auto;aspect-ratio:16/10;padding:12px;border-radius:12px;background:var(--paper)}
+  .service-grid .service-concept-card .service-screen-window>img{object-fit:contain;object-position:center;border-radius:5px}
+  .service-grid .service-concept-card .event-visual .service-screen-window{background:#151516}
+  .service-grid .service-concept-card .service-visual figcaption{display:block;min-height:0;font-size:14px;line-height:1.8;margin:10px 0 0}
+  .service-grid .service-concept-card .service-caption-copy{display:none}
+  .service-grid .service-concept-card .service-visual figcaption small{font-size:14px;line-height:1.8;margin:0}
+  .service-grid .service-concept-card .service-flow>figcaption{display:none}
+  .service-grid .service-concept-card .service-flow>.visual-flow{width:100%;height:180px;padding:18px 10px;border-radius:12px;gap:5px}
+  .service-grid .service-concept-card .flow-node>svg{width:32px;height:32px;margin:0 auto 12px}
+  .service-grid .service-concept-card .flow-node>span{font-size:14px;line-height:1.7;word-break:keep-all}
+  .service-grid .service-concept-card .diagram-arrow{font-size:19px}
+  .service-grid .service-concept-card>p{font-size:16px;line-height:1.8;color:var(--muted);margin:16px 0 0}
+  .service-grid .service-concept-card>.service-examples{font-size:14px;line-height:1.8;color:var(--blue);margin-top:12px}
+  .service-grid .service-concept-card>.service-case-link{display:inline-flex;align-items:center;gap:10px;min-height:44px;font-size:15px;line-height:1.6;font-weight:500;margin-top:12px}
+}
+@media(max-width:360px){
+  .service-grid .service-concept-card{padding:18px}
+  .service-grid .service-concept-card>h3{font-size:22px}
+  .service-grid .service-concept-card .service-screen-window{padding:9px}
+  .service-grid .service-concept-card .service-flow>.visual-flow{height:160px;padding-inline:8px;gap:4px}
+  .service-grid .service-concept-card .flow-node>svg{width:28px;height:28px}
+  .service-grid .service-concept-card .diagram-arrow{font-size:17px}
+}
+
+/* Process summary and detail layouts. */
+.work-together{background:var(--soft);border:0;margin-block:12px}
+.work-together .process-grid>li{border-top-color:transparent}
+.process-detail{display:grid;gap:44px}
+.process-row{position:relative;border:0;padding:0}
+.process-row+.process-row::before{content:"";position:absolute;inset-inline:0;top:-22px;border-top:1px solid var(--line);pointer-events:none}
+.process-step-heading>p{grid-column:1/-1;margin-top:0}
+.process-step-body{margin-left:0}
+@media(max-width:900px){
+  .work-together .process-grid{--process-row-gap:34px}
+  .work-together .process-grid>li:nth-child(n+3){position:relative}
+  .work-together .process-grid>li:nth-child(n+3)::before{content:"";position:absolute;left:0;top:calc(var(--process-row-gap) / -2);width:100%;border-top:1px solid var(--line);pointer-events:none}
+}
+@media(max-width:600px){
+  .work-together .section-heading h2{font-size:28px;line-height:1.5}
+  .work-together .process-grid{--process-row-gap:28px}
+  .process-step-heading{grid-template-columns:28px minmax(0,1fr);gap:12px}
+  .process-step-heading h2{font-size:25px;line-height:1.5}
+  .process-step-heading p{font-size:16px;line-height:1.85;margin-top:0}
+  .process-step-heading .number{font-size:15px;margin:5px 0 0}
+  .process-step-body{margin-top:22px;gap:20px}
+  .process-checklist li{font-size:15px;line-height:1.85;padding-left:23px}
+  .process-checklist li+li{margin-top:10px}
+  .stage-visual{padding:22px 16px;margin:0;border-radius:14px}
+  .stage-notes>span{font-size:15px;padding:10px 5px}
+}
