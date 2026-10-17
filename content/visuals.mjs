@@ -1,3 +1,5 @@
+import { processSteps } from './process.mjs';
+
 const paths = {
   notes: '<rect x="4" y="3" width="14" height="18" rx="2"/><path d="M8 8h6M8 12h6M8 16h3M18 7h3v14"/>',
   screen: '<rect x="2" y="3" width="20" height="14" rx="2"/><path d="M2 7h20M9 21h6M12 17v4M6 11h4M6 14h8"/>',
@@ -18,13 +20,26 @@ export const journeyVisual = () => `<figure class="journey-visual"><div class="j
 
 export const planningPhoto = () => `<figure class="planning-photo"><img src="/assets/visuals/planning-v5.jpg" width="1536" height="1024" alt="함께 메모를 정리하며 필요한 일을 구체화하는 과정을 표현한 연출 사진" loading="lazy" decoding="async"></figure>`;
 
-export const serviceVisual = (index) => {
-  if (index === 0) return `<figure class="service-visual service-screen"><a class="service-screen-window" href="/work/knet/" aria-label="K-NET 실제 제작 사례 보기"><img src="/assets/portfolio/knet-study-editor.png" width="1265" height="712" alt="K-NET의 소개 편집과 실시간 미리보기 운영 화면, 데모 데이터" loading="lazy" decoding="async"></a><figcaption><span class="service-caption-copy">작성하는 화면과 확인하는 화면을 함께 만듭니다.</span><small>K-NET 운영 화면, 데모 데이터</small></figcaption></figure>`;
-  if (index === 1) return `<figure class="service-visual service-flow">${flow([['data','흩어진 자료'],['spark','AI로 정리'],['check','사람의 확인']])}<figcaption><span class="service-caption-copy">자료를 모으고 정리해, 판단하기 쉽게 연결합니다.</span><small>업무 도구와 AI 연결 개념</small></figcaption></figure>`;
-  return `<figure class="service-visual service-screen event-visual"><a class="service-screen-window" href="/work/ignition/" aria-label="IGNITION 실제 제작 사례 보기"><img src="/assets/portfolio/ignition-07-screen.png" width="1280" height="720" alt="곡 정보와 관객 반응을 보여주는 IGNITION의 공개 시연 화면" loading="lazy" decoding="async"></a><figcaption><span class="service-caption-copy">현장의 참여를 운영 화면에 연결합니다.</span><small>IGNITION 공개 시연 화면</small></figcaption></figure>`;
+const serviceScreen = ({ className = '', slug, name, src, width, height, alt, caption, source }) => `<figure class="service-visual service-screen${className ? ` ${className}` : ''}"><a class="service-screen-window" href="/work/${slug}/" aria-label="${name} 실제 제작 사례 보기"><img src="${src}" width="${width}" height="${height}" alt="${alt}" loading="lazy" decoding="async"></a><figcaption><span class="service-caption-copy">${caption}</span><small>${source}</small></figcaption></figure>`;
+const serviceVisuals = {
+  software: serviceScreen({
+    slug: 'knet', name: 'K-NET', src: '/assets/portfolio/knet-study-editor.png', width: 1265, height: 712,
+    alt: 'K-NET의 소개 편집과 실시간 미리보기 운영 화면, 데모 데이터',
+    caption: '작성하는 화면과 확인하는 화면을 함께 만듭니다.', source: 'K-NET 운영 화면, 데모 데이터',
+  }),
+  automation: `<figure class="service-visual service-flow">${flow([['data','흩어진 자료'],['spark','AI로 정리'],['check','사람의 확인']])}<figcaption><span class="service-caption-copy">자료를 모으고 정리해, 판단하기 쉽게 연결합니다.</span><small>업무 도구와 AI 연결 개념</small></figcaption></figure>`,
+  event: serviceScreen({
+    className: 'event-visual', slug: 'ignition', name: 'IGNITION', src: '/assets/portfolio/ignition-07-screen.png', width: 1280, height: 720,
+    alt: '곡 정보와 관객 반응을 보여주는 IGNITION의 공개 시연 화면',
+    caption: '현장의 참여를 운영 화면에 연결합니다.', source: 'IGNITION 공개 시연 화면',
+  }),
 };
-
-export const stepSymbol = (index) => `<span class="step-symbol">${icon(['people','notes','screen','book'][index])}</span>`;
+export const serviceVisual = (key) => {
+  const visual = serviceVisuals[key];
+  if (!visual) throw new Error(`Unknown service visual: ${key}`);
+  return visual;
+};
+export const stepSymbol = (symbol) => `<span class="step-symbol">${icon(symbol)}</span>`;
 
 export const connectionVisual = () => `<figure class="connection-visual"><div class="connection-inputs">${[
   ['screen','제품','실제로 쓰는 화면'],
@@ -33,23 +48,18 @@ export const connectionVisual = () => `<figure class="connection-visual"><div cl
   ['check','규칙','같은 운영 기준'],
 ].map(([symbol,title,detail]) => node(symbol,title,detail)).join('')}</div><div class="connection-join" aria-hidden="true"></div><div class="connection-result">${icon('people')}<span>사람이 일을 이어갈 수 있는 구조</span></div><figcaption>화면, 안내, 기록과 기준을 하나의 업무 흐름으로 연결합니다.</figcaption></figure>`;
 
-export const processOverview = () => `<section class="wrap process-overview"><div class="process-photo">${planningPhoto()}</div><div class="overview-copy"><p class="eyebrow">함께 확인하는 네 단계</p><h2>무엇을 정하고,<br>무엇을 받는지 명확하게.</h2><ol class="overview-steps">${[
-  ['필요 이해','현재 상황과 원하는 변화'],
-  ['범위 합의','기능, 일정과 완료 기준'],
-  ['제작과 확인','작동하는 제품과 피드백'],
-  ['전달과 안내','결과물과 사용하는 방법'],
-].map(([title,detail],index) => `<li><span class="overview-number">0${index + 1}</span><div><span>${title}</span><small>${detail}</small></div></li>`).join('')}</ol></div></section>`;
+export const processOverview = () => `<section class="wrap process-overview"><div class="process-photo">${planningPhoto()}</div><div class="overview-copy"><p class="eyebrow">함께 확인하는 네 단계</p><h2>무엇을 정하고,<br>무엇을 받는지 명확하게.</h2><ol class="overview-steps">${processSteps.map(({ number, overviewTitle, overviewDescription }) => `<li><span class="overview-number">${number}</span><div><span>${overviewTitle}</span><small>${overviewDescription}</small></div></li>`).join('')}</ol></div></section>`;
 
-export const stageCaptions = ['대화와 자료에서 필요한 일을 찾습니다.','제작에 들어가기 전에 기준을 맞춥니다.','작동하는 결과물을 보면서 조정합니다.','전달받은 뒤에도 직접 이어가도록 돕습니다.'];
-
-export const stageVisual = (index) => {
-  const visuals = [
-    `<div class="stage-notes"><span>지금 하는 일</span><span>불편한 순간</span><span>원하는 변화</span></div>`,
-    `<div class="scope-sheet"><span class="scope-sheet-title">함께 정할 제작 범위</span><div>${['기능','완료 기준','일정','비용'].map(label => `<span>${icon('check')}${label}</span>`).join('')}</div></div>`,
-    `<div class="stage-product">${icon('screen')}<span>작동하는 화면</span>${arrow}${icon('people')}<span>함께 확인</span></div>`,
-    `<div class="handover-set"><div>${icon('screen')}<span>제품</span></div><span aria-hidden="true">+</span><div>${icon('book')}<span>운영 안내</span></div>${arrow}<div>${icon('check')}<span>직접 사용</span></div></div>`,
-  ];
-  return `<figure class="stage-visual stage-visual-${index + 1}">${visuals[index]}</figure>`;
+const stageVisuals = {
+  needs: `<div class="stage-notes"><span>지금 하는 일</span><span>불편한 순간</span><span>원하는 변화</span></div>`,
+  scope: `<div class="scope-sheet"><span class="scope-sheet-title">함께 정할 제작 범위</span><div>${['기능','완료 기준','일정','비용'].map(label => `<span>${icon('check')}${label}</span>`).join('')}</div></div>`,
+  build: `<div class="stage-product">${icon('screen')}<span>작동하는 화면</span>${arrow}${icon('people')}<span>함께 확인</span></div>`,
+  handover: `<div class="handover-set"><div>${icon('screen')}<span>제품</span></div><span aria-hidden="true">+</span><div>${icon('book')}<span>운영 안내</span></div>${arrow}<div>${icon('check')}<span>직접 사용</span></div></div>`,
+};
+export const stageVisual = ({ id, number }) => {
+  const visual = stageVisuals[id];
+  if (!visual) throw new Error(`Unknown process stage: ${id}`);
+  return `<figure class="stage-visual stage-visual-${Number(number)}">${visual}</figure>`;
 };
 
 export const nfcVisual = () => `<figure class="technology-visual"><img src="/assets/visuals/nfc-visit-v5.jpg" width="1536" height="1024" alt="휴대전화를 책상 위 태그에 가까이 대는 방문 확인 개념 연출 사진" loading="lazy" decoding="async"><figcaption><span>태그 가까이 → 현장 방문 확인 → 기록 연결</span></figcaption></figure>`;

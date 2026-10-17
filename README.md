@@ -1,5 +1,12 @@
 # Typeworks 회사 소개 사이트
 
+## v5-17 현재 배포본
+
+홈의 작업 방식 요약은 회색 배경과 두 열 사이에서 끊기는 중간 구분선을 사용합니다. 작업 방식 상세는 설명을 왼쪽에 정렬하고 단계 사이에만 구분선을 둡니다. 모바일 사례 목록과 서비스 개념 카드도 합의한 배치로 통합했습니다.
+
+로컬 비교 서버 11개는 종료했습니다. 아래 과거 버전의 로컬 주소는 보관 기록이며 현재 실행 중인 서버를 뜻하지 않습니다. 버전별 소스와 배포 전 백업은 유지합니다.
+
+
 ## v5-7 포커스 표시 수정
 
 메뉴 열기와 닫기 및 이미지 확대 후 포인터 조작에 불필요한 포커스 테두리가 남지 않도록 입력 방식을 구분합니다. 키보드 탐색과 텍스트 입력창의 포커스 표시는 유지하고 메뉴 항목의 테두리는 안쪽에 표시합니다.
@@ -42,7 +49,9 @@ python3 -m http.server 4317 --bind 127.0.0.1
 브라우저에서 http://127.0.0.1:4317 을 엽니다. 사이트는 루트 기준 주소를 사용하므로 HTTP 서버로 확인합니다.
 
 - 사례 수정: 기존 프로젝트 설명과 역할은 `content/cases.mjs`, 표시 이름과 이미지, 노놀 및 AWS SBG 사례와 노출 순서는 `content/portfolio-cases.mjs`에서 관리합니다. 수정 후 `npm run build`를 실행합니다.
-- 회사 소개와 서비스 수정: `scripts/build-site.mjs`의 해당 페이지 내용을 바꾸고 페이지를 다시 생성합니다.
+- 서비스 수정: `content/services.mjs`에서 제목, 설명, 적용 예와 관련 사례를 관리합니다.
+- 작업 방식 수정: `content/process.mjs`에서 단계별 제목, 설명, 체크 항목과 요약을 함께 관리합니다.
+- 회사 소개 및 페이지 구성 수정: `scripts/build-site.mjs`의 해당 페이지 내용을 바꾸고 페이지를 다시 생성합니다.
 - 연락 경로 수정: `content/contact.mjs`의 수신 주소 및 서버 주소와 `scripts/build-site.mjs`의 상담 안내를 수정합니다.
 - 화면 스타일 수정: `style.css`를 수정하고 브라우저를 새로고침합니다.
 
@@ -62,11 +71,14 @@ Google Fonts는 인터넷 연결 시 사용되며, 연결이 없으면 대체 �
 | `content/cases.mjs` | 사례 원본 데이터 |
 | `content/portfolio-cases.mjs` | 사례 표시 정보, 신규 사례와 노출 순서 |
 | `content/contact.mjs` | 상담 이메일과 전송 서버 주소 |
+| `content/services.mjs` | 서비스 분야, 설명과 관련 사례 |
+| `content/process.mjs` | 작업 단계별 설명, 요약과 확인 항목 |
 | `contact-api/` | Cloudflare 상담 전송 서버와 검증 코드 |
 | `content/visuals.mjs` | 홈과 주요 페이지의 설명 도식과 사진 구성 |
 | `content/visual-sources-v5.json` | 생성 사진의 도구, 목적과 프롬프트 기록 |
 | `DESIGN_SYSTEM.md` | v5의 브랜드 톤과 시각 자료 기준 |
-| `scripts/build-site.mjs` | 공통 탐색, 푸터, 페이지와 sitemap 생성 |
+| `scripts/build-site.mjs` | 공통 탐색, 푸터, 페이지 조합과 배포 파일 생성 |
+| `scripts/site-components.mjs` | 공통 링크, 사례, 서비스와 작업 단계의 화면 생성 |
 | `style.css`, `app.js` | 한국어 사이트 화면 및 메뉴, 상담 전송 기능 |
 | `assets/` | 브랜드 SVG, 제품 화면, 아이콘과 공유 이미지 |
 | `assets/visuals/` | 협업과 NFC 방문 확인을 설명하는 연출 사진 |
