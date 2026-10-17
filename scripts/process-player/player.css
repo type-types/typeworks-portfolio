@@ -1,0 +1,310 @@
+.process-experience {
+  padding-top: 28px;
+}
+.process-experience [hidden] {
+  display: none !important;
+}
+.process-experience .experience-intro {
+  margin-bottom: 34px;
+}
+.process-experience .experience-intro h2 {
+  font-size: 34px;
+  margin-top: 12px;
+  line-height: 1.5;
+}
+.process-experience .step-choices {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 26px 32px;
+  margin-bottom: 32px;
+}
+.process-experience .step-choice {
+  position: relative;
+  display: grid;
+  grid-template-columns: 30px minmax(0, 1fr);
+  align-items: start;
+  gap: 0 12px;
+  min-width: 0;
+  min-height: 84px;
+  padding: 3px 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  text-align: left;
+  color: var(--ink);
+}
+.process-experience .choice-number {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  font-size: 15px;
+  line-height: 1;
+  color: #687381;
+  font-variant-numeric: tabular-nums;
+}
+.process-experience .choice-copy {
+  display: block;
+  min-width: 0;
+}
+.process-experience .choice-title {
+  display: inline-block;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.65;
+  color: var(--muted);
+  transition: color 0.2s;
+}
+.process-experience .choice-copy small {
+  display: block;
+  margin-top: 7px;
+  font-size: 14px;
+  line-height: 1.85;
+  color: var(--muted);
+}
+.process-experience .step-choice.is-current .choice-number {
+  color: var(--blue);
+}
+.process-experience .step-choice.is-current .choice-title {
+  color: var(--blue);
+  font-weight: 700;
+}
+.process-experience .step-choice:hover .choice-title {
+  color: var(--blue);
+}
+.process-experience .step-display {
+  scroll-margin-top: 28px;
+}
+.process-experience .display-meta {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 62px;
+  padding-top: 18px;
+  margin-bottom: 22px;
+}
+.process-experience .stage-progress {
+  position: absolute;
+  top: 0;
+  inset-inline: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  height: 2px;
+}
+.process-experience .progress-segment {
+  display: block;
+  min-width: 0;
+  height: 100%;
+  background: var(--line);
+  overflow: hidden;
+  border-radius: 2px;
+}
+.process-experience .segment-fill {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: var(--blue);
+  transform: scaleX(0);
+  transform-origin: left;
+}
+.process-experience .current-step {
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+.process-experience .tap-cue {
+  flex: 1;
+  font-size: 12px;
+  line-height: 1.5;
+  text-align: right;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  opacity: 0;
+  transition: opacity 0.12s;
+  pointer-events: none;
+}
+.process-experience.has-tap-cue .tap-cue {
+  opacity: 1;
+}
+.process-experience .playback-toggle {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  min-height: 44px;
+  padding: 10px;
+  border: 0;
+  border-radius: 50%;
+  color: var(--ink);
+  background: transparent;
+  transition:
+    color 0.2s,
+    background-color 0.2s;
+}
+.process-experience .playback-toggle:hover {
+  color: var(--blue);
+  background: var(--soft);
+}
+.process-experience .playback-toggle > svg {
+  width: 18px;
+  height: 18px;
+  display: block;
+}
+.process-experience .step-panel + .step-panel {
+  margin-top: 44px;
+  padding-top: 32px;
+  border-top: 1px solid var(--line);
+}
+.process-experience.is-enhanced .step-viewport {
+  display: grid;
+  overflow: hidden;
+  touch-action: pan-y pinch-zoom;
+  cursor: pointer;
+  isolation: isolate;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+.process-experience.is-enhanced .step-viewport.is-holding {
+  cursor: default;
+}
+.process-experience.is-enhanced .step-panel {
+  grid-area: 1/1;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+.process-experience.is-enhanced .step-panel.is-current {
+  visibility: visible;
+  pointer-events: auto;
+}
+.process-experience .step-viewport:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 6px;
+}
+.process-experience .process-step-heading {
+  grid-template-columns: minmax(0, 1fr);
+  margin-bottom: 0;
+}
+.process-experience .process-step-heading h2 {
+  font-size: 32px;
+}
+.process-experience .process-step-heading p {
+  max-width: 50em;
+}
+.process-experience .process-step-body {
+  margin-top: 26px;
+  padding-bottom: 6px;
+}
+.process-experience .stage-visual {
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.process-experience .stage-visual > div {
+  width: 100%;
+}
+.process-experience + .section {
+  padding-top: 24px;
+}
+.process-experience + .section > .scope-note {
+  margin-top: 0;
+  padding-top: 30px;
+}
+@media (max-width: 900px) {
+  .process-experience .step-choices {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 25px 28px;
+  }
+  .process-experience .step-choice {
+    column-gap: 10px;
+  }
+  .process-experience .choice-title {
+    font-size: 17px;
+  }
+  .process-experience .experience-intro h2 {
+    font-size: 30px;
+  }
+  .process-experience .process-step-heading h2 {
+    font-size: 28px;
+  }
+  .process-experience .process-step-body {
+    gap: 26px;
+  }
+}
+@media (max-width: 600px) {
+  .process-experience {
+    padding-top: 12px;
+  }
+  .process-experience .experience-intro {
+    margin-bottom: 24px;
+  }
+  .process-experience .experience-intro h2 {
+    font-size: 27px;
+  }
+  .process-experience .step-choices {
+    gap: 24px 26px;
+    margin-top: 28px;
+    margin-bottom: 30px;
+  }
+  .process-experience .step-choice {
+    min-height: 74px;
+  }
+  .process-experience .choice-copy small {
+    line-height: 1.8;
+  }
+  .process-experience .display-meta {
+    padding-top: 12px;
+    margin-bottom: 18px;
+    min-height: 56px;
+  }
+  .process-experience .current-step {
+    font-size: 13px;
+  }
+  .process-experience .process-step-heading h2 {
+    font-size: 25px;
+  }
+  .process-experience .process-step-heading p {
+    font-size: 16px;
+    line-height: 1.85;
+  }
+  .process-experience .process-step-body {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    margin-top: 22px;
+  }
+  .process-experience .stage-visual {
+    padding: 22px 14px;
+    min-height: 176px;
+  }
+  .process-experience .stage-notes > span {
+    font-size: 14px;
+  }
+  .process-experience .process-checklist li {
+    font-size: 15px;
+    line-height: 1.85;
+  }
+}
+@media (max-width: 350px) {
+  .process-experience .choice-title {
+    font-size: 16px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .process-experience .choice-title,
+  .process-experience .tap-cue,
+  .process-experience .playback-toggle {
+    transition: none;
+  }
+}

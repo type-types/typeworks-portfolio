@@ -79,6 +79,7 @@ Google Fonts는 인터넷 연결 시 사용되며, 연결이 없으면 대체 �
 | `DESIGN_SYSTEM.md` | v5의 브랜드 톤과 시각 자료 기준 |
 | `scripts/build-site.mjs` | 공통 탐색, 푸터, 페이지 조합과 배포 파일 생성 |
 | `scripts/site-components.mjs` | 공통 링크, 사례, 서비스와 작업 단계의 화면 생성 |
+| `scripts/process-player/` | 작업 방식의 선택 화면, 자동 전환, 좌우 클릭과 검증 |
 | `style.css`, `app.js` | 한국어 사이트 화면 및 메뉴, 상담 전송 기능 |
 | `assets/` | 브랜드 SVG, 제품 화면, 아이콘과 공유 이미지 |
 | `assets/visuals/` | 협업과 NFC 방문 확인을 설명하는 연출 사진 |
