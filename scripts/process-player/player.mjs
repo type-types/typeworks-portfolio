@@ -5,7 +5,6 @@ import {
 } from "./playback.mjs";
 
 function initializeProcessPlayer(root) {
-  const display = root.querySelector(".step-display");
   root.classList.add("is-enhanced");
   root.querySelector(".step-choices").hidden = false;
   root.querySelector(".display-meta").hidden = false;
@@ -20,26 +19,13 @@ function initializeProcessPlayer(root) {
   const fills = [...root.querySelectorAll(".segment-fill")];
   const toggle = root.querySelector(".playback-toggle");
   const counter = root.querySelector(".current-step");
-  const cue = root.querySelector(".tap-cue");
   const announcement = root.querySelector(".step-announcement");
   const titles = panels.map((panel) => panel.querySelector("h2").textContent);
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
   let current = 0;
   let direction = 1;
-  let hoverDirection = null;
   let progressAnimation;
   let entranceAnimation;
-  let scrollFrame;
-  let holdCueTimer;
-  const wrap = (index) => (index + panels.length) % panels.length;
-  const hideCue = () => {
-    root.classList.remove("has-tap-cue");
-    cue.textContent = "";
-  };
-  const showCue = (side) => {
-    cue.textContent = `${side < 0 ? "이전" : "다음"}, ${titles[wrap(current + side)]}`;
-    root.classList.add("has-tap-cue");
-  };
   const playback = createPlayback({
     count: panels.length,
     onChange(index, manual) {
@@ -61,7 +47,6 @@ function initializeProcessPlayer(root) {
       counter.textContent = `0${index + 1} / 0${panels.length}`;
       if (manual)
         announcement.textContent = `${index + 1}단계, ${titles[index]}`;
-      if (hoverDirection !== null) showCue(hoverDirection);
       if (
         previous !== index &&
         !reducedMotion.matches &&
@@ -109,9 +94,6 @@ function initializeProcessPlayer(root) {
     onHold(holding) {
       viewport.classList.toggle("is-holding", holding);
       playback.pause("press", holding);
-      clearTimeout(holdCueTimer);
-      if (holding) holdCueTimer = setTimeout(hideCue, 450);
-      else hideCue();
     },
     onNavigate(side) {
       direction = side;
@@ -124,17 +106,8 @@ function initializeProcessPlayer(root) {
     playback.select(index);
   };
   choices.forEach((button) =>
-    button.addEventListener("click", (event) => {
+    button.addEventListener("click", () => {
       selectStep(Number(button.dataset.step));
-      cancelAnimationFrame(scrollFrame);
-      scrollFrame = requestAnimationFrame(() => {
-        display.scrollIntoView({
-          behavior: reducedMotion.matches ? "instant" : "smooth",
-          block: "start",
-        });
-        if (event.detail === 0)
-          panels[current].querySelector("h2").focus({ preventScroll: true });
-      });
     }),
   );
   toggle.addEventListener("click", () => playback.enable(!playback.enabled));
@@ -156,32 +129,9 @@ function initializeProcessPlayer(root) {
     if (tapping.start(event)) {
       if (event.pointerType === "mouse") event.preventDefault();
       viewport.setPointerCapture(event.pointerId);
-      const bounds = viewport.getBoundingClientRect();
-      showCue(event.clientX < (bounds.left + bounds.right) / 2 ? -1 : 1);
     }
   });
-  viewport.addEventListener("pointermove", (event) => {
-    if (event.target.closest("a,button,input,select,textarea")) {
-      hoverDirection = null;
-      hideCue();
-      return;
-    }
-    if (tapping.holding) {
-      tapping.move(event);
-      hideCue();
-      return;
-    }
-    if (event.pointerType === "mouse") {
-      const bounds = viewport.getBoundingClientRect();
-      hoverDirection =
-        event.clientX < (bounds.left + bounds.right) / 2 ? -1 : 1;
-      showCue(hoverDirection);
-    }
-  });
-  viewport.addEventListener("pointerleave", () => {
-    hoverDirection = null;
-    hideCue();
-  });
+  viewport.addEventListener("pointermove", (event) => tapping.move(event));
   viewport.addEventListener("pointerup", (event) =>
     tapping.finish(event, viewport.getBoundingClientRect()),
   );
@@ -236,8 +186,6 @@ function initializeProcessPlayer(root) {
     buttonContacts.clear();
     playback.pause("control-press", false);
     playback.pause("touch-contact", false);
-    hoverDirection = null;
-    hideCue();
   };
   window.addEventListener("blur", () => {
     playback.pause("window", true);

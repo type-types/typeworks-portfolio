@@ -73,7 +73,10 @@
   color: var(--blue);
 }
 .process-experience .step-display {
-  scroll-margin-top: 28px;
+  padding: 28px 30px 30px;
+  border: 1px solid #dce1e8;
+  border-radius: 18px;
+  background: white;
 }
 .process-experience .display-meta {
   position: relative;
@@ -115,22 +118,6 @@
   letter-spacing: 0.08em;
   color: var(--muted);
   font-variant-numeric: tabular-nums;
-}
-.process-experience .tap-cue {
-  flex: 1;
-  font-size: 12px;
-  line-height: 1.5;
-  text-align: right;
-  color: var(--muted);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  opacity: 0;
-  transition: opacity 0.12s;
-  pointer-events: none;
-}
-.process-experience.has-tap-cue .tap-cue {
-  opacity: 1;
 }
 .process-experience .playback-toggle {
   display: grid;
@@ -264,6 +251,10 @@
   .process-experience .choice-copy small {
     line-height: 1.8;
   }
+  .process-experience .step-display {
+    padding: 20px 18px 22px;
+    border-radius: 16px;
+  }
   .process-experience .display-meta {
     padding-top: 12px;
     margin-bottom: 18px;
@@ -303,7 +294,6 @@
 }
 @media (prefers-reduced-motion: reduce) {
   .process-experience .choice-title,
-  .process-experience .tap-cue,
   .process-experience .playback-toggle {
     transition: none;
   }
