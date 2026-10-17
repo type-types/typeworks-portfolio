@@ -19,9 +19,9 @@ export const journeyVisual = () => `<figure class="journey-visual"><div class="j
 export const planningPhoto = () => `<figure class="planning-photo"><img src="/assets/visuals/planning-v5.jpg" width="1536" height="1024" alt="함께 메모를 정리하며 필요한 일을 구체화하는 과정을 표현한 연출 사진" loading="lazy" decoding="async"></figure>`;
 
 export const serviceVisual = (index) => {
-  if (index === 0) return `<figure class="service-visual service-screen"><a class="service-screen-window" href="/work/knet/" aria-label="K-NET 실제 제작 사례 보기"><img src="/assets/portfolio/knet-study-editor.png" width="1265" height="712" alt="K-NET의 소개 편집과 실시간 미리보기 운영 화면, 데모 데이터" loading="lazy" decoding="async"></a><figcaption>작성하는 화면과 확인하는 화면을 함께 만듭니다.<small>K-NET 운영 화면, 데모 데이터</small></figcaption></figure>`;
-  if (index === 1) return `<figure class="service-visual service-flow">${flow([['data','흩어진 자료'],['spark','AI로 정리'],['check','사람의 확인']])}<figcaption>자료를 모으고 정리해, 판단하기 쉽게 연결합니다.<small>업무 도구와 AI 연결 개념</small></figcaption></figure>`;
-  return `<figure class="service-visual service-screen event-visual"><a class="service-screen-window" href="/work/ignition/" aria-label="IGNITION 실제 제작 사례 보기"><img src="/assets/portfolio/ignition-07-screen.png" width="1280" height="720" alt="곡 정보와 관객 반응을 보여주는 IGNITION의 공개 시연 화면" loading="lazy" decoding="async"></a><figcaption>현장의 참여를 운영 화면에 연결합니다.<small>IGNITION 공개 시연 화면</small></figcaption></figure>`;
+  if (index === 0) return `<figure class="service-visual service-screen"><a class="service-screen-window" href="/work/knet/" aria-label="K-NET 실제 제작 사례 보기"><img src="/assets/portfolio/knet-study-editor.png" width="1265" height="712" alt="K-NET의 소개 편집과 실시간 미리보기 운영 화면, 데모 데이터" loading="lazy" decoding="async"></a><figcaption><span class="service-caption-copy">작성하는 화면과 확인하는 화면을 함께 만듭니다.</span><small>K-NET 운영 화면, 데모 데이터</small></figcaption></figure>`;
+  if (index === 1) return `<figure class="service-visual service-flow">${flow([['data','흩어진 자료'],['spark','AI로 정리'],['check','사람의 확인']])}<figcaption><span class="service-caption-copy">자료를 모으고 정리해, 판단하기 쉽게 연결합니다.</span><small>업무 도구와 AI 연결 개념</small></figcaption></figure>`;
+  return `<figure class="service-visual service-screen event-visual"><a class="service-screen-window" href="/work/ignition/" aria-label="IGNITION 실제 제작 사례 보기"><img src="/assets/portfolio/ignition-07-screen.png" width="1280" height="720" alt="곡 정보와 관객 반응을 보여주는 IGNITION의 공개 시연 화면" loading="lazy" decoding="async"></a><figcaption><span class="service-caption-copy">현장의 참여를 운영 화면에 연결합니다.</span><small>IGNITION 공개 시연 화면</small></figcaption></figure>`;
 };
 
 export const stepSymbol = (index) => `<span class="step-symbol">${icon(['people','notes','screen','book'][index])}</span>`;
@@ -40,6 +40,8 @@ export const processOverview = () => `<section class="wrap process-overview"><di
   ['전달과 안내','결과물과 사용하는 방법'],
 ].map(([title,detail],index) => `<li><span class="overview-number">0${index + 1}</span><div><span>${title}</span><small>${detail}</small></div></li>`).join('')}</ol></div></section>`;
 
+export const stageCaptions = ['대화와 자료에서 필요한 일을 찾습니다.','제작에 들어가기 전에 기준을 맞춥니다.','작동하는 결과물을 보면서 조정합니다.','전달받은 뒤에도 직접 이어가도록 돕습니다.'];
+
 export const stageVisual = (index) => {
   const visuals = [
     `<div class="stage-notes"><span>지금 하는 일</span><span>불편한 순간</span><span>원하는 변화</span></div>`,
@@ -47,8 +49,7 @@ export const stageVisual = (index) => {
     `<div class="stage-product">${icon('screen')}<span>작동하는 화면</span>${arrow}${icon('people')}<span>함께 확인</span></div>`,
     `<div class="handover-set"><div>${icon('screen')}<span>제품</span></div><span aria-hidden="true">+</span><div>${icon('book')}<span>운영 안내</span></div>${arrow}<div>${icon('check')}<span>직접 사용</span></div></div>`,
   ];
-  const captions = ['대화와 자료에서 필요한 일을 찾습니다.','제작에 들어가기 전에 기준을 맞춥니다.','작동하는 결과물을 보면서 조정합니다.','전달받은 뒤에도 직접 이어가도록 돕습니다.'];
-  return `<figure class="stage-visual stage-visual-${index + 1}">${visuals[index]}<figcaption>${captions[index]}</figcaption></figure>`;
+  return `<figure class="stage-visual stage-visual-${index + 1}">${visuals[index]}</figure>`;
 };
 
 export const nfcVisual = () => `<figure class="technology-visual"><img src="/assets/visuals/nfc-visit-v5.jpg" width="1536" height="1024" alt="휴대전화를 책상 위 태그에 가까이 대는 방문 확인 개념 연출 사진" loading="lazy" decoding="async"><figcaption><span>태그 가까이 → 현장 방문 확인 → 기록 연결</span></figcaption></figure>`;
