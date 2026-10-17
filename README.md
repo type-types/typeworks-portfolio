@@ -43,17 +43,17 @@ npm test
 로컬 미리보기는 프로젝트 폴더에서 다음 명령으로 엽니다.
 
 ```bash
-python3 -m http.server 4317 --bind 127.0.0.1
+python3 -m http.server 4317 --bind 127.0.0.1 --directory dist
 ```
 
-브라우저에서 http://127.0.0.1:4317 을 엽니다. 사이트는 루트 기준 주소를 사용하므로 HTTP 서버로 확인합니다.
+브라우저에서 http://127.0.0.1:4317 을 엽니다. 사이트는 루트 기준 주소를 사용하므로 빌드된 `dist/`를 HTTP 서버로 확인합니다.
 
 - 사례 수정: 기존 프로젝트 설명과 역할은 `content/cases.mjs`, 표시 이름과 이미지, 노놀 및 AWS SBG 사례와 노출 순서는 `content/portfolio-cases.mjs`에서 관리합니다. 수정 후 `npm run build`를 실행합니다.
 - 서비스 수정: `content/services.mjs`에서 제목, 설명, 적용 예와 관련 사례를 관리합니다.
 - 작업 방식 수정: `content/process.mjs`에서 단계별 제목, 설명, 체크 항목과 요약을 함께 관리합니다.
 - 회사 소개 및 페이지 구성 수정: `scripts/build-site.mjs`의 해당 페이지 내용을 바꾸고 페이지를 다시 생성합니다.
 - 연락 경로 수정: `content/contact.mjs`의 수신 주소 및 서버 주소와 `scripts/build-site.mjs`의 상담 안내를 수정합니다.
-- 화면 스타일 수정: `style.css`를 수정하고 브라우저를 새로고침합니다.
+- 화면 스타일 수정: 공통 화면은 `style.css`, 작업 방식 선택 화면은 `scripts/process-player/player.css`를 수정한 뒤 `npm run build`를 실행하고 새로고침합니다.
 
 Google Fonts는 인터넷 연결 시 사용되며, 연결이 없으면 대체 서체로 표시됩니다.
 
