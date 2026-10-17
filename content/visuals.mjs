@@ -1,5 +1,3 @@
-import { processSteps } from './process.mjs';
-
 const paths = {
   notes: '<rect x="4" y="3" width="14" height="18" rx="2"/><path d="M8 8h6M8 12h6M8 16h3M18 7h3v14"/>',
   screen: '<rect x="2" y="3" width="20" height="14" rx="2"/><path d="M2 7h20M9 21h6M12 17v4M6 11h4M6 14h8"/>',
@@ -48,7 +46,6 @@ export const connectionVisual = () => `<figure class="connection-visual"><div cl
   ['check','규칙','같은 운영 기준'],
 ].map(([symbol,title,detail]) => node(symbol,title,detail)).join('')}</div><div class="connection-join" aria-hidden="true"></div><div class="connection-result">${icon('people')}<span>사람이 일을 이어갈 수 있는 구조</span></div><figcaption>화면, 안내, 기록과 기준을 하나의 업무 흐름으로 연결합니다.</figcaption></figure>`;
 
-export const processOverview = () => `<section class="wrap process-overview"><div class="process-photo">${planningPhoto()}</div><div class="overview-copy"><p class="eyebrow">함께 확인하는 네 단계</p><h2>무엇을 정하고,<br>무엇을 받는지 명확하게.</h2><ol class="overview-steps">${processSteps.map(({ number, overviewTitle, overviewDescription }) => `<li><span class="overview-number">${number}</span><div><span>${overviewTitle}</span><small>${overviewDescription}</small></div></li>`).join('')}</ol></div></section>`;
 
 const stageVisuals = {
   needs: `<div class="stage-notes"><span>지금 하는 일</span><span>불편한 순간</span><span>원하는 변화</span></div>`,

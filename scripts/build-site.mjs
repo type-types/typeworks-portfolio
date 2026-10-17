@@ -3,8 +3,8 @@ import { createHash } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import { recipient, contactEndpoint } from '../content/contact.mjs';
 import { portfolioCases as cases, featuredSlugs, supportingSlugs, workSlugs } from '../content/portfolio-cases.mjs';
-import { journeyVisual, planningPhoto, connectionVisual, processOverview, nfcVisual, callVisual, estimateVisual } from '../content/visuals.mjs';
-import { escape, arrow, button, textLink, caseMedia, caseCard, featuredCase, serviceGrid, processGrid, processDetail } from './site-components.mjs';
+import { journeyVisual, planningPhoto, connectionVisual, nfcVisual, callVisual, estimateVisual } from '../content/visuals.mjs';
+import { escape, arrow, button, textLink, caseMedia, caseCard, featuredCase, serviceGrid, processGrid, processExperience } from './site-components.mjs';
 
 const rootUrl = new URL('../', import.meta.url);
 const root = fileURLToPath(rootUrl);
@@ -14,6 +14,15 @@ const [styleVersion, legacyStyleVersion, scriptVersion] = await Promise.all([
   assetVersion('en/style.css'),
   assetVersion('app.js'),
 ]);
+const playerSource = await readFile(new URL('scripts/process-player/player.mjs', rootUrl), 'utf8');
+const [playerVersion, playbackVersion, playerStyleVersion] = await Promise.all([
+  assetVersion('scripts/process-player/player.mjs'),
+  assetVersion('scripts/process-player/playback.mjs'),
+  assetVersion('scripts/process-player/player.css'),
+]);
+const playerPath = `assets/process-player-${playerVersion}-${playbackVersion}.mjs`;
+const playbackPath = `assets/process-playback-${playbackVersion}.mjs`;
+const playerStylePath = `assets/process-player-${playerStyleVersion}.css`;
 const navItems = [['about','회사소개'],['services','서비스와 비용'],['work','제작 사례'],['process','작업 방식']];
 const navigation = (current) => navItems.map(([slug,label]) => `<a href="/${slug}/"${current === slug ? ' aria-current="page"' : ''}>${label}</a>`).join('');
 const cta = () => `<section class="cta wrap reveal"><div><p class="eyebrow">프로젝트 상담</p><h2>만들고 싶은 것이 있나요?</h2><p>지금의 상황과 원하는 결과부터 말씀해 주세요.</p></div>${button('프로젝트 이야기하기','/contact/',true)}</section>`;
@@ -22,7 +31,7 @@ const shell = (title, current, body, description, relative) => {
   const path = relative === '404.html' ? '/404.html' : '/' + relative.replace(/index\.html$/, '');
   const publicUrl = 'https://typeworks.pro' + path;
   return `<!doctype html>
-<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">${relative === '404.html' ? '<meta name="robots" content="noindex">' : ''}<meta name="description" content="${escape(description)}"><title>${escape(title)} | Typeworks</title><link rel="canonical" href="${publicUrl}"><meta name="theme-color" content="#ffffff"><meta property="og:type" content="website"><meta property="og:locale" content="ko_KR"><meta property="og:site_name" content="Typeworks"><meta property="og:title" content="${escape(title)} | Typeworks"><meta property="og:description" content="${escape(description)}"><meta property="og:url" content="${publicUrl}"><meta property="og:image" content="https://typeworks.pro/assets/og-image.png"><meta name="twitter:card" content="summary_large_image"><link rel="apple-touch-icon" href="/assets/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><script type="application/ld+json">${JSON.stringify({'@context':'https://schema.org','@type':'Organization',name:'Typeworks',alternateName:'타입웍스',url:'https://typeworks.pro/',logo:'https://typeworks.pro/assets/brand-mark.svg',description:'제품, 지식, 데이터, 규칙을 연결해 일이 돌아가는 구조를 만듭니다.',founder:{'@type':'Person',name:'박민석',alternateName:'Minseok Park'},sameAs:['https://www.linkedin.com/in/type-types']})}</script><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="icon" href="/assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="/style.css?v=${styleVersion}"><script src="/app.js?v=${scriptVersion}" defer></script></head>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">${relative === '404.html' ? '<meta name="robots" content="noindex">' : ''}<meta name="description" content="${escape(description)}"><title>${escape(title)} | Typeworks</title><link rel="canonical" href="${publicUrl}"><meta name="theme-color" content="#ffffff"><meta property="og:type" content="website"><meta property="og:locale" content="ko_KR"><meta property="og:site_name" content="Typeworks"><meta property="og:title" content="${escape(title)} | Typeworks"><meta property="og:description" content="${escape(description)}"><meta property="og:url" content="${publicUrl}"><meta property="og:image" content="https://typeworks.pro/assets/og-image.png"><meta name="twitter:card" content="summary_large_image"><link rel="apple-touch-icon" href="/assets/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><script type="application/ld+json">${JSON.stringify({'@context':'https://schema.org','@type':'Organization',name:'Typeworks',alternateName:'타입웍스',url:'https://typeworks.pro/',logo:'https://typeworks.pro/assets/brand-mark.svg',description:'제품, 지식, 데이터, 규칙을 연결해 일이 돌아가는 구조를 만듭니다.',founder:{'@type':'Person',name:'박민석',alternateName:'Minseok Park'},sameAs:['https://www.linkedin.com/in/type-types']})}</script><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="icon" href="/assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="/style.css?v=${styleVersion}"><script src="/app.js?v=${scriptVersion}" defer></script>${current === 'process' ? `<link rel="stylesheet" href="/${playerStylePath}"><script type="module" src="/${playerPath}"></script>` : ''}</head>
 <body><a class="skip-link" href="#main">본문으로 이동</a><div class="page-shell"><header class="site-header wrap"><a class="brand" href="/" aria-label="타입웍스 홈"><img src="/assets/brand-mark.svg" width="36" height="36" alt=""><span>typeworks.</span></a><button id="menu-toggle" class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="메뉴 열기"><span class="sr-only">메뉴</span><span class="menu-icon" aria-hidden="true"><span></span><span></span><span></span></span></button><nav id="site-nav" aria-label="주요 메뉴">${navigation(current)}<a class="nav-contact" href="/contact/"${current === 'contact' ? ' aria-current="page"' : ''}>프로젝트 상담 ${arrow}</a></nav></header><main id="main" tabindex="-1">${body.replace(/<br>\s*/g, '<br> ')}</main>${footer()}</div></body></html>`;
 };
 const pageHero = (label, title, description, extraClass = '') => `<section class="page-hero wrap${extraClass ? ` ${extraClass}` : ''}"><p class="eyebrow">${label}</p><h1>${title}</h1><p class="lead">${description}</p></section>`;
@@ -38,7 +47,7 @@ const servicePage = `${pageHero('서비스와 비용','필요한 기능을 정�
 <section class="section technology-section" id="modules"><div class="wrap"><div class="section-heading reveal"><div><p class="eyebrow">보유 기술과 구현 경험</p><h2>필요한 곳에 연결할 기술.</h2></div></div><div class="technology-grid"><article class="technology-item technology-nfc reveal">${nfcVisual()}<span class="eyebrow">NFC 현장 방문 확인</span><h3><span class="service-full">지문 인식기 설치 부담을 줄이는<br>현장 방문 확인 모듈.</span><span class="service-brief">NFC 방문 확인</span></h3><p><span class="service-full">휴대전화와 NTAG 424 DNA 태그를 활용해 현장 방문을 확인하고, 방문 기록을 운영 도구에 연결할 수 있습니다.</span><span class="service-brief">휴대전화와 태그로 방문을 확인하고 기록을 연결합니다.</span></p><p class="muted">방문자 본인 확인이 필요하면 인증 방식과 범위를 함께 정합니다.</p><a class="technology-mobile-link" href="/contact/">활용 상담하기${arrow}</a></article><article class="technology-item technology-call reveal">${callVisual()}<span class="eyebrow">AI 발신 전화</span><h3><span class="service-full">AI가 먼저 전화를 걸고,<br>사용자와 대화합니다.</span><span class="service-brief">AI 발신 전화</span></h3><p><span class="service-full">SIP 전화 연결을 통해 발신, 대화와 기록을 이어갑니다. 온담 프로토타입에서 실제 전화로 이 흐름을 검증했습니다.</span><span class="service-brief">먼저 전화를 걸어 대화하고 내용을 기록합니다.</span></p><span class="technology-mobile-status">실제 통화 검증 / 프로토타입</span>${textLink('온담 제작 사례','/work/ondam/')}</article></div></div></section>
 <section class="section wrap" id="pricing"><div class="section-heading reveal"><div><p class="eyebrow">견적 기준</p><h2>범위를 정하면,<br>비용도 명확해집니다.</h2></div></div>${estimateVisual(textLink('제작 상담하기','/contact/'))}</section>${cta()}`;
 
-const processPage = `${pageHero('작업 방식','같은 결과를 바라보도록,<br>함께 정하고 확인합니다.','좋은 제작은 요구를 이해하는 것과 명확하게 전달하는 것에서 시작합니다.')}${processOverview()}<section class="section wrap">${processDetail()}<div class="scope-note reveal"><h2>추가로 필요한 일이 생기면,<br>범위와 일정을 다시 정합니다.</h2><p>합의한 수정과 새 기능 요청을 구분해 안내합니다. 변경할 내용과 비용, 일정에 합의한 뒤 작업에 반영합니다.</p></div><div class="faq-list reveal"><h2>상담 전에 궁금할 수 있는 것.</h2>${[
+const processPage = `${pageHero('작업 방식','같은 결과를 바라보도록,<br>함께 정하고 확인합니다.','좋은 제작은 요구를 이해하는 것과 명확하게 전달하는 것에서 시작합니다.')}${processExperience()}<section class="section wrap"><div class="scope-note reveal"><h2>추가로 필요한 일이 생기면,<br>범위와 일정을 다시 정합니다.</h2><p>합의한 수정과 새 기능 요청을 구분해 안내합니다. 변경할 내용과 비용, 일정에 합의한 뒤 작업에 반영합니다.</p></div><div class="faq-list reveal"><h2>상담 전에 궁금할 수 있는 것.</h2>${[
 ['기획서가 없어도 상담할 수 있나요?','지금 어떤 일을 하고 계신지, 어디에서 불편함이 생기는지부터 말씀해 주세요. 필요한 기능과 제작 범위를 함께 구체화합니다.'],
 ['제작 후 수정하는 방법도 알려주시나요?','내용 변경과 데이터 확인 등 합의한 운영 범위에 맞춰 실제 화면으로 안내합니다. 방법을 쉽고 간단하게 설명하는 것까지 제작 범위에 포함해 정합니다.'],
 ['수정 횟수와 제작 기간은 어떻게 정하나요?','기능 수, 화면과 연동 범위를 살펴보고 견적 단계에서 정합니다. 확정한 기준을 바탕으로 중간 확인과 납품을 진행합니다.'],
@@ -91,4 +100,7 @@ for (const relative of publishFiles) {
   await mkdir(new URL('.', new URL(relative, outputUrl)), { recursive: true });
   await cp(new URL(relative, rootUrl), new URL(relative, outputUrl), { recursive: true });
 }
+await writeFile(new URL(playerPath, outputUrl), playerSource.replace(/(['"])\.\/playback\.mjs\1/, `"./process-playback-${playbackVersion}.mjs"`));
+await cp(new URL('scripts/process-player/playback.mjs', rootUrl), new URL(playbackPath, outputUrl));
+await cp(new URL('scripts/process-player/player.css', rootUrl), new URL(playerStylePath, outputUrl));
 console.log(`Built ${pages.length} pages and prepared ${fileURLToPath(outputUrl)}`);
