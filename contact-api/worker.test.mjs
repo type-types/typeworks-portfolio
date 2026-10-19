@@ -100,3 +100,25 @@ test('rate limits use each trusted edge IP independently and fail safely on limi
   assert.deepEqual(await response.json(), { ok: false, code: 'send_failed' });
   assert.equal(sent.length, 2);
 });
+
+test('four-step inquiry includes phone, chosen work, notes and multiline schedule', async () => {
+  const {env,sent} = setup();
+  const response = await worker.fetch(request({...valid,schemaVersion:2,locale:'en',phone:'+44 20 1234 5678',references:['knet','melissa'],referenceUnknown:false,referenceNotes:'Screen layout\n<script>unsafe</script>',timeline:'Start in November\nAbout two months'}),env);
+  assert.equal(response.status,200);
+  assert.match(sent[0].text,/\+44 20 1234 5678/);
+  assert.match(sent[0].text,/K-NET, Melissa/);
+  assert.match(sent[0].text,/Start in November\nAbout two months/);
+  assert.match(sent[0].html,/&lt;script&gt;/);
+  assert.doesNotMatch(sent[0].html,/<script>/);
+});
+
+test('new inquiry validates reference choices and optional field bounds before sending', async () => {
+  const {env,sent} = setup();
+  const modern = {...valid,schemaVersion:2,referenceUnknown:true,references:[]};
+  for (const patch of [{references:['missing']},{references:'knet'},{references:['knet'],referenceUnknown:true},{referenceUnknown:'yes'},{referenceUnknown:false},{phone:'x'.repeat(41)},{referenceNotes:'x'.repeat(2001)},{timeline:'x'.repeat(1001)},{locale:'fr'},{phone:'010\r\nBcc: x'},{schemaVersion:4}]) {
+    assert.equal((await worker.fetch(request({...modern,...patch}),env)).status,400,JSON.stringify(patch).slice(0,80));
+  }
+  assert.equal(sent.length,0);
+  assert.equal((await worker.fetch(request({...modern,phone:'',budget:'',timeline:''}),env)).status,200);
+  assert.equal((await worker.fetch(request({...modern,referenceUnknown:false,referenceNotes:'Written notes only'}),env)).status,200);
+});

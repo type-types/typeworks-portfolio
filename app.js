@@ -95,7 +95,7 @@
       targetOpen = isOpen;
       toggle.setAttribute("aria-expanded", String(isOpen));
       toggle.setAttribute("aria-controls", "site-nav");
-      toggle.setAttribute("aria-label", isOpen ? "메뉴 닫기" : "메뉴 열기");
+      toggle.setAttribute("aria-label", isOpen ? (toggle.dataset.menuCloseLabel || "메뉴 닫기") : (toggle.dataset.menuOpenLabel || "메뉴 열기"));
       toggle.classList.toggle("is-open", isOpen);
       navigation.classList.toggle("is-open", isOpen);
       header?.classList.toggle("is-open", isOpen);
@@ -104,7 +104,7 @@
       if (isOpen) {
         header?.setAttribute("role", "dialog");
         header?.setAttribute("aria-modal", "true");
-        header?.setAttribute("aria-label", "사이트 메뉴");
+        header?.setAttribute("aria-label", toggle.dataset.menuDialogLabel || "사이트 메뉴");
       } else {
         header?.removeAttribute("role");
         header?.removeAttribute("aria-modal");
