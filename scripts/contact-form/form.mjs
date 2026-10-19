@@ -115,6 +115,8 @@ if (form) {
     nextLabel.textContent = current === 3 ? t.actions.send : editing ? t.actions.return : current === 2 ? t.actions.review : t.actions.next;
     updateReview();
     if (sent) {
+      panels[3].querySelector('h2').textContent = t.complete.title;
+      panels[3].querySelector('.intake-heading p').textContent = t.complete.description;
       form.querySelector('.intake-next').hidden = true;
       back.hidden = true;
       steps.forEach(button => {button.disabled = true;});
