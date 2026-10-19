@@ -1,6 +1,6 @@
 # Typeworks 회사 소개 사이트
 
-## v5-17 현재 배포본
+## v5-17 통합 이력
 
 홈의 작업 방식 요약은 회색 배경과 두 열 사이에서 끊기는 중간 구분선을 사용합니다. 작업 방식 상세는 설명을 왼쪽에 정렬하고 단계 사이에만 구분선을 둡니다. 모바일 사례 목록과 서비스 개념 카드도 합의한 배치로 통합했습니다.
 
@@ -52,7 +52,7 @@ python3 -m http.server 4317 --bind 127.0.0.1 --directory dist
 - 서비스 수정: `content/services.mjs`에서 제목, 설명, 적용 예와 관련 사례를 관리합니다.
 - 작업 방식 수정: `content/process.mjs`에서 단계별 제목, 설명, 체크 항목과 요약을 함께 관리합니다.
 - 회사 소개 및 페이지 구성 수정: `scripts/build-site.mjs`의 해당 페이지 내용을 바꾸고 페이지를 다시 생성합니다.
-- 연락 경로 수정: `content/contact.mjs`의 수신 주소 및 서버 주소와 `scripts/build-site.mjs`의 상담 안내를 수정합니다.
+- 연락 경로 수정: `content/contact.mjs`에서 수신 주소와 서버 주소를 관리합니다. 상담 문구는 `content/contact-locales/ko.mjs`와 `en.mjs`, 화면은 `scripts/contact-form/render.mjs`, 동작은 `scripts/contact-form/form.mjs`에서 관리합니다.
 - 화면 스타일 수정: 공통 화면은 `style.css`, 작업 방식 선택 화면은 `scripts/process-player/player.css`를 수정한 뒤 `npm run build`를 실행하고 새로고침합니다.
 
 Google Fonts는 인터넷 연결 시 사용되며, 연결이 없으면 대체 서체로 표시됩니다.
@@ -67,7 +67,11 @@ Google Fonts는 인터넷 연결 시 사용되며, 연결이 없으면 대체 �
 | `work/index.html` | 제작 사례 목록 |
 | `work/<slug>/index.html` | 사례별 필요, 제작 내용, 결과와 담당 역할 |
 | `contact/index.html` | 상담 내용 작성과 연락 안내 |
-| `en/` | 기존 영문 포트폴리오 |
+| `en/` | 기존 영문 포트폴리오 및 영어 상담 페이지 |
+| `en/contact/index.html` | 영어 4단계 상담 폼 |
+| `content/contact-locales/` | 한국어와 영어 상담 문구 및 언어 등록 |
+| `content/contact-contract.mjs` | 상담 입력 제한과 참고 사례 식별자 |
+| `scripts/contact-form/` | 공통 4단계 화면, 스타일, 초안 저장 및 전송 |
 | `content/cases.mjs` | 사례 원본 데이터 |
 | `content/portfolio-cases.mjs` | 사례 표시 정보, 신규 사례와 노출 순서 |
 | `content/contact.mjs` | 상담 이메일과 전송 서버 주소 |
@@ -92,6 +96,8 @@ Google Fonts는 인터넷 연결 시 사용되며, 연결이 없으면 대체 �
 생성된 HTML도 Git에 포함합니다. GitHub Pages 배포 시 원본 데이터에서 페이지를 다시 생성하고 `dist/`의 공개 파일만 업로드합니다. 기존 영문 포트폴리오와 관련 자산도 배포 파일에 포함합니다.
 
 ## 상담 기능
+
+상담 폼은 연락처, 필요한 작업, 프로젝트 내용 및 검토의 네 단계로 구성합니다. 한국어와 영어는 같은 화면 및 동작 코드를 사용하고 문구 파일만 분리합니다. 언어 전환과 새로고침 시 브라우저 초안을 복원하며, 전화번호는 한국 자동 서식과 해외 자유 입력을 지원합니다.
 
 상담 폼은 Cloudflare Worker의 `/api/contact`에 JSON을 전송합니다. 서버가 메일 전송을 수락한 뒤 완료 화면을 표시합니다. 회신 주소에는 작성자가 입력한 이메일을 설정합니다.
 

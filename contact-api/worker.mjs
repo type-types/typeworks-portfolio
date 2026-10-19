@@ -1,7 +1,7 @@
 import { recipient } from '../content/contact.mjs';
+import {contactLimits as limits, contactCaseNames} from '../content/contact-contract.mjs';
 
 const origins = ['https://typeworks.pro', 'https://www.typeworks.pro'];
-const limits = { company: 120, name: 80, email: 254, projectType: 40, budget: 100, timeline: 100, message: 6000, website: 200 };
 const projectTypes = ['맞춤 소프트웨어', '업무 도구와 AI', '공연과 현장 운영', '상담 후 결정'];
 const maxBytes = 32768;
 const emailPattern = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+$/;
@@ -38,10 +38,19 @@ function validate(input) {
     const value = input[key] ?? '';
     if (typeof value !== 'string' || value.length > max) return null;
     values[key] = value.trim();
-    if (key !== 'message' && /[\x00-\x1f\x7f]/.test(value)) return null;
+    if (['message','timeline','referenceNotes'].includes(key) ? /[\x00-\x08\x0b\x0c\x0e-\x1f\x7f]/.test(value) : /[\x00-\x1f\x7f]/.test(value)) return null;
   }
   if (!values.company || !values.name || !values.message || values.website) return null;
   if (!emailPattern.test(values.email) || !projectTypes.includes(values.projectType)) return null;
+  if (input.schemaVersion !== undefined && input.schemaVersion !== 2) return null;
+  const refs = input.references ?? [];
+  if (!Array.isArray(refs) || refs.length > Object.keys(contactCaseNames).length || refs.some(slug => typeof slug !== 'string' || !Object.hasOwn(contactCaseNames,slug))) return null;
+  if (input.referenceUnknown !== undefined && typeof input.referenceUnknown !== 'boolean') return null;
+  values.references = [...new Set(refs)];
+  values.referenceUnknown = input.referenceUnknown === true;
+  values.locale = values.locale || 'ko';
+  if (!['ko','en'].includes(values.locale) || (values.referenceUnknown && refs.length)) return null;
+  if (input.schemaVersion === 2 && !refs.length && !values.referenceUnknown && !values.referenceNotes) return null;
   return values;
 }
 
@@ -80,7 +89,9 @@ export default {
       const { success } = await env.CONTACT_RATE_LIMITER.limit({ key: ip });
       if (!success) return respond(429, { ok: false, code: 'rate_limit' }, { 'Retry-After': '60' });
       const rows = [
-        ['회사 또는 소속', values.company], ['성함', values.name], ['이메일', values.email],
+        ['회사 또는 소속', values.company], ['성함', values.name], ['이메일', values.email], ['전화번호', values.phone || '미기재'],
+        ['작성 언어', values.locale], ['참고 제작 사례', values.referenceUnknown ? '상담하며 방향 정하기' : values.references.map(slug => contactCaseNames[slug]).join(', ') || '미기재'],
+        ['마음에 드신 점 및 참고 내용', values.referenceNotes || '미기재'],
         ['필요한 작업', values.projectType], ['예산', values.budget || '상담 후 결정'],
         ['희망 일정', values.timeline || '상담 후 결정'], ['현재 상황과 원하는 결과', values.message],
       ];
