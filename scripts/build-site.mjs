@@ -1,8 +1,8 @@
 import { mkdir, writeFile, readFile, cp, rm } from 'node:fs/promises';
+import { responsiveImages } from './responsive-images.mjs';
 import { createHash } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import {contactLocales, contactLocalePath} from '../content/contact-locales/index.mjs';
-import { responsiveImages } from './responsive-images.mjs';
 import {contactBody} from './contact-form/render.mjs';
 import {quickContact} from './contact-form/quick-render.mjs';
 import { portfolioCases as cases, featuredSlugs, supportingSlugs, workSlugs } from '../content/portfolio-cases.mjs';
