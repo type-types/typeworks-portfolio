@@ -1,0 +1,505 @@
+{
+  "/assets/founder-minseok.jpg": {
+    "width": 1499,
+    "height": 1999,
+    "originalBytes": 466290,
+    "originalHash": "16ead49ec0574dd26899730749dd3abb65259edbad9f054bbd62c693d11fcc06",
+    "variants": [
+      {
+        "src": "/assets/responsive/founder-minseok-480-a77f3aacd7bb.webp",
+        "width": 480,
+        "bytes": 110084
+      },
+      {
+        "src": "/assets/responsive/founder-minseok-768-b3569d5100ed.webp",
+        "width": 768,
+        "bytes": 260156
+      },
+      {
+        "src": "/assets/responsive/founder-minseok-1024-85fbb72d1194.webp",
+        "width": 1024,
+        "bytes": 423074
+      },
+      {
+        "src": "/assets/responsive/founder-minseok-1080-551d4d19ef4b.webp",
+        "width": 1080,
+        "bytes": 460646
+      },
+      {
+        "src": "/assets/founder-minseok.jpg",
+        "width": 1499,
+        "bytes": 466290
+      }
+    ]
+  },
+  "/assets/portfolio/aws-sbg-cloudwatch.jpg": {
+    "width": 934,
+    "height": 525,
+    "originalBytes": 33697,
+    "originalHash": "fea324ff4f72070de24b1c5ff1a356f919354d6680ea4944674c3976e9a47fc6",
+    "variants": [
+      {
+        "src": "/assets/responsive/aws-sbg-cloudwatch-480-187a201a6707.webp",
+        "width": 480,
+        "bytes": 26430
+      },
+      {
+        "src": "/assets/portfolio/aws-sbg-cloudwatch.jpg",
+        "width": 934,
+        "bytes": 33697
+      }
+    ]
+  },
+  "/assets/portfolio/aws-sbg-four-concepts.jpg": {
+    "width": 934,
+    "height": 525,
+    "originalBytes": 25104,
+    "originalHash": "1517030eca4d7c18a77b9c30a5a1642a7f6634f4a9e594023afd7487efea49af",
+    "variants": [
+      {
+        "src": "/assets/responsive/aws-sbg-four-concepts-480-8a6d9e9fe97d.webp",
+        "width": 480,
+        "bytes": 15252
+      },
+      {
+        "src": "/assets/portfolio/aws-sbg-four-concepts.jpg",
+        "width": 934,
+        "bytes": 25104
+      }
+    ]
+  },
+  "/assets/portfolio/aws-sbg-instagram-1.png": {
+    "width": 1080,
+    "height": 1350,
+    "originalBytes": 1212804,
+    "originalHash": "8eca431541cda22b3915aae8b3122c24398eed93fb461895dab459186f893f3d",
+    "variants": [
+      {
+        "src": "/assets/responsive/aws-sbg-instagram-1-480-54a4299b2fc6.webp",
+        "width": 480,
+        "bytes": 240972
+      },
+      {
+        "src": "/assets/responsive/aws-sbg-instagram-1-768-3ea4ac1842b0.webp",
+        "width": 768,
+        "bytes": 550346
+      },
+      {
+        "src": "/assets/responsive/aws-sbg-instagram-1-1080-56aca555dea8.webp",
+        "width": 1080,
+        "bytes": 890590
+      }
+    ]
+  },
+  "/assets/portfolio/aws-sbg-instagram-2.png": {
+    "width": 1080,
+    "height": 1350,
+    "originalBytes": 1317075,
+    "originalHash": "0185aecf52120a65f241416df1dbfb1646e5af5ee6e82accd956b95dc4492c5c",
+    "variants": [
+      {
+        "src": "/assets/responsive/aws-sbg-instagram-2-480-59d5be22853f.webp",
+        "width": 480,
+        "bytes": 251656
+      },
+      {
+        "src": "/assets/responsive/aws-sbg-instagram-2-768-df7a20d540fd.webp",
+        "width": 768,
+        "bytes": 590266
+      },
+      {
+        "src": "/assets/responsive/aws-sbg-instagram-2-1080-d1194a6bd0d2.webp",
+        "width": 1080,
+        "bytes": 958536
+      }
+    ]
+  },
+  "/assets/portfolio/aws-sbg-instagram-3.png": {
+    "width": 1080,
+    "height": 1350,
+    "originalBytes": 1601112,
+    "originalHash": "5cb569378b199bec5632bb83f2ca6507ec1402c6bb4318bbeddb4bc19d305896",
+    "variants": [
+      {
+        "src": "/assets/responsive/aws-sbg-instagram-3-480-f62554637439.webp",
+        "width": 480,
+        "bytes": 299188
+      },
+      {
+        "src": "/assets/responsive/aws-sbg-instagram-3-768-4008a254b41d.webp",
+        "width": 768,
+        "bytes": 699710
+      },
+      {
+        "src": "/assets/responsive/aws-sbg-instagram-3-1024-1cf30032acf7.webp",
+        "width": 1024,
+        "bytes": 1171582
+      },
+      {
+        "src": "/assets/responsive/aws-sbg-instagram-3-1080-4a81c5289f53.webp",
+        "width": 1080,
+        "bytes": 1201162
+      }
+    ]
+  },
+  "/assets/portfolio/aws-sbg-instagram-4.png": {
+    "width": 1080,
+    "height": 1350,
+    "originalBytes": 1038152,
+    "originalHash": "25ab802d56e934f103dfb3237d42172f14467a171cafe66624c161598f264bec",
+    "variants": [
+      {
+        "src": "/assets/responsive/aws-sbg-instagram-4-480-52a277a7a46c.webp",
+        "width": 480,
+        "bytes": 229296
+      },
+      {
+        "src": "/assets/responsive/aws-sbg-instagram-4-768-676b05869c2c.webp",
+        "width": 768,
+        "bytes": 516276
+      },
+      {
+        "src": "/assets/responsive/aws-sbg-instagram-4-1080-b934c5023db7.webp",
+        "width": 1080,
+        "bytes": 735202
+      }
+    ]
+  },
+  "/assets/portfolio/aws-sbg-lecture-cover.jpg": {
+    "width": 934,
+    "height": 525,
+    "originalBytes": 41727,
+    "originalHash": "666a5691b9aa609fcbf7fe84947bdbdfdb0a20b5076dcff502ee3f2245c942d7",
+    "variants": [
+      {
+        "src": "/assets/responsive/aws-sbg-lecture-cover-480-ea2ec5b8c86d.webp",
+        "width": 480,
+        "bytes": 30112
+      },
+      {
+        "src": "/assets/portfolio/aws-sbg-lecture-cover.jpg",
+        "width": 934,
+        "bytes": 41727
+      }
+    ]
+  },
+  "/assets/portfolio/aws-sbg-session-cover.jpg": {
+    "width": 1920,
+    "height": 1080,
+    "originalBytes": 218229,
+    "originalHash": "750e17508c6eec8f57bd39caf528d0cfb5496a64990145f15f8cd6f2eb090d51",
+    "variants": [
+      {
+        "src": "/assets/responsive/aws-sbg-session-cover-480-60abc49db6ea.webp",
+        "width": 480,
+        "bytes": 18692
+      },
+      {
+        "src": "/assets/responsive/aws-sbg-session-cover-768-5acfe3c66765.webp",
+        "width": 768,
+        "bytes": 36514
+      },
+      {
+        "src": "/assets/responsive/aws-sbg-session-cover-1024-d97eaac49ec9.webp",
+        "width": 1024,
+        "bytes": 57228
+      },
+      {
+        "src": "/assets/responsive/aws-sbg-session-cover-1080-36291d855fb6.webp",
+        "width": 1080,
+        "bytes": 60632
+      },
+      {
+        "src": "/assets/responsive/aws-sbg-session-cover-1280-857e2e0fb890.webp",
+        "width": 1280,
+        "bytes": 79444
+      },
+      {
+        "src": "/assets/responsive/aws-sbg-session-cover-1920-9665bb5327d8.webp",
+        "width": 1920,
+        "bytes": 146058
+      }
+    ]
+  },
+  "/assets/portfolio/csi-labeling.jpg": {
+    "width": 1440,
+    "height": 900,
+    "originalBytes": 106072,
+    "originalHash": "81f680c20984a0e76b67a1c11d72270ca0870a2ea5a197785049d07374c0f15b",
+    "variants": [
+      {
+        "src": "/assets/responsive/csi-labeling-480-d16b6073c075.webp",
+        "width": 480,
+        "bytes": 48886
+      },
+      {
+        "src": "/assets/portfolio/csi-labeling.jpg",
+        "width": 1440,
+        "bytes": 106072
+      }
+    ]
+  },
+  "/assets/portfolio/ignition-01-setlist.png": {
+    "width": 780,
+    "height": 1688,
+    "originalBytes": 247503,
+    "originalHash": "980ec41eb862d05de4c46440613ebb5288da6df02d3103be4eb4f7a293252a93",
+    "variants": [
+      {
+        "src": "/assets/responsive/ignition-01-setlist-480-2ad9fb44e305.webp",
+        "width": 480,
+        "bytes": 127944
+      },
+      {
+        "src": "/assets/responsive/ignition-01-setlist-780-2ac990993577.webp",
+        "width": 780,
+        "bytes": 154598
+      }
+    ]
+  },
+  "/assets/portfolio/ignition-05-admin.png": {
+    "width": 780,
+    "height": 1688,
+    "originalBytes": 266500,
+    "originalHash": "669ad02ba0779396231653b38cb29ed974d50f4a9da36f9ae4b08630a908939f",
+    "variants": [
+      {
+        "src": "/assets/responsive/ignition-05-admin-480-87f4f76903ea.webp",
+        "width": 480,
+        "bytes": 132832
+      },
+      {
+        "src": "/assets/responsive/ignition-05-admin-780-ba88c54a7992.webp",
+        "width": 780,
+        "bytes": 165436
+      }
+    ]
+  },
+  "/assets/portfolio/ignition-07-screen.png": {
+    "width": 1280,
+    "height": 720,
+    "originalBytes": 154414,
+    "originalHash": "02174363e0ffe76cbaea4ad4d11127538847071aefc01d033dbfa1766e0726a9",
+    "variants": [
+      {
+        "src": "/assets/responsive/ignition-07-screen-480-7d2064b26b7c.webp",
+        "width": 480,
+        "bytes": 27740
+      },
+      {
+        "src": "/assets/responsive/ignition-07-screen-768-cbf180533b3e.webp",
+        "width": 768,
+        "bytes": 64964
+      },
+      {
+        "src": "/assets/responsive/ignition-07-screen-1280-afcf6add1c43.webp",
+        "width": 1280,
+        "bytes": 80484
+      }
+    ]
+  },
+  "/assets/portfolio/knet-applicant-approval.png": {
+    "width": 1265,
+    "height": 1199,
+    "originalBytes": 58927,
+    "originalHash": "74d8d6d050fffb754a2ec177b768723963154ad35ee2c4e1d0d8e0a5bccc0ffb",
+    "variants": [
+      {
+        "src": "/assets/responsive/knet-applicant-approval-480-4e224f466104.webp",
+        "width": 480,
+        "bytes": 20740
+      },
+      {
+        "src": "/assets/responsive/knet-applicant-approval-768-366312e75aa4.webp",
+        "width": 768,
+        "bytes": 43376
+      },
+      {
+        "src": "/assets/portfolio/knet-applicant-approval.png",
+        "width": 1265,
+        "bytes": 58927
+      }
+    ]
+  },
+  "/assets/portfolio/knet-recruitment-settings.png": {
+    "width": 1265,
+    "height": 712,
+    "originalBytes": 62603,
+    "originalHash": "04ec1a2730a065057b5b70a9bb177b36695ae10b00d29628abd526099cf0167e",
+    "variants": [
+      {
+        "src": "/assets/responsive/knet-recruitment-settings-480-32358ca00c62.webp",
+        "width": 480,
+        "bytes": 27366
+      },
+      {
+        "src": "/assets/responsive/knet-recruitment-settings-768-9f236b0040a1.webp",
+        "width": 768,
+        "bytes": 59148
+      },
+      {
+        "src": "/assets/portfolio/knet-recruitment-settings.png",
+        "width": 1265,
+        "bytes": 62603
+      }
+    ]
+  },
+  "/assets/portfolio/knet-study-editor.png": {
+    "width": 1265,
+    "height": 712,
+    "originalBytes": 53617,
+    "originalHash": "7c2a6d98aa230700845d7f2a075fb82909ac24ee3da3ed5fce5021efcef4883d",
+    "variants": [
+      {
+        "src": "/assets/responsive/knet-study-editor-480-7a65a70ca2fd.webp",
+        "width": 480,
+        "bytes": 24842
+      },
+      {
+        "src": "/assets/responsive/knet-study-editor-768-0c3449a2099b.webp",
+        "width": 768,
+        "bytes": 53070
+      },
+      {
+        "src": "/assets/portfolio/knet-study-editor.png",
+        "width": 1265,
+        "bytes": 53617
+      }
+    ]
+  },
+  "/assets/portfolio/nonol-ending.png": {
+    "width": 390,
+    "height": 1533,
+    "originalBytes": 94482,
+    "originalHash": "eb480de01264e90e2478e61dc449c46b9a36c5ac6bc0530c61e1166a6093a8ce",
+    "variants": [
+      {
+        "src": "/assets/responsive/nonol-ending-390-e7f2ec587b44.webp",
+        "width": 390,
+        "bytes": 38672
+      }
+    ]
+  },
+  "/assets/portfolio/nonol-test-lab-full.jpg": {
+    "width": 1265,
+    "height": 1978,
+    "originalBytes": 122619,
+    "originalHash": "7133961ccd9f2be681eb68d36eb3d7c8b2d2d57b70bfe651731bac70464fac12",
+    "variants": [
+      {
+        "src": "/assets/responsive/nonol-test-lab-full-480-d9f8f166518b.webp",
+        "width": 480,
+        "bytes": 49150
+      },
+      {
+        "src": "/assets/responsive/nonol-test-lab-full-768-807830123c88.webp",
+        "width": 768,
+        "bytes": 107402
+      },
+      {
+        "src": "/assets/portfolio/nonol-test-lab-full.jpg",
+        "width": 1265,
+        "bytes": 122619
+      }
+    ]
+  },
+  "/assets/portfolio/nonol-test-lab.jpg": {
+    "width": 1265,
+    "height": 712,
+    "originalBytes": 39963,
+    "originalHash": "5fe9258c84f49a82e4fa7062ded0c72eaf0ccbb15dc5b97d578997f65bdbbbfd",
+    "variants": [
+      {
+        "src": "/assets/responsive/nonol-test-lab-480-a951bcb0a4d5.webp",
+        "width": 480,
+        "bytes": 17054
+      },
+      {
+        "src": "/assets/responsive/nonol-test-lab-768-2de20c5b8b3f.webp",
+        "width": 768,
+        "bytes": 34714
+      },
+      {
+        "src": "/assets/portfolio/nonol-test-lab.jpg",
+        "width": 1265,
+        "bytes": 39963
+      }
+    ]
+  },
+  "/assets/visuals/nfc-visit-v5.jpg": {
+    "width": 1536,
+    "height": 1024,
+    "originalBytes": 228133,
+    "originalHash": "e2b6e8da60319e1876d92b97cbc455fdad0c0d494b1859da2861dfe0615fc326",
+    "variants": [
+      {
+        "src": "/assets/responsive/nfc-visit-v5-480-a1700edd5969.webp",
+        "width": 480,
+        "bytes": 31894
+      },
+      {
+        "src": "/assets/responsive/nfc-visit-v5-768-89dd269d64bb.webp",
+        "width": 768,
+        "bytes": 68270
+      },
+      {
+        "src": "/assets/responsive/nfc-visit-v5-1024-ad281f3ebe66.webp",
+        "width": 1024,
+        "bytes": 100848
+      },
+      {
+        "src": "/assets/responsive/nfc-visit-v5-1080-f9615ce5a718.webp",
+        "width": 1080,
+        "bytes": 108852
+      },
+      {
+        "src": "/assets/responsive/nfc-visit-v5-1280-23f2157d7070.webp",
+        "width": 1280,
+        "bytes": 141054
+      },
+      {
+        "src": "/assets/responsive/nfc-visit-v5-1536-be8765f7789d.webp",
+        "width": 1536,
+        "bytes": 177478
+      }
+    ]
+  },
+  "/assets/visuals/planning-v5.jpg": {
+    "width": 1536,
+    "height": 1024,
+    "originalBytes": 282777,
+    "originalHash": "20872a62e1da2d62f9e13e84f2d21d32ff881c30ece7246af43d639962b3d60d",
+    "variants": [
+      {
+        "src": "/assets/responsive/planning-v5-480-c03cb267801f.webp",
+        "width": 480,
+        "bytes": 40860
+      },
+      {
+        "src": "/assets/responsive/planning-v5-768-12541ebd7da1.webp",
+        "width": 768,
+        "bytes": 85878
+      },
+      {
+        "src": "/assets/responsive/planning-v5-1024-f784dc78c557.webp",
+        "width": 1024,
+        "bytes": 135868
+      },
+      {
+        "src": "/assets/responsive/planning-v5-1080-e914edb35be6.webp",
+        "width": 1080,
+        "bytes": 146010
+      },
+      {
+        "src": "/assets/responsive/planning-v5-1280-518cba34eb30.webp",
+        "width": 1280,
+        "bytes": 184816
+      },
+      {
+        "src": "/assets/responsive/planning-v5-1536-13549837b73b.webp",
+        "width": 1536,
+        "bytes": 236244
+      }
+    ]
+  }
+}
