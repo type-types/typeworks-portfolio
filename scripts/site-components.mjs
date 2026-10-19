@@ -5,12 +5,12 @@ import { serviceVisual, stepSymbol, stageVisual } from '../content/visuals.mjs';
 
 const escape = (value) => String(value).replace(/[&<>"']/g, (character) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[character]));
 const arrow = '<span aria-hidden="true">↗</span>';
-const button = (label, url, light = false) => `<a class="button${light ? ' button-light' : ''}" href="${url}">${label}${arrow}</a>`;
+const button = (label, url, primary = false) => `<a class="button${primary ? ' button-primary' : ''}" href="${url}">${label}${arrow}</a>`;
 const textLink = (label, url) => `<a class="text-link" href="${url}">${label}${arrow}</a>`;
 
 const caseMedia = (item, detail = false) => {
-  if (item.visualType === 'screenshot') return `<div class="project-media screenshot-media ${item.slug}-media${detail ? ' detail-media' : ''}"><img src="${item.visual}" width="${item.visualWidth}" height="${item.visualHeight}" alt="${escape(item.visualAlt)}"${detail ? '' : ' loading="lazy"'}></div>`;
-  if (item.visualType === 'phones') return `<div class="project-media melissa-media${detail ? ' detail-media' : ''}"><div class="phone-gallery">${[1,2,3].map((number) => `<img src="/assets/melissa-${number}.webp" width="221" height="480" alt="${['Melissa의 AI 캐릭터 소개','Melissa에서 AI와 나누는 대화','대화로 작성된 Melissa의 일기'][number-1]}" loading="lazy">`).join('')}</div></div>`;
+  if (item.visualType === 'screenshot') return `<div class="project-media screenshot-media ${item.slug}-media${detail ? ' detail-media' : ''}"><img src="${item.visual}" width="${item.visualWidth}" height="${item.visualHeight}" alt="${escape(item.visualAlt)}" loading="${detail ? 'eager' : 'lazy'}"${detail ? ' fetchpriority="high"' : ''} decoding="async"></div>`;
+  if (item.visualType === 'phones') return `<div class="project-media melissa-media${detail ? ' detail-media' : ''}"><div class="phone-gallery">${[1,2,3].map((number) => `<img src="/assets/melissa-${number}.webp" width="221" height="480" alt="${['Melissa의 AI 캐릭터 소개','Melissa에서 AI와 나누는 대화','대화로 작성된 Melissa의 일기'][number-1]}" loading="${detail ? 'eager' : 'lazy'}"${detail && number === 1 ? ' fetchpriority="high"' : ''} decoding="async">`).join('')}</div></div>`;
   const icons = {
     ondam: '<path d="M17 12h10l5 13-6 5c5 10 11 16 21 21l5-6 13 5v10c0 4-3 7-7 6C31 62 14 45 10 22c-1-5 2-10 7-10Z"/><path d="M45 12c11 0 20 9 20 20M45 23c5 0 9 4 9 9"/>',
     'radio-gemma': '<rect x="8" y="10" width="26" height="49" rx="4"/><rect x="44" y="17" width="26" height="49" rx="4"/><path d="M15 24h12M15 34h12M15 44h8M51 31h12M51 41h12M51 51h8"/>',
@@ -28,8 +28,8 @@ const featuredCase = (slug) => {
   return `<article class="featured-case reveal"><a class="featured-visual case-link" href="/work/${slug}/">${caseMedia(item)}<span class="visual-label">${item.visualLabel}</span></a><div class="featured-copy"><p class="eyebrow">${item.category}</p><h3><a href="/work/${slug}/">${caseText(item.title, item.mobileTitle)}</a></h3><p class="featured-description">${caseText(item.shortDescription, item.teaser)}</p><div class="featured-facts"><span>${caseText(item.status, item.mobileStatus)}</span><p><span class="case-role-label">담당 역할</span>${item.role}</p></div>${textLink(`<span class="case-link-label">${caseText('사례 자세히 보기', '사례 보기')}</span>`, `/work/${slug}/`)}</div></article>`;
 };
 
-const serviceGrid = () => `<div class="service-grid">${services.map(({ title, description, examples, caseSlug, visual }) =>
-  `<article class="service-item service-concept-card reveal"><h3>${title}</h3>${serviceVisual(visual)}<p>${description}</p><p class="service-examples">${examples}</p><a class="service-case-link" href="/work/${caseSlug}/" aria-label="${title} 관련 사례 보기">관련 사례 보기${arrow}</a></article>`
+const serviceGrid = (priority = false) => `<div class="service-grid">${services.map(({ title, description, examples, caseSlug, visual }) =>
+  `<article class="service-item service-concept-card reveal"><h3>${title}</h3>${serviceVisual(visual, priority)}<p>${description}</p><p class="service-examples">${examples}</p><a class="service-case-link" href="/work/${caseSlug}/" aria-label="${title} 관련 사례 보기">관련 사례 보기${arrow}</a></article>`
 ).join('')}</div>`;
 
 const processGrid = () => `<ol class="process-grid">${processSteps.map(({ number, title, description, symbol }) =>

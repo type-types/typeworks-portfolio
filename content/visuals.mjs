@@ -16,7 +16,7 @@ const flow = (items) => `<div class="visual-flow">${items.map(([symbol, title, d
 
 export const journeyVisual = () => `<figure class="journey-visual"><div class="journey-heading"><span class="visual-dot" aria-hidden="true"></span><span>필요에서 시작해, 쓰는 순간까지.</span></div><div class="journey-scenes"><div class="journey-scene"><div class="paper-stack" aria-hidden="true"><i></i><i></i><i></i></div><span>흩어진 필요</span><small>메모, 자료, 반복 업무</small></div>${arrow}<div class="journey-scene"><div class="mini-browser" aria-hidden="true"><div class="mini-browser-bar"><i></i><i></i><i></i></div><div class="mini-browser-body"><span></span><b></b><b></b><em></em></div></div><span>작동하는 제품</span><small>사용 화면과 관리 도구</small></div>${arrow}<div class="journey-scene"><div class="guide-sheet" aria-hidden="true">${icon('check')}<i></i><i></i></div><span>이어지는 운영</span><small>직접 쓰는 방법까지</small></div></div><figcaption>필요를 정리하고, 제품을 만들고, 운영 방법을 전달합니다.</figcaption></figure>`;
 
-export const planningPhoto = () => `<figure class="planning-photo"><img src="/assets/visuals/planning-v5.jpg" width="1536" height="1024" alt="함께 메모를 정리하며 필요한 일을 구체화하는 과정을 표현한 연출 사진" loading="lazy" decoding="async"></figure>`;
+export const planningPhoto = () => `<figure class="planning-photo"><img src="/assets/visuals/planning-v5.jpg" width="1536" height="1024" alt="함께 메모를 정리하며 필요한 일을 구체화하는 과정을 표현한 연출 사진" loading="eager" fetchpriority="high" decoding="async"></figure>`;
 
 const serviceScreen = ({ className = '', slug, name, src, width, height, alt, caption, source }) => `<figure class="service-visual service-screen${className ? ` ${className}` : ''}"><a class="service-screen-window" href="/work/${slug}/" aria-label="${name} 실제 제작 사례 보기"><img src="${src}" width="${width}" height="${height}" alt="${alt}" loading="lazy" decoding="async"></a><figcaption><span class="service-caption-copy">${caption}</span><small>${source}</small></figcaption></figure>`;
 const serviceVisuals = {
@@ -32,10 +32,10 @@ const serviceVisuals = {
     caption: '현장의 참여를 운영 화면에 연결합니다.', source: 'IGNITION 공개 시연 화면',
   }),
 };
-export const serviceVisual = (key) => {
+export const serviceVisual = (key, priority = false) => {
   const visual = serviceVisuals[key];
   if (!visual) throw new Error(`Unknown service visual: ${key}`);
-  return visual;
+  return priority ? visual.replace('loading="lazy"', 'loading="eager" fetchpriority="high"') : visual;
 };
 export const stepSymbol = (symbol) => `<span class="step-symbol">${icon(symbol)}</span>`;
 

@@ -1,0 +1,17 @@
+.line-field{min-width:0}
+.line-field>label{display:block;font-size:15px;line-height:1.7;font-weight:500;color:var(--muted);margin:0 0 5px;transition:color 130ms}
+.line-field:focus-within>label{color:var(--blue)}
+.line-field .line-entry{position:relative;min-width:0;border:0;border-bottom:1px solid #b2bac5;border-radius:0;background:transparent;box-shadow:none;overflow:visible}
+.line-entry::after{content:"";position:absolute;bottom:-1px;left:0;width:100%;height:2px;background:var(--blue);transform:scaleX(0);transform-origin:left;transition:transform 140ms ease-out;pointer-events:none}
+.line-entry:focus-within::after{transform:scaleX(1)}
+.line-field .line-entry :is(input,textarea){display:block;width:100%;min-width:0;min-height:52px;margin:0;padding:10px 0 13px;border:0;border-radius:0;background:transparent;color:var(--ink);font-family:inherit;font-size:16px;line-height:1.8;box-shadow:none;scroll-margin-block:calc(var(--site-header-height,88px) + 20px)}
+.line-field .line-entry textarea{resize:vertical;min-height:150px}
+.line-field .line-entry :is(input,textarea):focus{outline:none;box-shadow:none;background:transparent}
+.line-field .line-entry input::placeholder,.line-field .line-entry textarea::placeholder{color:var(--muted);opacity:.8}
+.line-field .line-entry:has([aria-invalid="true"]){border-color:#9b342c}
+.line-field .line-entry:has([aria-invalid="true"])::after{background:#9b342c}
+.line-field .phone-input input{flex:1 1 0;width:0;padding-left:15px}
+.line-field .phone-region select{font-size:16px;padding-left:0}
+.line-field .phone-region select:focus-visible{outline:2px solid var(--blue);outline-offset:-3px}
+.line-field .line-entry .timeline-input{min-height:112px}
+@media(prefers-reduced-motion:reduce){.line-field>label,.line-entry::after{transition:none}}

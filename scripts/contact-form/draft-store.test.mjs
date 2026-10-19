@@ -63,7 +63,7 @@ test('migrates an earlier draft without letting an older tab overwrite new sched
   try {
     globalThis.window = {localStorage:{getItem:key=>items.get(key) ?? null, setItem:(key,value)=>items.set(key,value)}};
     const migrated = loadDraft('new', ['melissa','ondam'], 'old').draft;
-    assert.equal(migrated.version, 4);
+    assert.equal(migrated.version, 5);
     assert.equal(migrated.values.phone, sample.values.phone);
     migrated.values.timeline = '11월 중 시작, 약 2개월';
     saveDraft('new', migrated);
@@ -82,4 +82,13 @@ test('preserves review stage and international number across languages', () => {
   assert.equal(draft.phoneRegion, 'international');
   assert.equal(draft.values.phone, '+44 20 1234 5678');
   assert.equal(parseDraft(JSON.stringify(sample), []).phoneRegion, 'KR');
+});
+
+test('combines legacy name and organization once and preserves the full combined identity', () => {
+  const draft = parseDraft(JSON.stringify({...sample,version:4,values:{name:'가'.repeat(80),company:'나'.repeat(120)}}),[]);
+  assert.equal(draft.values.name.length,203);
+  assert.equal(draft.values.name,'가'.repeat(80)+' / '+'나'.repeat(120));
+  assert.equal(parseDraft(JSON.stringify(draft),[]).values.name,draft.values.name);
+  assert.equal(draft.values.company,undefined);
+  assert.equal(parseDraft(JSON.stringify({version:5,values:{name:'x'.repeat(220)}}),[]).values.name.length,203);
 });
