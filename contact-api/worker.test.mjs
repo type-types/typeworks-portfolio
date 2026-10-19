@@ -122,3 +122,18 @@ test('new inquiry validates reference choices and optional field bounds before s
   assert.equal((await worker.fetch(request({...modern,phone:'',budget:'',timeline:''}),env)).status,200);
   assert.equal((await worker.fetch(request({...modern,referenceUnknown:false,referenceNotes:'Written notes only'}),env)).status,200);
 });
+
+test('quick inquiry accepts the four fields and preserves a combined identity without inventing organization data', async () => {
+  const {env,sent} = setup();
+  const body = {schemaVersion:3,mode:'quick',name:'홍길동 / 개인',email:'test@example.com',phone:'',message:'예산과 일정은 상담 후 결정',projectType:'상담 후 결정',website:''};
+  assert.equal((await worker.fetch(request(body),env)).status,200);
+  assert.match(sent[0].text,/성함 \/ 소속\n홍길동 \/ 개인/);
+  assert.match(sent[0].text,/신청 방식\n간단 상담/);
+  assert.equal(sent[0].subject,'[Typeworks 상담] 홍길동 / 개인');
+  for (const patch of [{mode:'other'},{name:' '},{name:'x'.repeat(204)},{name:'A\nBcc: evil@example.com'},{email:'invalid'},{website:'spam'}]) {
+    assert.equal((await worker.fetch(request({...body,...patch}),env)).status,400);
+  }
+  assert.equal((await worker.fetch(request({...body,mode:'detailed'}),env)).status,400);
+  assert.equal((await worker.fetch(request({...body,mode:'detailed',referenceUnknown:true}),env)).status,200);
+  assert.equal(sent.length,2);
+});

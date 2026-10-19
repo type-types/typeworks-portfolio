@@ -5,7 +5,7 @@ import { serviceVisual, stepSymbol, stageVisual } from '../content/visuals.mjs';
 
 const escape = (value) => String(value).replace(/[&<>"']/g, (character) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[character]));
 const arrow = '<span aria-hidden="true">↗</span>';
-const button = (label, url, light = false) => `<a class="button${light ? ' button-light' : ''}" href="${url}">${label}${arrow}</a>`;
+const button = (label, url, primary = false) => `<a class="button${primary ? ' button-primary' : ''}" href="${url}">${label}${arrow}</a>`;
 const textLink = (label, url) => `<a class="text-link" href="${url}">${label}${arrow}</a>`;
 
 const caseMedia = (item, detail = false) => {

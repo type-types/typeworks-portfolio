@@ -1,8 +1,8 @@
 export function inquiryPayload(form, locale) {
   const value = name => form.elements[name].value.trim();
   return {
-    schemaVersion:2, locale,
-    ...Object.fromEntries(['name','company','email','phone','budget','timeline','referenceNotes','message','website'].map(name => [name,value(name)])),
+    schemaVersion:3, mode:'detailed', locale, company:'',
+    ...Object.fromEntries(['name','email','phone','budget','timeline','referenceNotes','message','website'].map(name => [name,value(name)])),
     projectType:'상담 후 결정',
     references:[...form.querySelectorAll('[name="references"]:checked')].map(input => input.value),
     referenceUnknown:form.elements.referenceUnknown.checked,

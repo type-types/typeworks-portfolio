@@ -64,7 +64,7 @@
     if (!toggle || !navigation) return;
 
     const mobile = window.matchMedia("(max-width: 900px)");
-    const background = [...document.querySelectorAll("main, .site-footer, .skip-link")];
+    const background = [...document.querySelectorAll("main, .site-footer, .skip-link, .quick-launcher")];
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     let isOpen = false;
     let targetOpen = false;

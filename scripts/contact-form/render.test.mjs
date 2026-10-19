@@ -13,7 +13,7 @@ test('both languages render the same four steps and input structure', () => {
     assert.doesNotMatch(html,/세 단계|intake-outcome|로컬 시안|placeholder=/);
     assert.ok(html.indexOf('id="intake-referenceNotes"')<html.indexOf('class="reference-grid"'));
     assert.match(html,/action="https:\/\/typeworks-contact/);
-    for(const name of ['name','company','email','phone','referenceNotes','timeline','message','budget']) {
+    for(const name of ['name','email','phone','referenceNotes','timeline','message','budget']) {
       assert.match(html,new RegExp(`name="${name}"[^>]*maxlength="${contactLimits[name]}"`));
     }
   }
