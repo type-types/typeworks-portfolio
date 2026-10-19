@@ -1,4 +1,5 @@
 import { mkdir, writeFile, readFile, cp, rm } from 'node:fs/promises';
+import { responsiveImages } from './responsive-images.mjs';
 import { createHash } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import {contactLocales, contactLocalePath} from '../content/contact-locales/index.mjs';
@@ -58,7 +59,7 @@ const home = `<section class="hero wrap portfolio-hero hero-v5"><div class="hero
 
 const work = `${pageHero('포트폴리오','필요에서 출발한,<br>제품과 경험들.','소프트웨어 제작, 팀 운영과 기술을 전달한 경험입니다.')}<section class="section wrap work-list"><div class="case-grid portfolio-grid">${workSlugs.map(caseCard).join('')}</div><p class="case-context">대표의 기존 프로젝트 참여 경험을 포함합니다. 실제 화면, 데모 화면, 기능 소개 이미지와 콘텐츠 제작 시안을 사례별로 표시했습니다.</p></section>${cta()}`;
 
-const servicePage = `${pageHero('서비스와 비용','필요한 기능을 정리하고,<br>사용할 제품을 만듭니다.','새로운 서비스, 반복되는 업무와 현장 운영에 필요한 소프트웨어를 제작합니다.','services-hero')}<section class="section wrap service-offers">${serviceGrid()}<div class="scope-note reveal"><h2>화면만 만드는 데서 끝나지 않습니다.</h2><p>제품을 사용하는 사람과 관리하는 사람의 일을 함께 살펴봅니다. 필요한 정보, 데이터와 운영 규칙을 화면과 기능에 연결합니다.</p></div></section>
+const servicePage = `${pageHero('서비스와 비용','필요한 기능을 정리하고,<br>사용할 제품을 만듭니다.','새로운 서비스, 반복되는 업무와 현장 운영에 필요한 소프트웨어를 제작합니다.','services-hero')}<section class="section wrap service-offers">${serviceGrid(true)}<div class="scope-note reveal"><h2>화면만 만드는 데서 끝나지 않습니다.</h2><p>제품을 사용하는 사람과 관리하는 사람의 일을 함께 살펴봅니다. 필요한 정보, 데이터와 운영 규칙을 화면과 기능에 연결합니다.</p></div></section>
 <section class="section technology-section" id="modules"><div class="wrap"><div class="section-heading reveal"><div><p class="eyebrow">보유 기술과 구현 경험</p><h2>필요한 곳에 연결할 기술.</h2></div></div><div class="technology-grid"><article class="technology-item technology-nfc reveal">${nfcVisual()}<span class="eyebrow">NFC 현장 방문 확인</span><h3><span class="service-full">설치 부담은 줄이고,<br>현장 방문은 안전하게 확인합니다.</span><span class="service-brief">보안 NFC 방문 확인</span></h3><p><span class="service-full">지문이나 안면 인식기 없이, NTAG 424 DNA와 휴대전화를 활용한 현장 방문 확인 모듈을 개발했습니다.</span><span class="service-brief">NTAG 424 DNA와 휴대전화로 현장 방문을 확인합니다.</span></p><p class="muted">암호 검증과 인증 정보 재사용 차단으로 보안을 강화했습니다.</p>${textLink('노놀 제작 사례','/work/nonol/')}</article><article class="technology-item technology-call reveal">${callVisual()}<span class="eyebrow">AI 발신 전화</span><h3><span class="service-full">AI가 먼저 전화를 걸고,<br>사용자와 대화합니다.</span><span class="service-brief">AI 발신 전화</span></h3><p><span class="service-full">SIP 전화 연결을 통해 발신, 대화와 기록을 이어갑니다. 온담 프로토타입에서 실제 전화로 이 흐름을 검증했습니다.</span><span class="service-brief">먼저 전화를 걸어 대화하고 내용을 기록합니다.</span></p><span class="technology-mobile-status">실제 통화 검증 / 프로토타입</span>${textLink('온담 제작 사례','/work/ondam/')}</article></div></div></section>
 <section class="section wrap" id="pricing"><div class="section-heading reveal"><div><p class="eyebrow">견적 기준</p><h2>범위를 정하면,<br>비용도 명확해집니다.</h2></div></div>${estimateVisual(textLink('제작 상담하기','/contact/'))}</section>${cta()}`;
 
@@ -72,11 +73,11 @@ const about = `<section class="about-hero wrap"><div class="about-copy"><p class
 ['이해하고 구체화합니다','고객이 원하는 기능만 듣기보다, 그 기능이 필요한 이유와 사용 환경을 함께 이해합니다.'],
 ['함께 확인합니다','현재 무엇을 만들고 있고, 어떤 결정이 필요한지 작동하는 화면과 구체적인 작업으로 전달합니다.'],
 ['쉽게 전합니다','복잡한 설명을 줄이고, 고객이 실제로 할 일을 기준으로 제품과 운영 방법을 알려드립니다.'],
-].map(([title,description]) => `<article class="reveal"><h3>${title}</h3><p>${description}</p></article>`).join('')}</div><div class="founder-section reveal"><div class="founder-portrait"><img src="/assets/founder-minseok.jpg" width="1499" height="1999" alt="타입웍스 대표 박민석" loading="lazy" decoding="async"></div><div><p class="eyebrow">대표 박민석</p><h2>대표 소개</h2><p class="large-copy">다양한 팀의 요구를 제품으로 만들고, 기획과 개발, 팀 운영과 발표를 경험했습니다.</p><p>Melissa에서는 PM과 초기 프로토타입 개발, 팀 운영을 맡았습니다. K-NET 운영 도구와 CSI 연구 도구, 공연 참여 모듈을 제작했고, 영상의학과 병리 연구 도구의 프론트엔드 개발에 참여했습니다.</p>${textLink('프로젝트별 담당 역할 보기','/work/')}</div></div><div class="vision-section reveal"><p class="eyebrow">앞으로의 방향</p><h2>직접 만들 수 있는 사람을 늘립니다.</h2><p>현재 중심 사업은 고객에게 필요한 소프트웨어 제작입니다. 제품 운영 교육을 바탕으로, AI를 활용해 필요한 것을 정의하고 제품을 만들며 공유하는 교육과 초중고 대상 학원 설립 및 운영도 구상하고 있습니다.</p></div></section>${cta()}`;
+].map(([title,description]) => `<article class="reveal"><h3>${title}</h3><p>${description}</p></article>`).join('')}</div><div class="founder-section reveal"><div class="founder-portrait"><img src="/assets/founder-minseok.jpg" width="1499" height="1999" alt="타입웍스 대표 박민석" loading="lazy" fetchpriority="low" decoding="async"></div><div><p class="eyebrow">대표 박민석</p><h2>대표 소개</h2><p class="large-copy">다양한 팀의 요구를 제품으로 만들고, 기획과 개발, 팀 운영과 발표를 경험했습니다.</p><p>Melissa에서는 PM과 초기 프로토타입 개발, 팀 운영을 맡았습니다. K-NET 운영 도구와 CSI 연구 도구, 공연 참여 모듈을 제작했고, 영상의학과 병리 연구 도구의 프론트엔드 개발에 참여했습니다.</p>${textLink('프로젝트별 담당 역할 보기','/work/')}</div></div><div class="vision-section reveal"><p class="eyebrow">앞으로의 방향</p><h2>직접 만들 수 있는 사람을 늘립니다.</h2><p>현재 중심 사업은 고객에게 필요한 소프트웨어 제작입니다. 제품 운영 교육을 바탕으로, AI를 활용해 필요한 것을 정의하고 제품을 만들며 공유하는 교육과 초중고 대상 학원 설립 및 운영도 구상하고 있습니다.</p></div></section>${cta()}`;
 
 const contact = contactBody(contactLocales.ko);
 
-const gallery = `<dialog id="image-dialog" aria-labelledby="dialog-title"><div class="dialog-heading"><h2 id="dialog-title">제품 화면</h2><button id="dialog-close" type="button" aria-label="확대 화면 닫기">닫기 <span aria-hidden="true">×</span></button></div><img id="dialog-image" src="/assets/portfolio/knet-study-editor.png" width="1265" height="712" alt="확대한 제품 화면"></dialog>`;
+const gallery = `<dialog id="image-dialog" aria-labelledby="dialog-title"><div class="dialog-heading"><h2 id="dialog-title">제품 화면</h2><button id="dialog-close" type="button" aria-label="확대 화면 닫기">닫기 <span aria-hidden="true">×</span></button></div><img id="dialog-image" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" width="1265" height="712" alt="확대한 제품 화면"></dialog>`;
 const galleryAttributes = (item, src, label) => `data-gallery-open="${item.slug}" data-gallery-src="${escape(src)}" data-gallery-alt="${escape(label)}" data-gallery-title="${escape(item.title)}"`;
 const casePage = (item) => {
   const canEnlarge = item.visualType === 'screenshot';
@@ -98,7 +99,7 @@ const pages = [
 for (const [relative,title,current,body,description,locale = 'ko'] of pages) {
   const url = new URL(relative,rootUrl);
   await mkdir(fileURLToPath(new URL('.',url)),{recursive:true});
-  await writeFile(url,shell(title,current,body,description,relative,locale));
+  await writeFile(url,responsiveImages(shell(title,current,body,description,relative,locale)));
 }
 const publicPaths = pages.filter(([relative]) => relative !== '404.html').map(([relative]) => '/' + relative.replace(/index\.html$/, ''));
 publicPaths.push('/en/');
