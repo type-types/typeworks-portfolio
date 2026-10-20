@@ -43,7 +43,9 @@ if (header) {
   document.addEventListener('pointercancel',releasePointer);
   window.addEventListener('blur',releasePointer);
   document.addEventListener('focusin',event => {
-    if (root.dataset.focusInput === 'keyboard' && header.contains(event.target)) reveal();
+    if (!header.contains(event.target)) return;
+    previous = window.scrollY;
+    reveal();
   });
   document.addEventListener('keydown',event => { if (event.key === 'Tab') reveal(); },{capture:true});
   window.addEventListener('resize',() => { previous = window.scrollY; travel = 0; });

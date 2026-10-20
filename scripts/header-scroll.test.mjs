@@ -75,10 +75,15 @@ test('editing and an open overlay keep the header stable', () => {
   assert.equal(app.header.classList.contains('is-scroll-hidden'),false);
 });
 
-test('pointer focus preserves a hidden header while keyboard focus reveals it', () => {
+test('restoring pointer focus reveals the header without replaying queued scroll', () => {
   const app = setup();
   app.scroll(200);
+  app.queueScroll(220);
   app.focus('pointer');
+  assert.equal(app.header.classList.contains('is-scroll-hidden'),false);
+  app.flush();
+  assert.equal(app.header.classList.contains('is-scroll-hidden'),false);
+  app.scroll(240);
   assert.ok(app.header.classList.contains('is-scroll-hidden'));
   app.focus('keyboard');
   assert.equal(app.header.classList.contains('is-scroll-hidden'),false);
