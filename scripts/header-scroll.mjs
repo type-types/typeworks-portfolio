@@ -9,13 +9,14 @@ if (header) {
   let previous = window.scrollY;
   let travel = 0;
   let frame = 0;
+  let pointerActive = false;
   const reveal = () => { header.classList.remove('is-scroll-hidden'); travel = 0; };
   const update = () => {
     frame = 0;
     const y = Math.max(0,Math.min(window.scrollY,document.documentElement.scrollHeight - window.innerHeight));
     const delta = y - previous;
     previous = y;
-    if (root.classList.contains('menu-open') || root.classList.contains('quick-contact-open') || document.activeElement?.matches('input,textarea,select') || header.contains(document.activeElement) && root.dataset.focusInput === 'keyboard') {
+    if (pointerActive || root.classList.contains('menu-open') || root.classList.contains('quick-contact-open') || document.activeElement?.matches('input,textarea,select') || header.contains(document.activeElement) && root.dataset.focusInput === 'keyboard') {
       travel = 0;
       return;
     }
@@ -27,7 +28,23 @@ if (header) {
     else if (travel < -8) reveal();
   };
   window.addEventListener('scroll',() => { if (!frame) frame = requestAnimationFrame(update); },{passive:true});
-  document.addEventListener('focusin',event => { if (header.contains(event.target)) reveal(); });
+  header.addEventListener('pointerdown',() => {
+    pointerActive = true;
+    previous = window.scrollY;
+    reveal();
+  });
+  const releasePointer = () => {
+    if (!pointerActive) return;
+    pointerActive = false;
+    previous = window.scrollY;
+    travel = 0;
+  };
+  document.addEventListener('pointerup',releasePointer);
+  document.addEventListener('pointercancel',releasePointer);
+  window.addEventListener('blur',releasePointer);
+  document.addEventListener('focusin',event => {
+    if (root.dataset.focusInput === 'keyboard' && header.contains(event.target)) reveal();
+  });
   document.addEventListener('keydown',event => { if (event.key === 'Tab') reveal(); },{capture:true});
   window.addEventListener('resize',() => { previous = window.scrollY; travel = 0; });
   window.addEventListener('pageshow',() => { previous = window.scrollY; reveal(); });
